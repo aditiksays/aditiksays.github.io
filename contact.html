@@ -1,22 +1,28 @@
+Wrapping up the set! Here is your Contact page redesigned to match the Cutesy Sticker Book aesthetic. I've turned the contact links into "taped-on" notes and used a soft, handwritten vibe.
+
+📄 Updated Contact Page (Cutesy Theme)
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Midnight UI</title>
+    <title>Contact | Sticker Book</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
+            --bg-color: #fffdf5;      /* Warm Vanilla */
+            --card-bg: #ffffff;       /* Paper White */
+            --accent: #ffb7c5;        /* Strawberry Pink */
+            --text-main: #5d4d50;     /* Cocoa Brown */
+            --text-dim: #a09395;      /* Muted Rose */
         }
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(#f0eadd 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
             color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', cursive, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -26,97 +32,122 @@
 
         nav {
             margin-top: 30px;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 3px solid var(--accent);
+            box-shadow: 5px 5px 0px var(--accent);
         }
 
         nav a {
             color: var(--text-dim);
             text-decoration: none;
             margin: 0 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: lowercase;
+            transition: 0.3s;
         }
 
-        nav a:hover { color: var(--accent); }
-        .active { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+        nav a:hover, .active { color: #ff6b81 !important; }
 
         .container {
             width: 90%;
             max-width: 600px;
-            margin-top: 80px;
+            margin-top: 60px;
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            color: #ff85a1;
+            text-shadow: 2px 2px 0px white;
             margin-bottom: 40px;
         }
 
-        /* Contact Method Cards */
+        /* Contact Method Cards as Taped Notes */
         .contact-method {
             background: var(--card-bg);
             padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 3px solid #fff;
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
             color: inherit;
+            position: relative;
+            box-shadow: 8px 8px 0px #f0d5e2;
             transition: all 0.3s ease;
         }
 
-        .contact-method:hover {
-            transform: scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        /* Washi Tape Effect */
+        .contact-method::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 183, 197, 0.5);
+            border-left: 2px dashed #ffb7c5;
+            border-right: 2px dashed #ffb7c5;
+            z-index: 1;
         }
+
+        .contact-method:hover {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 12px 12px 0px #f0d5e2;
+        }
+
+        /* Alternating tilts for a "scrapbook" feel */
+        .contact-method:nth-child(even) { transform: rotate(-1deg); }
+        .contact-method:nth-child(odd) { transform: rotate(1deg); }
 
         .contact-info {
             text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
         .label {
             display: block;
-            color: var(--accent);
-            font-size: 0.8rem;
+            color: #ff85a1;
+            font-size: 0.85rem;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: lowercase;
+            margin-bottom: 4px;
         }
 
         .value {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .arrow {
-            font-size: 1.5rem;
-            color: var(--text-dim);
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="active">Contact</a>
-        <a href="feedback.html">Feedback</a>
+        <a href="index.html">home</a>
+        <a href="blog.html">blog</a>
+        <a href="about.html">about</a>
+        <a href="contact.html" class="active">contact</a>
+        <a href="feedback.html">feedback</a>
     </nav>
 
     <div class="container">
-        <h1>Let's Connect.</h1>
+        <h1>say hello! ♡</h1>
 
         <a href="mailto:yourname@email.com" class="contact-method">
             <div class="contact-info">
-                <span class="label">Email</span>
+                <span class="label">send an email</span>
                 <span class="value">yourname@email.com</span>
             </div>
             <span class="arrow">→</span>
@@ -124,16 +155,16 @@
 
         <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-method">
             <div class="contact-info">
-                <span class="label">LinkedIn</span>
-                <span class="value">Professional Profile</span>
+                <span class="label">linkedin</span>
+                <span class="value">Let's be professional!</span>
             </div>
             <span class="arrow">→</span>
         </a>
 
         <a href="https://github.com/yourusername" target="_blank" class="contact-method">
             <div class="contact-info">
-                <span class="label">GitHub</span>
-                <span class="value">Code Repositories</span>
+                <span class="label">github</span>
+                <span class="value">Check out my code</span>
             </div>
             <span class="arrow">→</span>
         </a>
