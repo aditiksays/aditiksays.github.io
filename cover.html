@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Journal | 2026</title>
+    <title>SCRAPBOOK | 2026</title>
     <style>
         :root {
-            --journal-red: #7a1d2e; 
-            --tablecloth: #fff5f7; 
-            --binding: #5a1522;
+            --journal-red: #7a1d2e; /* Deep Red-Brown from your inspo */
+            --tablecloth: #fff5f7;  /* Soft floral pink background */
         }
 
         body, html {
             height: 100%;
             margin: 0;
+            overflow: hidden;
             background-color: var(--tablecloth);
+            /* Floral tablecloth pattern */
             background-image: radial-gradient(#ffb7c5 10%, transparent 10%), 
                               radial-gradient(#ffb7c5 10%, transparent 10%);
             background-size: 40px 40px;
@@ -23,107 +24,116 @@
             justify-content: center;
             align-items: center;
             font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
         }
 
-        /* Perspective must be on the wrapper */
-        .journal-wrapper {
-            position: relative;
-            perspective: 1200px;
+        .journal-link {
             text-decoration: none;
-            cursor: pointer;
+            perspective: 1000px;
         }
 
+        /* The Hardcover */
         .cover {
             width: 350px;
-            height: 480px;
+            height: 500px;
             background-color: var(--journal-red);
             border-radius: 5px 15px 15px 5px;
-            box-shadow: 10px 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 20px 30px 60px rgba(0,0,0,0.4);
+            border-left: 12px solid #5a1522; /* Book binding */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            border-left: 10px solid var(--binding); 
-            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-origin: left; /* Key for the book swing */
-            z-index: 2;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* This is a "fake" page behind the cover to give it thickness */
-        .journal-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 350px;
-            height: 470px;
-            background: white;
-            border-radius: 5px 15px 15px 5px;
-            z-index: 1;
+        /* Hover effect to make the book "lift" */
+        .journal-link:hover .cover {
+            transform: rotateY(-12deg) rotateX(5deg) scale(1.02);
         }
 
-        .journal-wrapper:hover .cover {
-            transform: rotateY(-35deg);
-        }
-
-        .title-container {
+        /* Ransom Note Style Lettering (Image 1 Inspo) */
+        .title-group {
             display: flex;
-            gap: 5px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
+
+        .row { display: flex; gap: 5px; }
 
         .letter {
             background: white;
             color: #333;
-            padding: 8px 12px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            padding: 10px 14px;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            display: inline-block;
         }
 
-        .letter:nth-child(even) { transform: rotate(-3deg); }
-        .letter:nth-child(odd) { transform: rotate(2deg); }
+        /* Random rotations for the "cut-out" look */
+        .letter:nth-child(odd) { transform: rotate(-3deg); background: #fdfdfd; }
+        .letter:nth-child(even) { transform: rotate(2deg); background: #f0f0f0; }
 
+        /* Stickers (Image 1 Inspo) */
         .sticker {
             position: absolute;
+            font-size: 2.5rem;
+            filter: drop-shadow(3px 3px0px rgba(0,0,0,0.1));
             pointer-events: none;
         }
 
-        .note-sticker {
+        .open-hint {
+            margin-top: 40px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Hand-drawn note (Image 2 Inspo) */
+        .note {
             position: absolute;
             bottom: 30px;
-            right: 20px;
+            right: -20px;
             background: #fff;
-            padding: 8px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            font-size: 0.75rem;
             transform: rotate(-5deg);
-            font-size: 0.7rem;
+            color: #444;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <div class="journal-wrapper" onclick="alert('Journal Opening...')">
+    <a href="aboutme.html" class="journal-link">
         <div class="cover">
-            <span class="sticker" style="top: 30px; left: 30px; font-size: 2.5rem;">⭐</span>
-            <span class="sticker" style="bottom: 80px; left: 40px; font-size: 2.5rem;">🎸</span>
-            
-            <div class="title-container">
-                <div class="letter">J</div>
-                <div class="letter">O</div>
-                <div class="letter">U</div>
-                <div class="letter">R</div>
-                <div class="letter">N</div>
-                <div class="letter">A</div>
-                <div class="letter">L</div>
+            <span class="sticker" style="top: 30px; left: 30px;">⭐</span>
+            <span class="sticker" style="bottom: 80px; left: 40px;">🎸</span>
+            <span class="sticker" style="top: 60px; right: 40px;">🪐</span>
+
+            <div class="title-group">
+                <div class="row">
+                    <div class="letter">M</div>
+                    <div class="letter">Y</div>
+                </div>
+                <div class="row">
+                    <div class="letter">W</div>
+                    <div class="letter">O</div>
+                    <div class="letter">R</div>
+                    <div class="letter">L</div>
+                    <div class="letter">D</div>
+                </div>
             </div>
-            
-            <p style="color: white; opacity: 0.6; font-size: 0.8rem; margin-top: 20px;">CLICK TO OPEN</p>
-            
-            <div class="note-sticker">Don't be so hard on yourself... :)</div>
+
+            <p class="open-hint">Click to open journal</p>
+
+            <div class="note">Don't be so hard on yourself :)</div>
         </div>
-    </div>
+    </a>
 
 </body>
 </html>

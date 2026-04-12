@@ -1,79 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Inside the Book</title>
-    <style>
-        :root {
-            --bg-color: #fff9e6;      /* Butter Yellow */
-            --accent: #a34343;       /* Terra Cotta */
-            --text-main: #4a3728;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#f0e4bc 1.5px, transparent 1.5px);
-            background-size: 30px 30px;
-            color: var(--text-main);
-            font-family: 'Segoe UI', cursive, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Nav Tab Styling to match others */
-        nav {
-            margin-top: 30px;
-            background: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            border: 3px solid var(--accent);
-            box-shadow: 5px 5px 0px var(--accent);
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .active { color: var(--accent) !important; }
-
-        .content-card {
-            width: 90%;
-            max-width: 600px;
-            background: white;
-            margin: 50px 0;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--accent);
-        }
-
-        h1 { color: var(--accent); font-family: 'Georgia', serif; font-style: italic; }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <a href="home.html" class="active">home</a>
-        <a href="blog.html">blog</a>
-        <a href="about.html">about</a>
-        <a href="contact.html">contact</a>
-        <a href="feedback.html">feedback</a>
-
-    </nav>
-
-    <div class="content-card">
-        <h1>Welcome to the first page...</h1>
-        <p>You've successfully opened the scrapbook! Here you'll find a collection of everything I've been working on.</p>
-        <p>Feel free to flip through the tabs above to see my <strong>Yearbook</strong>, send a <strong>Postcard</strong>, or leave a <strong>Remark</strong>.</p>
-    </div>
-
-</body>
-</html>
+<nav>
+    <a href="home.html" class="active">home</a>
+    <a href="aboutme.html">about</a>
+    <a href="blog.html">blog</a>
+    <a href="contact.html">contact</a>
+    <a href="feedback.html">feedback</a>
+</nav>
+<div class="page-container">
+    <h1>Entry #01: Welcome</h1>
+    <p>You've opened the journal. This is my digital space where I keep all my memories and projects.</p>
