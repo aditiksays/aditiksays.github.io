@@ -6,16 +6,20 @@
     <title>My Journal | 2026</title>
     <style>
         :root {
-            --journal-red: #7a1d2e; /* Deep Red-Brown from inspo */
-            --tablecloth: #fff5f7; /* Soft floral-ish pink */
+            --journal-red: #7a1d2e; 
+            --tablecloth: #fff5f7; 
+            --binding: #5a1522;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body, html {
             height: 100%;
             margin: 0;
-            overflow: hidden;
             background-color: var(--tablecloth);
-            /* Floral tablecloth pattern approximation */
+            /* Floral tablecloth pattern */
             background-image: radial-gradient(#ffb7c5 10%, transparent 10%), 
                               radial-gradient(#ffb7c5 10%, transparent 10%);
             background-size: 40px 40px;
@@ -24,13 +28,15 @@
             justify-content: center;
             align-items: center;
             font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
         }
 
         /* The Journal Container */
         .journal-wrapper {
             position: relative;
-            perspective: 1000px;
+            perspective: 1500px; /* Increased for better 3D depth */
             text-decoration: none;
+            display: block;
         }
 
         .cover {
@@ -44,11 +50,12 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            border-left: 12px solid #5a1522; /* Binding shade */
-            transition: transform 0.5s ease;
+            border-left: 12px solid var(--binding); 
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left center; /* Makes it swing like a door */
         }
 
-        /* Gingham Bookmark Detail from Image 2 */
+        /* Gingham Bookmark */
         .gingham-tab {
             position: absolute;
             top: 20px;
@@ -56,20 +63,21 @@
             width: 60px;
             height: 80px;
             background-color: white;
-            background-image: linear-gradient(90deg, rgba(0,0,255,.1) 50%, transparent 50%),
-                              linear-gradient(rgba(0,0,255,.1) 50%, transparent 50%);
+            background-image: linear-gradient(90deg, rgba(0,0,255,.05) 50%, transparent 50%),
+                              linear-gradient(rgba(0,0,255,.05) 50%, transparent 50%);
             background-size: 10px 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             transform: rotate(5deg);
-            z-index: 1;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            z-index: 5;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Ransom Note Style Lettering from Image 1 */
+        /* Ransom Note Style Lettering */
         .title-container {
             display: flex;
             gap: 5px;
             margin-bottom: 20px;
+            z-index: 2;
         }
 
         .letter {
@@ -80,54 +88,58 @@
             font-weight: bold;
             text-transform: uppercase;
             box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            display: inline-block;
         }
 
-        /* Vary the letters for that "cut out" look */
-        .letter:nth-child(even) { transform: rotate(-3deg); background: #f0f0f0; }
+        .letter:nth-child(even) { transform: rotate(-3deg); background: #f9f9f9; }
         .letter:nth-child(odd) { transform: rotate(2deg); padding: 10px 8px; }
 
         .sticker {
             position: absolute;
             filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
             pointer-events: none;
+            user-select: none;
         }
 
-        /* "Open Me" Note */
         .note-sticker {
             position: absolute;
             bottom: 40px;
             right: 30px;
             background: #fff;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #eee;
             transform: rotate(-5deg);
             font-size: 0.8rem;
             color: #555;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            max-width: 150px;
+            line-height: 1.2;
         }
 
+        /* Hover interaction */
         .journal-wrapper:hover .cover {
-            transform: rotateY(-10deg) rotateX(5deg);
+            transform: rotateY(-25deg) scale(1.02);
         }
 
         .enter-text {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.6);
             margin-top: 30px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
 
-    <a href="home.html" class="journal-wrapper">
+    <a href="#" class="journal-wrapper">
         <div class="gingham-tab"></div>
         
         <div class="cover">
-            <span class="sticker" style="top: 30px; left: 40px; font-size: 3rem;">⭐</span>
-            <span class="sticker" style="top: 60px; right: 50px; font-size: 2.5rem;">🪐</span>
-            <span class="sticker" style="bottom: 100px; left: 50px; font-size: 3rem;">🎸</span>
+            <span class="sticker" style="top: 40px; left: 40px; font-size: 3rem;">⭐</span>
+            <span class="sticker" style="top: 70px; right: 60px; font-size: 2.5rem;">🪐</span>
+            <span class="sticker" style="bottom: 110px; left: 60px; font-size: 3rem;">🎸</span>
 
             <div class="title-container">
                 <div class="letter">J</div>
