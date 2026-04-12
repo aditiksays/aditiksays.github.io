@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me | Midnight UI</title>
+    <title>Feedback | Sticker Book</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
+            --bg-color: #fffdf5;      /* Warm Vanilla */
+            --card-bg: #ffffff;       /* Paper White */
+            --accent: #ffb7c5;        /* Strawberry Pink */
+            --text-main: #5d4d50;     /* Cocoa Brown */
+            --text-dim: #a09395;      /* Muted Rose */
         }
 
         body {
             background-color: var(--bg-color);
+            /* Polka dot grid background */
+            background-image: radial-gradient(#f0eadd 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
             color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', cursive, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -24,110 +27,140 @@
             min-height: 100vh;
         }
 
+        /* Navigation styled like a sticker */
         nav {
             margin-top: 30px;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 3px solid var(--accent);
+            box-shadow: 5px 5px 0px var(--accent);
         }
 
         nav a {
             color: var(--text-dim);
             text-decoration: none;
             margin: 0 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: lowercase;
+            transition: 0.3s;
         }
 
-        nav a:hover { color: var(--accent); }
-        .active { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+        nav a:hover, .active { color: #ff6b81 !important; }
 
         .container {
             width: 90%;
-            max-width: 800px;
-            margin-top: 60px;
-        }
-
-        .profile-card {
+            max-width: 500px;
+            margin: 60px 0;
             background: var(--card-bg);
             padding: 40px;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            gap: 30px;
-            align-items: center;
+            border-radius: 35px;
+            border: 4px solid #fff; /* White border for sticker look */
+            box-shadow: 10px 10px 0px #f0d5e2; /* Soft thick shadow */
+            position: relative; /* Essential for placing stickers inside */
         }
 
-        /* If you have a photo later, this is where it goes */
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, var(--accent), #818cf8);
-            border-radius: 50%;
-            flex-shrink: 0;
+        h1 { 
+            color: #ff85a1; 
+            font-size: 2.2rem; 
+            text-shadow: 2px 2px 0px white;
+            margin-bottom: 5px; 
         }
 
-        .bio h2 {
-            margin-top: 0;
-            color: var(--accent);
+        .subtitle { color: var(--text-dim); margin-bottom: 30px; font-weight: 500; }
+
+        /* Form Elements */
+        .input-group { margin-bottom: 25px; position: relative; z-index: 2; }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: lowercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ff85a1;
         }
 
-        .bio p {
-            color: var(--text-dim);
-            line-height: 1.8;
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            background: #fffdfb;
+            border: 2px solid #f0eadd;
+            border-radius: 15px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
         }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 30px;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
         }
 
-        .detail-box {
-            background: rgba(255,255,255,0.02);
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0px #f89ba9;
+            transition: all 0.2s;
         }
 
-        @media (max-width: 600px) {
-            .profile-card { flex-direction: column; text-align: center; }
-            .details-grid { grid-template-columns: 1fr; }
+        .submit-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0px #f89ba9;
+        }
+
+        /* STICKER CLASS */
+        .sticker {
+            position: absolute;
+            z-index: 5;
+            filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.05));
+            pointer-events: none; /* Allows clicking through the sticker to the form */
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html" class="active">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="feedback.html">Feedback</a>
+        <a href="index.html">home</a>
+        <a href="blog.html">blog</a>
+        <a href="about.html">about</a>
+        <a href="contact.html">contact</a>
+        <a href="feedback.html" class="active">feedback</a>
     </nav>
 
     <div class="container">
-        <div class="profile-card">
-            <div class="profile-pic"></div>
-            <div class="bio">
-                <h2>Who I Am</h2>
-                <p>Hello! I'm an aspiring developer and creator. I built this site to share my journey, document my learning process, and connect with other creative minds in the digital space.</p>
-            </div>
-        </div>
+        <img src="heart-sticker.png" class="sticker" style="width: 80px; top: -30px; right: -20px; transform: rotate(15deg);" alt="">
+        
+        <h1>Send Feedback</h1>
+        <p class="subtitle">leave a sweet note! 🎀</p>
 
-        <div class="details-grid">
-            <div class="detail-box">
-                <h3>My Goal</h3>
-                <p>To master front-end development and create beautiful, interactive user experiences.</p>
+        <form action="https://formspree.io/f/your-id" method="POST">
+            <div class="input-group">
+                <label>how was your visit?</label>
+                <select name="rating">
+                    <option value="excellent">Amazing ✨</option>
+                    <option value="good">Good 👍</option>
+                    <option value="neutral">Okay 😐</option>
+                    <option value="bad">Needs Work 🛠️</option>
+                </select>
             </div>
-            <div class="detail-box">
-                <h3>Interests</h3>
-                <p>UI/UX Design, Open Source, and exploring the latest web technologies.</p>
+
+            <div class="input-group">
+                <label>your thoughts</label>
+                <textarea name="message" required placeholder="type here..."></textarea>
             </div>
-        </div>
+
+            <button type="submit" class="submit-btn">SEND NOTE</button>
+        </form>
     </div>
 
 </body>
