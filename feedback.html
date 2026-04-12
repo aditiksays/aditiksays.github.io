@@ -7,16 +7,18 @@
     <style>
         :root {
             --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --card-bg: rgba(30, 41, 59, 0.7);
             --accent: #38bdf8;
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
             color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -24,12 +26,13 @@
             min-height: 100vh;
         }
 
+        /* Navigation */
         nav {
             margin-top: 30px;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 15px 30px;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 12px 25px;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
         }
 
@@ -38,70 +41,75 @@
             text-decoration: none;
             margin: 0 15px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        nav a:hover { color: var(--accent); }
-        .active { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+        nav a:hover, .active { color: var(--accent); }
 
         .container {
             width: 90%;
-            max-width: 600px;
-            margin-top: 60px;
+            max-width: 550px;
+            margin: 60px 0;
             background: var(--card-bg);
             padding: 40px;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        h1 { margin-bottom: 10px; color: var(--accent); }
-        p { color: var(--text-dim); margin-bottom: 30px; }
+        h1 { font-size: 2rem; margin-bottom: 8px; text-align: center; }
+        .subtitle { color: var(--text-dim); text-align: center; margin-bottom: 30px; font-size: 0.9rem; }
 
-        /* Form Styling */
-        .form-group { margin-bottom: 20px; }
-        
+        /* Form Elements */
+        .input-group { margin-bottom: 25px; }
+
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--accent);
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
+            padding: 14px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             color: white;
-            font-family: inherit;
-            box-sizing: border-box; /* Prevents overflow */
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
         }
-
-        textarea { height: 120px; resize: vertical;}
 
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: var(--accent);
-            color: var(--bg-color);
+            padding: 16px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            color: #0f172a;
             border: none;
-            border-radius: 8px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
         }
     </style>
 </head>
@@ -116,21 +124,26 @@
     </nav>
 
     <div class="container">
-        <h1>Feedback</h1>
-        <p>How am I doing? Leave your thoughts or suggestions below.</p>
+        <h1>Send Feedback</h1>
+        <p class="subtitle">Help me improve this digital space.</p>
 
-        <form action="https://formspree.io/f/your-id-here" method="POST">
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" name="name" placeholder="Optional">
+        <form action="https://formspree.io/f/your-id" method="POST">
+            <div class="input-group">
+                <label>Experience Rating</label>
+                <select name="rating">
+                    <option value="excellent">Amazing ✨</option>
+                    <option value="good">Good 👍</option>
+                    <option value="neutral">Okay 😐</option>
+                    <option value="bad">Needs Work 🛠️</option>
+                </select>
             </div>
 
-            <div class="form-group">
-                <label>Message</label>
-                <textarea name="message" required placeholder="What's on your mind?"></textarea>
+            <div class="input-group">
+                <label>Your Thoughts</label>
+                <textarea name="message" required placeholder="What should I build next?"></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Feedback</button>
+            <button type="submit" class="submit-btn">Transmit Feedback</button>
         </form>
     </div>
 
