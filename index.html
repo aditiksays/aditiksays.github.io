@@ -3,35 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="feedback.html">Feedback</a>
-</nav>
-    <title>My Midnight Blog</title>
+    <title>Home | Midnight UI</title>
     <style>
-        nav {
-    margin-top: 20px;
-}
-
-nav a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent);
-}
-        /* CSS Variables - Change these to change the whole vibe! */
         :root {
-            --bg-color: #0f172a; /* Deep Navy/Charcoal */
-            --card-bg: #1e293b;  /* Lighter Blue-Grey */
-            --accent: #38bdf8;   /* Sky Blue Neon */
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
         }
@@ -39,7 +16,7 @@ nav a:hover {
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -47,100 +24,86 @@ nav a:hover {
             min-height: 100vh;
         }
 
+        /* Navigation Bar Styles */
+        nav {
+            margin-top: 30px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent);
+        }
+
+        .active { color: var(--accent); }
+
         header {
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 100px 20px;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+            font-size: 4rem;
             background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        /* The "Postbox" Blocks */
-        .container {
-            width: 90%;
-            max-width: 800px;
+        .hero-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 600px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
-        .blog-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        /* Interactive Hover Effect */
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent);
-        }
-
-        .date {
-            color: var(--accent);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        p {
-            line-height: 1.6;
-            color: var(--text-dim);
-        }
-
-        .tag {
+        .btn {
             display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 1rem;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.2s;
         }
 
-        footer {
-            margin-top: auto;
-            padding: 2rem;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
+        .btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html">Feedback</a>
+    </nav>
+
     <header>
-        <h1>Midnight Thoughts</h1>
-        <p>A journey through code and creativity.</p>
+        <h1>Welcome.</h1>
+        <div class="hero-card">
+            <p style="font-size: 1.2rem;">This is my corner of the digital universe. Explore my thoughts, projects, and creative journey.</p>
+            <a href="blog.html" class="btn">Read My Blog</a>
+        </div>
     </header>
-
-    <div class="container">
-        <article class="blog-card">
-            <span class="date">April 12, 2026</span>
-            <h2>How I Conquered the Terminal</h2>
-            <p>Today was a massive milestone. I managed to link VS Code to GitHub and pushed my very first update. The command line isn't as scary as it looks once you know the secret handshake.</p>
-            <span class="tag">#WebDev</span>
-            <span class="tag">#Success</span>
-        </article>
-
-        <article class="blog-card">
-            <span class="date">April 11, 2026</span>
-            <h2>Hello World!</h2>
-            <p>Welcome to my new blog. This is where I'll be documenting everything I learn as I build this site from scratch. Stay tuned for more updates!</p>
-            <span class="tag">#Personal</span>
-        </article>
-    </div>
-
-    <footer>
-        &copy; 2026 Your Name | Built with VS Code & Grit
-    </footer>
 
 </body>
 </html>

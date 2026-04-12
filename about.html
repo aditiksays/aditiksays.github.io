@@ -3,35 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="feedback.html">Feedback</a>
-</nav>
-    <title>My Midnight Blog</title>
+    <title>About Me | Midnight UI</title>
     <style>
-        nav {
-    margin-top: 20px;
-}
-
-nav a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent);
-}
-        /* CSS Variables - Change these to change the whole vibe! */
         :root {
-            --bg-color: #0f172a; /* Deep Navy/Charcoal */
-            --card-bg: #1e293b;  /* Lighter Blue-Grey */
-            --accent: #38bdf8;   /* Sky Blue Neon */
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
         }
@@ -39,7 +16,7 @@ nav a:hover {
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -47,100 +24,111 @@ nav a:hover {
             min-height: 100vh;
         }
 
-        header {
-            text-align: center;
-            padding: 4rem 1rem;
+        nav {
+            margin-top: 30px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        /* The "Postbox" Blocks */
+        nav a:hover { color: var(--accent); }
+        .active { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+
         .container {
             width: 90%;
             max-width: 800px;
+            margin-top: 60px;
         }
 
-        .blog-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+        .profile-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            gap: 30px;
+            align-items: center;
         }
 
-        /* Interactive Hover Effect */
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent);
+        /* If you have a photo later, this is where it goes */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, var(--accent), #818cf8);
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        .date {
+        .bio h2 {
+            margin-top: 0;
             color: var(--accent);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
         }
 
-        p {
-            line-height: 1.6;
+        .bio p {
             color: var(--text-dim);
+            line-height: 1.8;
         }
 
-        .tag {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 1rem;
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        footer {
-            margin-top: auto;
-            padding: 2rem;
-            color: var(--text-dim);
-            font-size: 0.8rem;
+        .detail-box {
+            background: rgba(255,255,255,0.02);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .profile-card { flex-direction: column; text-align: center; }
+            .details-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Midnight Thoughts</h1>
-        <p>A journey through code and creativity.</p>
-    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html">Feedback</a>
+    </nav>
 
     <div class="container">
-        <article class="blog-card">
-            <span class="date">April 12, 2026</span>
-            <h2>How I Conquered the Terminal</h2>
-            <p>Today was a massive milestone. I managed to link VS Code to GitHub and pushed my very first update. The command line isn't as scary as it looks once you know the secret handshake.</p>
-            <span class="tag">#WebDev</span>
-            <span class="tag">#Success</span>
-        </article>
+        <div class="profile-card">
+            <div class="profile-pic"></div>
+            <div class="bio">
+                <h2>Who I Am</h2>
+                <p>Hello! I'm an aspiring developer and creator. I built this site to share my journey, document my learning process, and connect with other creative minds in the digital space.</p>
+            </div>
+        </div>
 
-        <article class="blog-card">
-            <span class="date">April 11, 2026</span>
-            <h2>Hello World!</h2>
-            <p>Welcome to my new blog. This is where I'll be documenting everything I learn as I build this site from scratch. Stay tuned for more updates!</p>
-            <span class="tag">#Personal</span>
-        </article>
+        <div class="details-grid">
+            <div class="detail-box">
+                <h3>My Goal</h3>
+                <p>To master front-end development and create beautiful, interactive user experiences.</p>
+            </div>
+            <div class="detail-box">
+                <h3>Interests</h3>
+                <p>UI/UX Design, Open Source, and exploring the latest web technologies.</p>
+            </div>
+        </div>
     </div>
-
-    <footer>
-        &copy; 2026 Your Name | Built with VS Code & Grit
-    </footer>
 
 </body>
 </html>

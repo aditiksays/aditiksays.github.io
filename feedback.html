@@ -3,35 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="feedback.html">Feedback</a>
-</nav>
-    <title>My Midnight Blog</title>
+    <title>Feedback | Midnight UI</title>
     <style>
-        nav {
-    margin-top: 20px;
-}
-
-nav a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent);
-}
-        /* CSS Variables - Change these to change the whole vibe! */
         :root {
-            --bg-color: #0f172a; /* Deep Navy/Charcoal */
-            --card-bg: #1e293b;  /* Lighter Blue-Grey */
-            --accent: #38bdf8;   /* Sky Blue Neon */
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
         }
@@ -39,7 +16,7 @@ nav a:hover {
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -47,100 +24,115 @@ nav a:hover {
             min-height: 100vh;
         }
 
-        header {
-            text-align: center;
-            padding: 4rem 1rem;
+        nav {
+            margin-top: 30px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        /* The "Postbox" Blocks */
+        nav a:hover { color: var(--accent); }
+        .active { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+
         .container {
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
+            margin-top: 60px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .blog-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
+        h1 { margin-bottom: 10px; color: var(--accent); }
+        p { color: var(--text-dim); margin-bottom: 30px; }
 
-        /* Interactive Hover Effect */
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent);
-        }
-
-        .date {
-            color: var(--accent);
+        /* Form Styling */
+        .form-group { margin-bottom: 20px; }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: bold;
         }
 
-        p {
-            line-height: 1.6;
-            color: var(--text-dim);
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            box-sizing: border-box; /* Prevents overflow */
         }
 
-        .tag {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 1rem;
+        textarea { height: 120px; resize: vertical;}
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
-        footer {
-            margin-top: auto;
-            padding: 2rem;
-            color: var(--text-dim);
-            font-size: 0.8rem;
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Midnight Thoughts</h1>
-        <p>A journey through code and creativity.</p>
-    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html" class="active">Feedback</a>
+    </nav>
 
     <div class="container">
-        <article class="blog-card">
-            <span class="date">April 12, 2026</span>
-            <h2>How I Conquered the Terminal</h2>
-            <p>Today was a massive milestone. I managed to link VS Code to GitHub and pushed my very first update. The command line isn't as scary as it looks once you know the secret handshake.</p>
-            <span class="tag">#WebDev</span>
-            <span class="tag">#Success</span>
-        </article>
+        <h1>Feedback</h1>
+        <p>How am I doing? Leave your thoughts or suggestions below.</p>
 
-        <article class="blog-card">
-            <span class="date">April 11, 2026</span>
-            <h2>Hello World!</h2>
-            <p>Welcome to my new blog. This is where I'll be documenting everything I learn as I build this site from scratch. Stay tuned for more updates!</p>
-            <span class="tag">#Personal</span>
-        </article>
+        <form action="https://formspree.io/f/your-id-here" method="POST">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Optional">
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" required placeholder="What's on your mind?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Feedback</button>
+        </form>
     </div>
-
-    <footer>
-        &copy; 2026 Your Name | Built with VS Code & Grit
-    </footer>
 
 </body>
 </html>
