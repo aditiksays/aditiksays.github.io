@@ -3,128 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback | Sticker Book</title>
+    <title>About Me | Yearbook '26</title>
     <style>
         :root {
-            --bg-color: #fffdf5;      /* Warm Vanilla */
-            --card-bg: #ffffff;       /* Paper White */
-            --accent: #ffb7c5;        /* Strawberry Pink */
-            --text-main: #5d4d50;     /* Cocoa Brown */
-            --text-dim: #a09395;      /* Muted Rose */
+            --bg-color: #f3f0e7;      /* Vintage paper color */
+            --ink-black: #1a1a1a;
+            --id-yellow: #e9d5a3;     /* ID card background */
+            --accent-pink: #ffb7c5;
         }
 
         body {
             background-color: var(--bg-color);
-            /* Polka dot grid background */
-            background-image: radial-gradient(#f0eadd 1.5px, transparent 1.5px);
-            background-size: 30px 30px;
-            color: var(--text-main);
-            font-family: 'Segoe UI', cursive, sans-serif;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Paper texture */
+            color: var(--ink-black);
+            font-family: 'Courier New', Courier, monospace; /* Typewriter feel */
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
-        /* Navigation styled like a sticker */
         nav {
             margin-top: 30px;
             background: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            border: 3px solid var(--accent);
-            box-shadow: 5px 5px 0px var(--accent);
+            padding: 10px 25px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-pink);
+            box-shadow: 4px 4px 0px var(--accent-pink);
         }
 
-        nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            text-transform: lowercase;
-            transition: 0.3s;
-        }
+        nav a { text-decoration: none; color: #555; margin: 0 10px; font-weight: bold; }
+        .active { color: var(--accent-pink); }
 
-        nav a:hover, .active { color: #ff6b81 !important; }
-
-        .container {
+        .yearbook-container {
+            max-width: 800px;
             width: 90%;
-            max-width: 500px;
-            margin: 60px 0;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 35px;
-            border: 4px solid #fff; /* White border for sticker look */
-            box-shadow: 10px 10px 0px #f0d5e2; /* Soft thick shadow */
-            position: relative; /* Essential for placing stickers inside */
+            margin: 50px 0;
+            text-align: center;
         }
 
-        h1 { 
-            color: #ff85a1; 
-            font-size: 2.2rem; 
-            text-shadow: 2px 2px 0px white;
-            margin-bottom: 5px; 
-        }
-
-        .subtitle { color: var(--text-dim); margin-bottom: 30px; font-weight: 500; }
-
-        /* Form Elements */
-        .input-group { margin-bottom: 25px; position: relative; z-index: 2; }
-
-        label {
-            display: block;
-            font-size: 0.8rem;
-            text-transform: lowercase;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #ff85a1;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 14px;
-            background: #fffdfb;
-            border: 2px solid #f0eadd;
-            border-radius: 15px;
-            color: var(--text-main);
-            font-family: inherit;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
+        /* Top Section: Yearbook Photo */
+        .yearbook-photo-frame {
             background: white;
+            padding: 15px;
+            display: inline-block;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 18px;
-            font-weight: 800;
+        .photo-placeholder {
+            width: 250px;
+            height: 320px;
+            background: #ccc; /* Replace with your image later */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .student-name {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            margin: 20px 0 5px 0;
+            font-style: italic;
+        }
+
+        .yearbook-quote {
             font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 5px 0px #f89ba9;
-            transition: all 0.2s;
+            color: #444;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.4;
         }
 
-        .submit-btn:hover {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0px #f89ba9;
+        /* Bottom Section: The Identity Card Sticker */
+        .id-card {
+            background-color: var(--id-yellow);
+            width: 100%;
+            max-width: 550px;
+            margin: 60px auto;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #b5a47a;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 15px;
+            text-align: left;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
+            transform: rotate(1deg); /* Makes it look "stuck down" */
         }
 
-        /* STICKER CLASS */
-        .sticker {
+        /* The Stars around the ID */
+        .id-card::before {
+            content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
             position: absolute;
-            z-index: 5;
-            filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.05));
-            pointer-events: none; /* Allows clicking through the sticker to the form */
+            top: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 12px;
         }
+
+        .id-photo-area {
+            width: 180px;
+            height: 180px;
+            border: 2px solid #333;
+            background: #fff;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .id-details {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .id-line {
+            border-bottom: 1px dotted #333;
+            margin-bottom: 8px;
+            padding-bottom: 2px;
+        }
+
+        .id-stamp {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            opacity: 0.6;
+            transform: rotate(-15deg);
+        }
+
     </style>
 </head>
 <body>
@@ -132,35 +146,46 @@
     <nav>
         <a href="index.html">home</a>
         <a href="blog.html">blog</a>
-        <a href="about.html">about</a>
+        <a href="about.html" class="active">about</a>
         <a href="contact.html">contact</a>
-        <a href="feedback.html" class="active">feedback</a>
+        <a href="feedback.html">feedback</a>
     </nav>
 
-    <div class="container">
-        <img src="heart-sticker.png" class="sticker" style="width: 80px; top: -30px; right: -20px; transform: rotate(15deg);" alt="">
+    <div class="yearbook-container">
+        <div class="yearbook-photo-frame">
+            <div class="photo-placeholder">
+                [ Insert Yearbook Photo Here ]
+            </div>
+        </div>
         
-        <h1>Send Feedback</h1>
-        <p class="subtitle">leave a sweet note! 🎀</p>
+        <h1 class="student-name">Your Name</h1>
+        <p class="yearbook-quote">"I'm not just building a website, I'm building a digital scrapbook."</p>
 
-        <form action="https://formspree.io/f/your-id" method="POST">
-            <div class="input-group">
-                <label>how was your visit?</label>
-                <select name="rating">
-                    <option value="excellent">Amazing ✨</option>
-                    <option value="good">Good 👍</option>
-                    <option value="neutral">Okay 😐</option>
-                    <option value="bad">Needs Work 🛠️</option>
-                </select>
+        <div class="id-card">
+            <div class="id-photo-area">
+                <div style="padding: 60px 10px; text-align: center; color: #999;">ID PHOTO</div>
             </div>
 
-            <div class="input-group">
-                <label>your thoughts</label>
-                <textarea name="message" required placeholder="type here..."></textarea>
+            <div class="id-details">
+                <p style="text-align: center; font-size: 0.6rem; margin-bottom: 10px;">PERMANENT LICENSE OF TRAVEL</p>
+                <div class="id-line">ISSUED TO: YOUR NAME</div>
+                <div class="id-line">DATE OF BIRTH: 00 / 00 / 00</div>
+                <div class="id-line">PLACE OF ISSUE: WEB DEVELOPER CITY</div>
+                <div class="id-line">EXPIRY: NEVER</div>
+                
+                <p style="margin-top: 15px; font-size: 0.6rem; line-height: 1.2;">
+                    This is to certify that the person named is permitted to travel and explore freely unless detained by bugs.
+                </p>
+                
+                <div style="margin-top: 10px; font-family: 'Brush Script MT', cursive; font-size: 1.5rem;">
+                    Your Signature
+                </div>
             </div>
-
-            <button type="submit" class="submit-btn">SEND NOTE</button>
-        </form>
+            
+            <div class="id-stamp" style="color: #2b4570; border: 2px solid #2b4570; padding: 5px; font-size: 0.6rem; font-weight: bold;">
+                CALL ME IF<br>YOU GET LOST
+            </div>
+        </div>
     </div>
 
 </body>
