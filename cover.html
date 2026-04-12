@@ -11,15 +11,10 @@
             --binding: #5a1522;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
         body, html {
             height: 100%;
             margin: 0;
             background-color: var(--tablecloth);
-            /* Floral tablecloth pattern */
             background-image: radial-gradient(#ffb7c5 10%, transparent 10%), 
                               radial-gradient(#ffb7c5 10%, transparent 10%);
             background-size: 40px 40px;
@@ -31,116 +26,89 @@
             overflow: hidden;
         }
 
-        /* The Journal Container */
+        /* Perspective must be on the wrapper */
         .journal-wrapper {
             position: relative;
-            perspective: 1500px; /* Increased for better 3D depth */
+            perspective: 1200px;
             text-decoration: none;
-            display: block;
+            cursor: pointer;
         }
 
         .cover {
-            width: 380px;
-            height: 520px;
+            width: 350px;
+            height: 480px;
             background-color: var(--journal-red);
             border-radius: 5px 15px 15px 5px;
-            box-shadow: 15px 20px 50px rgba(0,0,0,0.4);
+            box-shadow: 10px 15px 35px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            border-left: 12px solid var(--binding); 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: left center; /* Makes it swing like a door */
+            border-left: 10px solid var(--binding); 
+            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: left; /* Key for the book swing */
+            z-index: 2;
         }
 
-        /* Gingham Bookmark */
-        .gingham-tab {
+        /* This is a "fake" page behind the cover to give it thickness */
+        .journal-wrapper::before {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: -10px;
-            width: 60px;
-            height: 80px;
-            background-color: white;
-            background-image: linear-gradient(90deg, rgba(0,0,255,.05) 50%, transparent 50%),
-                              linear-gradient(rgba(0,0,255,.05) 50%, transparent 50%);
-            background-size: 10px 10px;
-            border: 1px solid #ddd;
-            transform: rotate(5deg);
-            z-index: 5;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            top: 5px;
+            left: 5px;
+            width: 350px;
+            height: 470px;
+            background: white;
+            border-radius: 5px 15px 15px 5px;
+            z-index: 1;
         }
 
-        /* Ransom Note Style Lettering */
+        .journal-wrapper:hover .cover {
+            transform: rotateY(-35deg);
+        }
+
         .title-container {
             display: flex;
             gap: 5px;
-            margin-bottom: 20px;
-            z-index: 2;
         }
 
         .letter {
             background: white;
             color: #333;
             padding: 8px 12px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            text-transform: uppercase;
             box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
-            display: inline-block;
         }
 
-        .letter:nth-child(even) { transform: rotate(-3deg); background: #f9f9f9; }
-        .letter:nth-child(odd) { transform: rotate(2deg); padding: 10px 8px; }
+        .letter:nth-child(even) { transform: rotate(-3deg); }
+        .letter:nth-child(odd) { transform: rotate(2deg); }
 
         .sticker {
             position: absolute;
-            filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
             pointer-events: none;
-            user-select: none;
         }
 
         .note-sticker {
             position: absolute;
-            bottom: 40px;
-            right: 30px;
+            bottom: 30px;
+            right: 20px;
             background: #fff;
-            padding: 10px;
-            border: 1px solid #eee;
+            padding: 8px;
             transform: rotate(-5deg);
-            font-size: 0.8rem;
-            color: #555;
+            font-size: 0.7rem;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            max-width: 150px;
-            line-height: 1.2;
-        }
-
-        /* Hover interaction */
-        .journal-wrapper:hover .cover {
-            transform: rotateY(-25deg) scale(1.02);
-        }
-
-        .enter-text {
-            color: rgba(255,255,255,0.6);
-            margin-top: 30px;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            z-index: 2;
         }
     </style>
 </head>
 <body>
 
-    <a href="#" class="journal-wrapper">
-        <div class="gingham-tab"></div>
-        
+    <div class="journal-wrapper" onclick="alert('Journal Opening...')">
         <div class="cover">
-            <span class="sticker" style="top: 40px; left: 40px; font-size: 3rem;">⭐</span>
-            <span class="sticker" style="top: 70px; right: 60px; font-size: 2.5rem;">🪐</span>
-            <span class="sticker" style="bottom: 110px; left: 60px; font-size: 3rem;">🎸</span>
-
+            <span class="sticker" style="top: 30px; left: 30px; font-size: 2.5rem;">⭐</span>
+            <span class="sticker" style="bottom: 80px; left: 40px; font-size: 2.5rem;">🎸</span>
+            
             <div class="title-container">
                 <div class="letter">J</div>
                 <div class="letter">O</div>
@@ -150,14 +118,12 @@
                 <div class="letter">A</div>
                 <div class="letter">L</div>
             </div>
-
-            <div class="enter-text">Click to open</div>
-
-            <div class="note-sticker">
-                Don't be so hard on yourself... :)
-            </div>
+            
+            <p style="color: white; opacity: 0.6; font-size: 0.8rem; margin-top: 20px;">CLICK TO OPEN</p>
+            
+            <div class="note-sticker">Don't be so hard on yourself... :)</div>
         </div>
-    </a>
+    </div>
 
 </body>
 </html>
