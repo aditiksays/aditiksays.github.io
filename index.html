@@ -3,107 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Midnight UI</title>
+    <title>Sweet Escape | Home</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
+            --bg-color: #fff9e6;      /* Creamy Butter Yellow */
+            --card-bg: #ffffff;       /* Paper White */
+            --accent-red: #a34343;    /* Deep Terra Cotta */
+            --text-main: #4a3728;     /* Dark Coffee Brown */
+            --tape-color: rgba(163, 67, 67, 0.2); /* Tinted Red-Brown Tape */
         }
 
         body {
             background-color: var(--bg-color);
+            /* Subtle grid pattern in a darker butter shade */
+            background-image: radial-gradient(#f0e4bc 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
             color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', cursive, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Navigation Bar Styles */
+        /* Nav styled as Folder Tabs */
         nav {
-            margin-top: 30px;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            margin-top: 40px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
         }
 
         nav a {
-            color: var(--text-dim);
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: 600;
+            color: var(--text-main);
+            background: #fffbe6;
+            padding: 12px 20px;
+            border: 2px solid #e6dec3;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: lowercase;
             transition: all 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--accent);
-            text-shadow: 0 0 8px var(--accent);
+        nav a:hover, .active {
+            background: var(--accent-red);
+            color: #fff9e6 !important;
+            border-color: var(--accent-red);
+            transform: translateY(-5px);
         }
 
-        .active { color: var(--accent); }
-
-        header {
+        .cover-container {
+            width: 90%;
+            max-width: 650px;
+            background: var(--card-bg);
+            padding: 60px 20px;
+            border-radius: 0 0 40px 40px;
+            border: 6px solid #fff;
+            box-shadow: 15px 15px 0px rgba(74, 55, 40, 0.05);
             text-align: center;
-            padding: 100px 20px;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        /* Washi Tape Header */
+        .tape {
+            position: absolute;
+            width: 140px;
+            height: 40px;
+            background: var(--tape-color);
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            border-left: 3px dashed rgba(255,255,255,0.4);
+            border-right: 3px dashed rgba(255,255,255,0.4);
+            z-index: 10;
+        }
+
+        .hero-frame {
+            width: 300px;
+            height: 380px;
+            background: #fafaf5;
+            margin: 20px auto;
+            border: 12px solid white;
+            outline: 1px solid #e6dec3;
+            box-shadow: 8px 12px 20px rgba(0,0,0,0.08);
+            transform: rotate(-2deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Retro Photo Corners in Terra Cotta */
+        .hero-frame::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-red);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            opacity: 0.8;
+            z-index: 2;
         }
 
         h1 {
-            font-size: 4rem;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            color: var(--accent-red);
+            margin: 40px 0 5px 0;
+            font-style: italic;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #8c7662;
             margin-bottom: 10px;
-        }
-
-        .hero-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 600px;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 30px;
-            background: var(--accent);
-            color: var(--bg-color);
-            text-decoration: none;
-            border-radius: 8px;
             font-weight: bold;
-            transition: transform 0.2s;
         }
 
-        .btn:hover { transform: scale(1.05); }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent-red);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        .sticker {
+            position: absolute;
+            cursor: pointer;
+            filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.03));
+            transition: 0.3s;
+        }
+
+        .sticker:hover { transform: scale(1.1) rotate(-10deg); }
+
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="feedback.html">Feedback</a>
+        <a href="index.html" class="active">home</a>
+        <a href="blog.html">blog</a>
+        <a href="about.html">about</a>
+        <a href="contact.html">contact</a>
+        <a href="feedback.html">feedback</a>
     </nav>
 
-    <header>
-        <h1>Welcome.</h1>
-        <div class="hero-card">
-            <p style="font-size: 1.2rem;">This is my corner of the digital universe. Explore my thoughts, projects, and creative journey.</p>
-            <a href="blog.html" class="btn">Read My Blog</a>
+    <div class="cover-container">
+        <div class="tape"></div>
+        
+        <span class="sticker" style="top: 15%; left: 8%; font-size: 2.5rem;">📜</span>
+        <span class="sticker" style="bottom: 10%; right: 8%; font-size: 2.5rem;">🖋️</span>
+
+        <p class="tagline">Established 2026</p>
+        <h1>Sweet Escape</h1>
+        <div class="divider"></div>
+
+        <div class="hero-frame">
+            <div style="color: #b5a47a; font-size: 0.8rem;">[ PORTRAIT IMAGE ]</div>
         </div>
-    </header>
+
+        <p style="margin-top: 40px; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+            welcome to my world. a curated collection of digital memories, postcards from places i've been, and notes for the future.
+        </p>
+    </div>
 
 </body>
 </html>
