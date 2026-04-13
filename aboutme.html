@@ -9,10 +9,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            --bg-pink-cream: #fab8b8;   /* Pinkish Creamy background */
-            --butter-yellow: #f2df75;   /* Butter Yellow for the ID card */
-            --text-dark: #2c3e50;
-            --star-gold: #ffd900;
+            /* VIBRANT COLOR PALETTE */
+            --bg-pink-cream: #f4dcd6;   /* Deep, warm pinkish-cream */
+            --soft-blue-tint: #c5d9ed;  /* Distinct soft blue for photo border */
+            --butter-yellow: #f9e1a0;   /* Rich, saturated butter yellow for ID */
+            --text-dark: #1a2a38;       /* Deep navy/dark for readability */
+            --star-gold: #ffcc33;       /* Vibrant sticker gold */
+            --accent-pink: #eeb8b8;     /* Pink for separators */
         }
 
         body, html {
@@ -21,16 +24,14 @@
             width: 100%;
             background-color: var(--bg-pink-cream);
             font-family: 'Quicksand', sans-serif;
-            /* Enabling scrolling as requested */
             overflow-y: auto; 
             overflow-x: hidden;
         }
 
-        /* Container no longer has the blue/white box background */
         .page-container {
             width: 95vw;
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 60px auto;
             display: flex;
             flex-direction: row;
             gap: 60px;
@@ -39,35 +40,40 @@
             box-sizing: border-box;
         }
 
-        /* 1. LEFT PANEL: PROFILE */
+        /* 1. LEFT PANEL: YEARBOOK */
         .left-panel {
             flex: 1;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--text-dark);
-            margin: 0 0 20px 0;
+            margin: 0 0 25px 0;
+            letter-spacing: -1px;
         }
 
         .yearbook-frame {
             width: 100%;
-            border: 2px solid #330902;
-            padding: 10px;
-            background: #ea9090; /* Keeping the photo paper white */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+            border: 3px solid rgba(0,0,0,0.08);
+            padding: 15px;
+            background: var(--soft-blue-tint); 
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            border-radius: 4px;
+            position: relative;
         }
 
         .photo-container {
             width: 100%;
-            height: 400px;
-            background: #222;
+            height: 550px; 
+            background: #111;
             overflow: hidden;
+            border: 2px solid rgba(0,0,0,0.15);
         }
 
         .photo-container img {
@@ -78,119 +84,140 @@
 
         .yearbook-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.6rem;
             color: var(--text-dark);
-            margin: 15px 0 5px;
+            margin: 20px 0 5px;
         }
 
         .yearbook-quote {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.1rem;
-            color: #f5cb9e;
-            padding-bottom: 10px;
+            font-size: 1.2rem;
+            color: #5d4a3e;
+            padding-bottom: 15px;
         }
 
         /* 2. RIGHT PANEL: ID STAMP */
         .right-panel {
-            flex: 1.5;
-            padding-top: 100px; /* Offset so it sits lower than the header */
+            flex: 1.4;
+            padding-top: 150px;
+            position: relative;
         }
 
         .license-card {
             background-color: var(--butter-yellow);
-            background-image: radial-gradient(#f0d492 0.5px, transparent 0.5px);
-            background-size: 6px 6px;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+            background-size: 25px 25px;
             border: 12px solid transparent;
-            border-image: radial-gradient(#333 20%, transparent 20%) 33% repeat;
-            border-width: 15px;
-            padding: 30px;
-            color: #444;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
-            font-family: monospace;
-            transform: rotate(-3deg); /* Stamped effect */
+            border-image: radial-gradient(#222 25%, transparent 26%) 33% repeat;
+            border-width: 16px;
+            padding: 40px;
+            color: var(--text-dark);
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.15);
+            font-family: 'Courier New', Courier, monospace;
+            transform: rotate(-3deg);
             width: 100%;
             box-sizing: border-box;
             position: relative;
         }
 
-        /* STAR STICKERS */
-        .star {
+        /* DECORATIONS: STARS & EMOJIS */
+        .sticker {
             position: absolute;
-            width: 35px;
-            height: 35px;
-            background: var(--star-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 3;
+            z-index: 10;
+            filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.15));
+            pointer-events: none;
+            user-select: none;
         }
 
-        .star-1 { top: -20px; left: -15px; transform: rotate(-15deg); width: 45px; height: 45px; }
-        .star-2 { bottom: 10px; right: -20px; transform: rotate(20deg); }
-        .star-3 { top: -30px; right: 40px; transform: rotate(10deg); width: 25px; height: 25px; }
+        .star {
+            width: 45px;
+            height: 45px;
+            background: var(--star-gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        /* Placement */
+        .s-star-1 { top: -25px; left: -20px; transform: rotate(-15deg); width: 55px; height: 55px; }
+        .s-star-2 { bottom: 20px; right: -25px; transform: rotate(25deg); background: #ffaa33; }
+        .s-strawberry { top: 10px; right: -20px; font-size: 50px; transform: rotate(15deg); }
+        .s-cherry { bottom: -30px; left: 10px; font-size: 45px; transform: rotate(-10deg); }
+        .s-lily { top: -40px; right: 80px; font-size: 40px; transform: rotate(-5deg); }
+        .s-small-star { top: 40%; left: -15px; font-size: 25px; transform: rotate(-20deg); }
 
         .license-header-group {
             text-align: right;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent-pink);
+            padding-bottom: 10px;
         }
 
-        .license-title { font-size: 0.9rem; font-weight: bold; letter-spacing: 1px; }
-        .license-no { font-size: 0.9rem; font-weight: bold; }
+        .license-title { font-size: 1.1rem; font-weight: 900; letter-spacing: 1px; }
+        .license-no { font-size: 0.9rem; font-weight: bold; color: #664d3d; }
 
         .license-main {
             display: flex;
-            gap: 25px;
+            gap: 30px;
+            margin-top: 20px;
         }
 
         .id-photo {
-            width: 140px;
-            height: 140px;
-            background: #f9ee75;
-            border: 1px solid #f19b9b;
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            border: 3px solid #664d3d;
+            padding: 5px;
             flex-shrink: 0;
+            transform: rotate(2deg);
         }
 
         .id-photo img { width: 100%; height: 100%; object-fit: cover; }
 
         .license-fields {
-            font-size: 0.9rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            line-height: 2.2;
+            line-height: 2.4;
             flex-grow: 1;
+            font-weight: bold;
         }
 
         .field-line {
-            border-bottom: 1px dotted #888;
+            border-bottom: 2px dashed rgba(0,0,0,0.15);
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .signature-area {
             font-family: 'Sacramento', cursive;
-            font-size: 2.5rem;
+            font-size: 3rem;
             text-align: right;
-            margin-top: 10px;
-            border-top: 1px solid #444;
+            margin-top: 15px;
+            border-top: 2px solid #222;
             float: right;
-            min-width: 180px;
+            min-width: 200px;
+            padding-top: 5px;
         }
 
         .back-link {
-            display: block;
-            margin-bottom: 20px;
+            display: inline-block;
+            margin-bottom: 25px;
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 0.9rem;
-            opacity: 0.5;
+            font-size: 1rem;
+            font-weight: bold;
+            opacity: 0.7;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 850px) {
             .page-container {
                 flex-direction: column;
                 align-items: center;
-                gap: 40px;
+                gap: 50px;
             }
             .right-panel { padding-top: 0; width: 100%; }
+            .photo-container { height: 450px; }
         }
     </style>
 </head>
@@ -198,11 +225,11 @@
 
 <div class="page-container">
     <div class="left-panel">
-        <a href="index.html" class="back-link">← BACK</a>
+        <a href="index.html" class="back-link">← BACK TO JOURNAL</a>
         <h1>Student Profile</h1>
         <div class="yearbook-frame">
             <div class="photo-container">
-                <img src="highschoolyearbook.jpg" alt="Yearbook Photo">
+                <img src="highschoolyearbook.jpg" alt="Yearbook Portrait">
             </div>
             <div class="yearbook-name">Aditi K</div>
             <div class="yearbook-quote">"I'm not killing people, I'm killing boys."</div>
@@ -211,9 +238,12 @@
 
     <div class="right-panel">
         <div class="license-card">
-            <div class="star star-1"></div>
-            <div class="star star-2"></div>
-            <div class="star star-3"></div>
+            <div class="sticker star s-star-1"></div>
+            <div class="sticker star s-star-2"></div>
+            <div class="sticker s-strawberry">🍓</div>
+            <div class="sticker s-cherry">🍒</div>
+            <div class="sticker s-lily">🌸</div>
+            <div class="sticker s-small-star">⭐</div>
 
             <div class="license-header-group">
                 <div class="license-title">PERMANENT LICENSE OF TRAVEL</div>
@@ -232,8 +262,8 @@
                 </div>
             </div>
 
-            <div style="font-size: 0.7rem; margin-top: 25px; text-align: justify; line-height: 1.4; opacity: 0.9;">
-                This is to Certify that the person named and described above is permitted to travel and explore freely unless detained by law.
+            <div style="font-size: 0.8rem; margin-top: 30px; text-align: justify; line-height: 1.5; font-weight: bold;">
+                THIS IS TO CERTIFY THAT THE PERSON NAMED AND DESCRIBED ABOVE IS PERMITTED TO TRAVEL AND EXPLORE FREELY UNLESS DETAINED BY LAW.
             </div>
             
             <div class="signature-area">Aditi</div>
