@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>About Me - Seamless Edition</title>
+    <title>About Me - Stamped Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            /* VIBRANT COLOR PALETTE */
-            --bg-pink-cream: #f4dcd6;   /* Deep, warm pinkish-cream */
-            --soft-blue-tint: #c5d9ed;  /* Distinct soft blue for photo border */
-            --butter-yellow: #f9e1a0;   /* Rich, saturated butter yellow for ID */
-            --text-dark: #1a2a38;       /* Deep navy/dark for readability */
-            --star-gold: #ffcc33;       /* Vibrant sticker gold */
-            --accent-pink: #eeb8b8;     /* Pink for separators */
+            --bg-pink-cream: #f4dcd6;   
+            --soft-blue-tint: #c5d9ed;  
+            --butter-yellow: #f9e1a0;   
+            --text-dark: #1a2a38;       
+            --star-gold: #ffcc33;       
+            --accent-pink: #eeb8b8;     
         }
 
         body, html {
@@ -26,51 +25,44 @@
             font-family: 'Quicksand', sans-serif;
             overflow-y: auto; 
             overflow-x: hidden;
+            display: flex;
+            justify-content: center;
         }
 
         .page-container {
             width: 95vw;
-            max-width: 1100px;
-            margin: 60px auto;
+            max-width: 600px; /* Narrower for vertical stacking */
+            margin: 40px auto;
             display: flex;
-            flex-direction: row;
-            gap: 60px;
-            align-items: flex-start;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        /* 1. LEFT PANEL: YEARBOOK */
-        .left-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stacking elements vertically */
+            align-items: center;
             position: relative;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: var(--text-dark);
-            margin: 0 0 25px 0;
-            letter-spacing: -1px;
+            margin-bottom: 20px;
+            align-self: flex-start;
         }
 
+        /* 1. YEARBOOK (PORTRAIT) */
         .yearbook-frame {
             width: 100%;
             border: 3px solid rgba(0,0,0,0.08);
             padding: 15px;
             background: var(--soft-blue-tint); 
             box-shadow: 10px 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
             border-radius: 4px;
-            position: relative;
+            box-sizing: border-box;
+            z-index: 1;
         }
 
         .photo-container {
             width: 100%;
-            height: 550px; 
+            height: 650px; /* Portrait height */
             background: #111;
             overflow: hidden;
             border: 2px solid rgba(0,0,0,0.15);
@@ -86,137 +78,115 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.6rem;
             color: var(--text-dark);
-            margin: 20px 0 5px;
+            margin: 15px 0 5px;
         }
 
-        .yearbook-quote {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #5d4a3e;
-            padding-bottom: 15px;
-        }
-
-        /* 2. RIGHT PANEL: ID STAMP */
-        .right-panel {
-            flex: 1.4;
-            padding-top: 150px;
-            position: relative;
-        }
-
+        /* 2. ID CARD (LANDSCAPE & STAMPED BELOW) */
         .license-card {
             background-color: var(--butter-yellow);
             background-image: 
                 linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-            background-size: 25px 25px;
+            background-size: 20px 20px;
             border: 12px solid transparent;
             border-image: radial-gradient(#222 25%, transparent 26%) 33% repeat;
             border-width: 16px;
-            padding: 40px;
+            padding: 25px;
             color: var(--text-dark);
             box-shadow: 15px 15px 30px rgba(0,0,0,0.15);
             font-family: 'Courier New', Courier, monospace;
-            transform: rotate(-3deg);
-            width: 100%;
+            
+            /* STAMPED EFFECT */
+            width: 110%; /* Makes it hang off the edges slightly */
+            margin-top: -50px; /* Pulls it up to "overlap" like a sticker */
+            transform: rotate(-2deg); 
+            
             box-sizing: border-box;
             position: relative;
+            z-index: 2; /* Sits on top of yearbook */
         }
 
-        /* DECORATIONS: STARS & EMOJIS */
+        /* STICKERS / EMOJIS */
         .sticker {
             position: absolute;
             z-index: 10;
             filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.15));
             pointer-events: none;
-            user-select: none;
         }
 
         .star {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background: var(--star-gold);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
 
-        /* Placement */
-        .s-star-1 { top: -25px; left: -20px; transform: rotate(-15deg); width: 55px; height: 55px; }
-        .s-star-2 { bottom: 20px; right: -25px; transform: rotate(25deg); background: #ffaa33; }
-        .s-strawberry { top: 10px; right: -20px; font-size: 50px; transform: rotate(15deg); }
-        .s-cherry { bottom: -30px; left: 10px; font-size: 45px; transform: rotate(-10deg); }
-        .s-lily { top: -40px; right: 80px; font-size: 40px; transform: rotate(-5deg); }
-        .s-small-star { top: 40%; left: -15px; font-size: 25px; transform: rotate(-20deg); }
+        .s1 { top: -20px; left: 10px; transform: rotate(-10deg); }
+        .s2 { bottom: -10px; right: 20px; font-size: 40px; } /* Strawberry */
+        .s3 { top: 20%; right: -25px; font-size: 35px; transform: rotate(15deg); } /* Cherries */
+        .s4 { top: -35px; right: 15%; font-size: 30px; } /* Lily */
 
         .license-header-group {
             text-align: right;
-            margin-bottom: 25px;
-            border-bottom: 3px solid var(--accent-pink);
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-pink);
         }
 
-        .license-title { font-size: 1.1rem; font-weight: 900; letter-spacing: 1px; }
-        .license-no { font-size: 0.9rem; font-weight: bold; color: #664d3d; }
+        .license-title { font-size: 0.9rem; font-weight: 900; }
+        .license-no { font-size: 0.8rem; font-weight: bold; }
 
         .license-main {
             display: flex;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 20px;
+            align-items: center;
         }
 
-        .id-photo {
-            width: 160px;
-            height: 160px;
+        .id-photo-small {
+            width: 100px;
+            height: 100px;
             background: #fff;
-            border: 3px solid #664d3d;
-            padding: 5px;
+            border: 2px solid #664d3d;
+            padding: 3px;
             flex-shrink: 0;
-            transform: rotate(2deg);
         }
 
-        .id-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .id-photo-small img { width: 100%; height: 100%; object-fit: cover; }
 
         .license-fields {
-            font-size: 1rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            line-height: 2.4;
+            line-height: 2;
             flex-grow: 1;
             font-weight: bold;
         }
 
         .field-line {
-            border-bottom: 2px dashed rgba(0,0,0,0.15);
+            border-bottom: 1px dashed rgba(0,0,0,0.2);
             display: block;
-            margin-bottom: 10px;
         }
 
-        .signature-area {
+        .signature {
             font-family: 'Sacramento', cursive;
-            font-size: 3rem;
+            font-size: 2.2rem;
             text-align: right;
-            margin-top: 15px;
-            border-top: 2px solid #222;
+            margin-top: 5px;
+            border-top: 1px solid #222;
             float: right;
-            min-width: 200px;
-            padding-top: 5px;
+            min-width: 140px;
         }
 
         .back-link {
-            display: inline-block;
-            margin-bottom: 25px;
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
-            opacity: 0.7;
+            opacity: 0.6;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        @media (max-width: 850px) {
-            .page-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 50px;
-            }
-            .right-panel { padding-top: 0; width: 100%; }
+        @media (max-width: 600px) {
+            .license-card { width: 100%; margin-top: -20px; transform: rotate(0); }
             .photo-container { height: 450px; }
         }
     </style>
@@ -224,51 +194,43 @@
 <body>
 
 <div class="page-container">
-    <div class="left-panel">
-        <a href="index.html" class="back-link">← BACK TO JOURNAL</a>
-        <h1>Student Profile</h1>
-        <div class="yearbook-frame">
-            <div class="photo-container">
-                <img src="highschoolyearbook.jpg" alt="Yearbook Portrait">
-            </div>
-            <div class="yearbook-name">Aditi K</div>
-            <div class="yearbook-quote">"I'm not killing people, I'm killing boys."</div>
+    <a href="index.html" class="back-link">← BACK</a>
+    <h1>Student Profile</h1>
+
+    <div class="yearbook-frame">
+        <div class="photo-container">
+            <img src="highschoolyearbook.jpg" alt="Yearbook Photo">
+        </div>
+        <div class="yearbook-name">Aditi K</div>
+        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e;">
+            "I'm not killing people, I'm killing boys."
         </div>
     </div>
 
-    <div class="right-panel">
-        <div class="license-card">
-            <div class="sticker star s-star-1"></div>
-            <div class="sticker star s-star-2"></div>
-            <div class="sticker s-strawberry">🍓</div>
-            <div class="sticker s-cherry">🍒</div>
-            <div class="sticker s-lily">🌸</div>
-            <div class="sticker s-small-star">⭐</div>
+    <div class="license-card">
+        <div class="sticker star s1"></div>
+        <div class="sticker s2">🍓</div>
+        <div class="sticker s3">🍒</div>
+        <div class="sticker s4">🌸</div>
 
-            <div class="license-header-group">
-                <div class="license-title">PERMANENT LICENSE OF TRAVEL</div>
-                <div class="license-no">NO. AK6252026</div>
-            </div>
-            
-            <div class="license-main">
-                <div class="id-photo">
-                    <img src="highschoolyearbook.jpg" alt="ID Thumbnail">
-                </div>
-                <div class="license-fields">
-                    <span class="field-line">Issued to: <b>Aditi K</b></span>
-                    <span class="field-line">Date of Birth: <b>01/01/2004</b></span>
-                    <span class="field-line">Place of Issue: <b>Digital Journal</b></span>
-                    <span class="field-line">Date of Issue: <b>04/14/2026</b></span>
-                </div>
-            </div>
-
-            <div style="font-size: 0.8rem; margin-top: 30px; text-align: justify; line-height: 1.5; font-weight: bold;">
-                THIS IS TO CERTIFY THAT THE PERSON NAMED AND DESCRIBED ABOVE IS PERMITTED TO TRAVEL AND EXPLORE FREELY UNLESS DETAINED BY LAW.
-            </div>
-            
-            <div class="signature-area">Aditi</div>
-            <div style="clear:both;"></div>
+        <div class="license-header-group">
+            <div class="license-title">PERMANENT LICENSE OF TRAVEL</div>
+            <div class="license-no">NO. AK6252026</div>
         </div>
+        
+        <div class="license-main">
+            <div class="id-photo-small">
+                <img src="highschoolyearbook.jpg" alt="ID Photo">
+            </div>
+            <div class="license-fields">
+                <span class="field-line">NAME: <b>ADITI K</b></span>
+                <span class="field-line">ISSUE: <b>2026</b></span>
+                <span class="field-line">EXPIRY: <b>PERMANENT</b></span>
+            </div>
+        </div>
+
+        <div class="signature">Aditi</div>
+        <div style="clear:both;"></div>
     </div>
 </div>
 
