@@ -100,25 +100,28 @@
 
     .bow-sticker {
     position: absolute;
-    /* 1. Positioning to overlap the envelope */
-    /* Adjust these slightly if your bow isn't hitting the exact spot */
-    top: 28%;      /* Moves it down to meet the top of the envelope */
-    right: 5%;      /* Moves it left to sit over the envelope corner */
+    /* 1. Positioning: Aiming for the right-center of the envelope */
+    /* Envelope is at top: 32%, so we put the bow slightly lower than before */
+    top: 38%;      
+    right: 6%;     /* Moves it onto the right side of the envelope */
     
-    /* 2. Realistic Size (2800px was definitely the culprit!) */
-    width: 300px;  
-    height: 250px;
-    transform: rotate(-15deg) scale(2.5); 
-    transform-origin: center; 
-    /* 3. Stacking - Higher than the envelope (which is 5) */
-    z-index: 100;   
-    /* 4. The Image */
+    /* 2. Controlled Size */
+    width: 150px;  
+    height: 120px; 
+    
+    /* 3. The "Pin" Effect: Small scale and right-leaning tilt */
+    /* Adjust scale(1.2) to make it slightly bigger or smaller */
+    transform: rotate(-20deg) scale(1.2); 
+    transform-origin: center;
+
+    /* 4. Layering */
+    z-index: 100; 
     background-image: url('greenbow.png'); 
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; 
-    /*5 Pointer-events: none makes it so you can still click the envelope 
-       even if the bow is technically on top of it */
+    background-position: center;
+    
+    /* 5. Allows clicking the envelope underneath */
     pointer-events: none; 
 }
 
