@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
     <title>Digital Journal</title>
     <style>
         /* 1. FONTS */
@@ -210,7 +213,64 @@
     transform: rotate(-8deg); /* "Random" tilt */
     /* REPLACE WITH YOUR IMAGE LINK */
     background-image: url('strawberryicon.png'); 
+}/* --- MOBILE STYLES (Add this at the end of your style tag) --- */
+@media (max-width: 600px) {
+    /* 1. Reset the cover to allow scrolling on tall phones */
+    body, html {
+        overflow: auto; 
+    }
+    
+    .cover {
+        height: auto;
+        min-height: 100vh;
+        padding: 10% 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers everything on mobile */
+    }
+
+    /* 2. Scale the title so it fits the screen width */
+    .title {
+        font-size: 15vw; 
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* 3. Center the Envelope so it's not "stuck" to the side */
+    .envelope-link {
+        position: relative; /* Switches from absolute to relative */
+        top: 0 !important;
+        right: 0 !important;
+        margin: 40px auto; /* Centers it with space around it */
+        width: 220px;
+        height: 260px;
+        transform: rotate(0deg) !important; /* Straightens it for easier tapping */
+    }
+
+    /* 4. The Bow - Adjusts to stay on the centered envelope */
+    .bow-sticker {
+        width: 120px;
+        height: 100px;
+        top: -30px; /* Positions it relative to the envelope */
+        right: -10px;
+        transform: rotate(35deg) scale(1.1) !important;
+    }
+
+    /* 5. Place stickers below the envelope nicely */
+    .mini-sticker {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+        right: auto !important;
+        bottom: auto !important;
+    }
+    
+    .subtitle-area {
+        text-align: center;
+        margin-top: 30px;
+    }
 }
+
     </style>
 </head>
 <body>
