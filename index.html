@@ -3,193 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journal Cover</title>
+    <title>My Sweet Journal</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Quicksand:wght@500&display=swap');
+
         :root {
-            --baby-pink: #fce4ec;
-            --deep-pink: #f8bbd0;
-            --cream: #fffdf5;
-            --lace-white: #ffffff;
+            --soft-pink: #ffdae9;
+            --cream: #fffaf0;
+            --lace: #ffffff;
+            --accent: #ff85a1;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--baby-pink);
-            /* Soft cream diamond pattern */
-            background-image:  linear-gradient(30deg, var(--cream) 12%, transparent 12.5%, transparent 87%, var(--cream) 87.5%, var(--cream)),
-            linear-gradient(150deg, var(--cream) 12%, transparent 12.5%, transparent 87%, var(--cream) 87.5%, var(--cream)),
-            linear-gradient(30deg, var(--cream) 12%, transparent 12.5%, transparent 87%, var(--cream) 87.5%, var(--cream)),
-            linear-gradient(150deg, var(--cream) 12%, transparent 12.5%, transparent 87%, var(--cream) 87.5%, var(--cream)),
-            linear-gradient(60deg, var(--deep-pink) 25%, transparent 25.5%, transparent 75%, var(--deep-pink) 75%, var(--deep-pink)),
-            linear-gradient(60deg, var(--deep-pink) 25%, transparent 25.5%, transparent 75%, var(--deep-pink) 75%, var(--deep-pink));
-            background-size: 80px 140px;
-            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            background-color: var(--soft-pink);
+            /* Soft polka dot background instead of geometric shapes */
+            background-image: radial-gradient(var(--cream) 20%, transparent 20%);
+            background-size: 30px 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: 'Georgia', serif;
+            font-family: 'Quicksand', sans-serif;
         }
 
-        /* The Main Journal Cover */
-        .journal-cover {
+        /* The Journal Page with Lace Border */
+        .journal-container {
             position: relative;
-            width: 85vw;
+            width: 80vw;
             height: 85vh;
             background: var(--cream);
-            border: 15px solid white;
-            outline: 2px solid var(--deep-pink);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-radius: 50px; /* Rounded corners for a softer look */
+            box-shadow: 0 15px 40px rgba(255, 133, 161, 0.2);
+            padding: 40px;
+            box-sizing: border-box;
+            /* Lace Border Effect */
+            border: 12px solid var(--lace);
+            outline: 5px dotted var(--soft-pink);
+            outline-offset: -20px;
+        }
+
+        /* Cutesy Title using Bubbles */
+        .title-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 10vh;
+            margin-top: 20px;
         }
 
-        /* Title Styling */
-        .title-area {
-            text-align: center;
+        .word {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
         }
 
-        .title-word {
-            display: inline-flex;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .letter-tile {
+        .bubble-letter {
+            width: 50px;
+            height: 50px;
             background: white;
-            border: 1px solid var(--deep-pink);
-            padding: 10px 15px;
-            font-size: 2rem;
-            color: #d81b60;
-            box-shadow: 3px 3px 0px var(--baby-pink);
-            transform: rotate(var(--r));
-        }
-
-        /* The Envelope (Bottom Right) */
-        .envelope-wrapper {
-            position: absolute;
-            bottom: -20px;
-            right: 40px;
-            transform: rotate(-10deg);
-            transition: transform 0.3s ease;
-        }
-
-        .envelope-wrapper:hover {
-            transform: rotate(-5deg) scale(1.05);
-        }
-
-        .envelope {
-            position: relative;
-            width: 200px;
-            height: 120px;
-            background: #fff;
-            border: 2px solid var(--deep-pink);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
-        }
-
-        /* The Letter inside the envelope */
-        .letter-content {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 140px;
-            background: white;
-            border: 1px solid #eee;
-            z-index: 1;
+            border: 3px solid var(--soft-pink);
+            border-radius: 50% 40% 60% 30%; /* Irregular "organic" rounds */
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Cherry Bomb One', cursive;
+            color: var(--accent);
+            font-size: 1.8rem;
+            box-shadow: 2px 4px 0px var(--soft-pink);
+            transform: rotate(var(--r));
+        }
+
+        /* The Envelope (Hand-drawn look) */
+        .envelope-link {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            width: 220px;
+            height: 150px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 15px 15px 50px 15px; /* Irregular pocket shape */
+            transform: rotate(-8deg);
             text-decoration: none;
-            color: var(--deep-pink);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .envelope-link:hover {
+            transform: rotate(-3deg) scale(1.05);
+        }
+
+        /* Heart on the envelope */
+        .envelope-link::after {
+            content: '❤';
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            font-size: 3rem;
+            color: var(--soft-pink);
+            opacity: 0.6;
+        }
+
+        .open-text {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--accent);
             font-weight: bold;
             font-size: 1.2rem;
-            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
+            z-index: 11;
         }
 
-        /* Envelope Flap (Opened) */
-        .envelope::after {
-            content: '';
+        /* Sticker Slots */
+        .sticker-slot {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 100px solid transparent;
-            border-right: 100px solid transparent;
-            border-bottom: 70px solid var(--baby-pink);
-            top: -70px;
-        }
-
-        /* Sticker Placeholders */
-        .sticker {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 5;
-            /* Replace background-image with your URL later */
+            width: 80px;
+            height: 80px;
             background-size: contain;
             background-repeat: no-repeat;
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+            background-position: center;
+            z-index: 5;
+            transition: 0.3s;
+            /* Replace url with your images */
+            background-image: url('PLACE_STICKER_URL_HERE');
         }
 
-        .sticker:hover { transform: scale(1.1) rotate(5deg); }
+        .sticker-slot:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
 
-        /* Specific Sticker Positions around the envelope */
-        #sticker1 { bottom: 130px; right: 180px; transform: rotate(-15deg); background-image: url('YOUR_IMAGE_HERE'); border: 2px dashed #ffc1e3; }
-        #sticker2 { bottom: 50px; right: 260px; transform: rotate(10deg); background-image: url('YOUR_IMAGE_HERE'); border: 2px dashed #ffc1e3; }
-        #sticker3 { bottom: 180px; right: 40px; transform: rotate(5deg); background-image: url('YOUR_IMAGE_HERE'); border: 2px dashed #ffc1e3; }
+        #s1 { bottom: 180px; right: 40px; transform: rotate(15deg); }
+        #s2 { bottom: 60px; right: 280px; transform: rotate(-10deg); }
+        #s3 { bottom: 220px; right: 220px; transform: rotate(-5deg); }
 
     </style>
 </head>
 <body>
 
-    <div class="journal-cover">
+    <div class="journal-container">
         
-        <div class="title-area">
-            <div class="title-word">
-                <span class="letter-tile" style="--r: -3deg">M</span>
-                <span class="letter-tile" style="--r: 2deg">Y</span>
+        <div class="title-container">
+            <div class="word">
+                <span class="bubble-letter" style="--r: -5deg">M</span>
+                <span class="bubble-letter" style="--r: 8deg">Y</span>
             </div>
-            <br>
-            <div class="title-word">
-                <span class="letter-tile" style="--r: 1deg">D</span>
-                <span class="letter-tile" style="--r: -2deg">I</span>
-                <span class="letter-tile" style="--r: 4deg">G</span>
-                <span class="letter-tile" style="--r: -1deg">I</span>
-                <span class="letter-tile" style="--r: 3deg">T</span>
-                <span class="letter-tile" style="--r: -3deg">A</span>
-                <span class="letter-tile" style="--r: 2deg">L</span>
+            <div class="word">
+                <span class="bubble-letter" style="--r: -3deg">D</span>
+                <span class="bubble-letter" style="--r: 5deg">I</span>
+                <span class="bubble-letter" style="--r: -7deg">G</span>
+                <span class="bubble-letter" style="--r: 4deg">I</span>
+                <span class="bubble-letter" style="--r: -2deg">T</span>
+                <span class="bubble-letter" style="--r: 6deg">A</span>
+                <span class="bubble-letter" style="--r: -4deg">L</span>
             </div>
-            <br>
-            <div class="title-word">
-                <span class="letter-tile" style="--r: -2deg">J</span>
-                <span class="letter-tile" style="--r: 1deg">O</span>
-                <span class="letter-tile" style="--r: -4deg">U</span>
-                <span class="letter-tile" style="--r: 3deg">R</span>
-                <span class="letter-tile" style="--r: -1deg">N</span>
-                <span class="letter-tile" style="--r: 2deg">A</span>
-                <span class="letter-tile" style="--r: -3deg">L</span>
+            <div class="word">
+                <span class="bubble-letter" style="--r: 9deg">J</span>
+                <span class="bubble-letter" style="--r: -5deg">O</span>
+                <span class="bubble-letter" style="--r: 3deg">U</span>
+                <span class="bubble-letter" style="--r: -6deg">R</span>
+                <span class="bubble-letter" style="--r: 2deg">N</span>
+                <span class="bubble-letter" style="--r: -8deg">A</span>
+                <span class="bubble-letter" style="--r: 4deg">L</span>
             </div>
         </div>
 
-        <a href="#" class="sticker" id="sticker1" title="Sticker 1"></a>
-        <a href="#" class="sticker" id="sticker2" title="Sticker 2"></a>
-        <a href="#" class="sticker" id="sticker3" title="Sticker 3"></a>
+        <div class="sticker-slot" id="s1" title="Put sticker here"></div>
+        <div class="sticker-slot" id="s2" title="Put sticker here"></div>
+        <div class="sticker-slot" id="s3" title="Put sticker here"></div>
 
-        <div class="envelope-wrapper">
-            <a href="home.html" class="letter-content">
-                Open Me ♡
-            </a>
-            <div class="envelope"></div>
-        </div>
+        <a href="home.html" class="envelope-link">
+            <div class="open-text">Open me ♡</div>
+        </a>
 
     </div>
 
