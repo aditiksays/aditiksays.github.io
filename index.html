@@ -106,22 +106,18 @@
     right: 5%;      /* Moves it left to sit over the envelope corner */
     
     /* 2. Realistic Size (2800px was definitely the culprit!) */
-    width: 200px;  
-    height: 150px; 
-    
+    width: 300px;  
+    height: 250px;
+    transform: rotate(-15deg) scale(2.5); 
+    transform-origin: center; 
     /* 3. Stacking - Higher than the envelope (which is 5) */
-    z-index: 20;   
-    
+    z-index: 100;   
     /* 4. The Image */
     background-image: url('greenbow.png'); 
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
-    
-    /* 5. Rotation - Adjust to make it look like it's "pinning" the corner */
-    transform: rotate(-15deg); 
-    
-    /* Pointer-events: none makes it so you can still click the envelope 
+    background-position: center; 
+    /*5 Pointer-events: none makes it so you can still click the envelope 
        even if the bow is technically on top of it */
     pointer-events: none; 
 }
