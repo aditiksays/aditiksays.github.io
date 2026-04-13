@@ -5,196 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Journal 2026</title>
     <style>
+        /* 1. FONTS */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Quicksand:wght@300;500&display=swap');
 
+        /* 2. COLORS & VARIABLES */
         :root {
             --journal-blue: #8ba3bc;
             --ribbon-blue: #5a7d9a;
             --text-color: #5d7082;
+            --lace-white: #f8f8f8;
         }
 
+        /* 3. FULL SCREEN LANDSCAPE SETUP */
         body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Prevents scrolling */
-    background-color: #d1d9e0;
-}
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #d1d9e0;
+            font-family: 'Quicksand', sans-serif;
+        }
 
-.cover {
-    position: relative;
-    width: 100vw; /* Full Viewport Width */
-    height: 100vh; /* Full Viewport Height */
-    background-color: var(--journal-blue);
-    background-image: 
-        linear-gradient(90deg, rgba(255,255,255,.05) 50%, transparent 50%),
-        linear-gradient(rgba(255,255,255,.08) 50%, transparent 50%);
-    background-size: 4px 4px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5% 8%; /* Adjusted for full screen */
-    box-sizing: border-box;
-}
-        /* Spine Shadow */
+        .cover {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--journal-blue);
+            /* Linen Texture Effect */
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,.05) 50%, transparent 50%),
+                linear-gradient(rgba(255,255,255,.08) 50%, transparent 50%);
+            background-size: 4px 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8% 10%;
+            box-sizing: border-box;
+            box-shadow: inset 30px 0 50px rgba(0,0,0,0.1);
+        }
+
+        /* Spine Shadow on the left */
         .cover::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 40px;
-            background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+            width: 60px;
+            background: linear-gradient(to right, rgba(0,0,0,0.15), transparent);
             border-right: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* Debossed (Pressed-in) Text Effect */
+        /* 4. TEXT STYLING (The "Pressed" Effect) */
         .title {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 80px;
+            font-size: 8vw; /* Responsive size */
             color: var(--text-color);
-            line-height: 0.9;
-            margin-top: 40px;
-            /* This creates the "stamped" look */
-            text-shadow: -1px -1px 1px rgba(255,255,255,0.3), 1px 1px 1px rgba(0,0,0,0.2);
-            opacity: 0.8;
+            line-height: 0.85;
+            text-shadow: -1px -1px 1px rgba(255,255,255,0.4), 1px 1px 1px rgba(0,0,0,0.2);
+            opacity: 0.9;
         }
 
         .subtitle-area {
-            margin-top: auto;
             color: var(--text-color);
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .year {
-            font-size: 32px;
+            font-size: 38px;
             font-weight: bold;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
         }
 
         .quote {
-            font-size: 12px;
-            max-width: 400px;
-            line-height: 1.6;
+            font-size: 14px;
+            max-width: 500px;
+            line-height: 1.8;
         }
 
-        /* Vertical Ribbon */
+        /* 5. DECORATIONS */
         .ribbon {
             position: absolute;
-            right: 80px;
+            right: 12%;
             top: 0;
             bottom: 0;
-            width: 25px;
-            background-color: var(--ribbon-blue);
-            box-shadow: inset 2px 0 5px rgba(0,0,0,0.2), 2px 0 5px rgba(0,0,0,0.1);
-            /* Ribbon Texture lines */
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.1) 3px);
-        }
-
-        /* The Envelope/Photo Link */
-        .envelope-photo {
-            position: absolute;
-            bottom: 250px;
-            right: 60px;
-            width: 180px;
-            height: 200px;
-            background-color: #3b5a7a; /* Denim look */
-            transform: rotate(5deg);
-            padding: 15px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-            text-decoration: none;
-            transition: transform 0.3s;
-            z-index: 5;
-        }
-
-        .envelope-photo {
-    position: absolute;
-    top: 40%;
-    right: 6%;
-    width: 240px;
-    height: 280px;
-    /* Keep other existing styles like background and transform */
-}
-
-        .photo-inner {
-    width: 100%;
-    height: 190px; /* Adjust this to match your envelope height */
-    background: white;
-    border-radius: 50%; /* Makes the container a perfect circle */
-    border: 10px solid #f8f8f8; /* The "lace" frame */
-    overflow: hidden; /* This clips the image into the circle shape */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box; /* Ensures border doesn't shrink the circle */
-}
-
-.photo-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* This is the magic line that crops the image to fit perfectly */
-    object-position: center; /* Centers the focus of your photo */
-}
-        /* Gingham Bow */
-        .bow-sticker {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    width: 200px; /* Adjust size as needed */
-    height: 150px;
-    z-index: 10;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Replace with your uploaded bow image link */
-    background-image: url('greenbow.jpg'); 
-    transform: rotate(-5deg);
-}
-        /* Button on the Bow */
-        .button-icon {
-            position: absolute;
-            top: 105px;
-            right: 75px;
             width: 35px;
-            height: 35px;
-            background: #fffdf0;
-            border-radius: 50%;
-            border: 2px solid #ddd;
-            z-index: 11;
+            background-color: var(--ribbon-blue);
+            box-shadow: inset 3px 0 7px rgba(0,0,0,0.2), 3px 0 7px rgba(0,0,0,0.1);
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.05) 3px);
+        }
+
+        /* Sticker Bow at the top */
+        .bow-sticker {
+            position: absolute;
+            top: 8%;
+            right: 7%;
+            width: 180px;
+            height: 120px;
+            z-index: 10;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* REPLACE WITH YOUR BOW IMAGE LINK */
+            background-image: url('https://via.placeholder.com/180x120?text=Bow+Sticker'); 
+            transform: rotate(-5deg);
+        }
+
+        /* 6. THE ENVELOPE & CIRCLE PHOTO */
+        .envelope-link {
+            position: absolute;
+            top: 40%;
+            right: 7%;
+            width: 240px;
+            height: 280px;
+            background-color: #3b5a7a; 
+            transform: rotate(6deg);
+            padding: 15px;
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.2);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .envelope-link:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        /* The Circle "Cookie Cutter" */
+        .photo-inner {
+            width: 100%;
+            height: 210px; /* Adjust height to fit inside the envelope */
+            background: white;
+            border-radius: 50%; /* This creates the circle */
+            border: 10px solid var(--lace-white);
+            overflow: hidden; /* This crops the image into the circle */
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
         }
 
-        /* Sticker Slots */
-        .sticker {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 6;
+        .photo-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image fill the circle perfectly */
         }
+
+        .open-label {
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
     </style>
 </head>
-
-
-
 <body>
-
-    <div class="photo-inner">
-        <img src="journalphoto.jpg" alt="Journal Photo">
-    </div>
 
     <div class="cover">
         <div class="ribbon"></div>
         
         <div class="title">
-            my<br>digital<br>journal
+            digital<br>planner
         </div>
 
         <div class="subtitle-area">
@@ -204,17 +183,14 @@
             </div>
         </div>
 
-        <a href="home.html" class="envelope-photo">
-            <div class="photo-inner">
-                <img src="https://via.placeholder.com/150" alt="Home">
-            </div>
-            <p style="color: white; text-align: center; font-size: 12px; margin-top: 10px;">Open Journal</p>
-        </a>
-
         <div class="bow-sticker"></div>
 
-        <div class="sticker" style="bottom: 220px; right: 230px; background-image: url('staricon.jpg');">⭐</div>
-        <div class="sticker" style="bottom: 150px; right: 150px; background-image: url('strawberryicon.jpg');">🍓</div>
+        <a href="home.html" class="envelope-link">
+            <div class="photo-inner">
+                <img src="https://via.placeholder.com/300" alt="Journal Photo">
+            </div>
+            <div class="open-label">Open Journal ♡</div>
+        </a>
     </div>
 
 </body>
