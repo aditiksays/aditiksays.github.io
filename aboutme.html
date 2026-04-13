@@ -9,9 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            --bg-pink-cream: #f4dcd6;   
-            --soft-blue-tint: #c5d9ed;  
-            --butter-yellow: #f9e1a0;   
+            --bg-pink-cream: #f4dcd6;   /* Deeper pinkish-creamy background */
+            --soft-blue-tint: #c5d9ed;  /* Noticeable soft blue */
+            --butter-yellow: #f9e1a0;   /* Saturated butter yellow */
             --text-dark: #1a2a38;       
             --star-gold: #ffcc33;       
             --accent-pink: #eeb8b8;     
@@ -31,12 +31,14 @@
 
         .page-container {
             width: 95vw;
-            max-width: 600px; /* Narrower for vertical stacking */
+            max-width: 600px;
             margin: 40px auto;
             display: flex;
-            flex-direction: column; /* Stacking elements vertically */
+            flex-direction: column;
             align-items: center;
             position: relative;
+            /* Added gap to prevent elements from crushing each other */
+            gap: 20px;
         }
 
         h1 {
@@ -44,13 +46,13 @@
             font-style: italic;
             font-size: 3rem;
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             align-self: flex-start;
         }
 
         /* 1. YEARBOOK (PORTRAIT) */
         .yearbook-frame {
-            width: 95%;
+            width: 100%;
             border: 3px solid rgba(0,0,0,0.08);
             padding: 15px;
             background: var(--soft-blue-tint); 
@@ -62,7 +64,7 @@
 
         .photo-container {
             width: 100%;
-            height: 650px; /* Portrait height */
+            height: 750px; /* Strict Portrait height */
             background: #111;
             overflow: hidden;
             border: 2px solid rgba(0,0,0,0.15);
@@ -79,6 +81,7 @@
             font-size: 2.6rem;
             color: var(--text-dark);
             margin: 15px 0 5px;
+            text-align: center;
         }
 
         /* 2. ID CARD (LANDSCAPE & STAMPED BELOW) */
@@ -96,14 +99,14 @@
             box-shadow: 15px 15px 30px rgba(0,0,0,0.15);
             font-family: 'Courier New', Courier, monospace;
             
-            /* STAMPED EFFECT */
-            width: 110%; /* Makes it hang off the edges slightly */
-            margin-top: -50px; /* Pulls it up to "overlap" like a sticker */
-            transform: rotate(-5deg); 
+            /* STAMPED EFFECT - Positioned below yearbook */
+            width: 105%; 
+            margin-top: 10px; /* Positive margin so it doesn't overlay the photo */
+            transform: rotate(-2deg); 
             
             box-sizing: border-box;
             position: relative;
-            z-index: 2; /* Sits on top of yearbook */
+            z-index: 2;
         }
 
         /* STICKERS / EMOJIS */
@@ -122,9 +125,9 @@
         }
 
         .s1 { top: -20px; left: 10px; transform: rotate(-10deg); }
-        .s2 { bottom: -10px; right: 20px; font-size: 40px; } /* Strawberry */
-        .s3 { top: 20%; right: -25px; font-size: 35px; transform: rotate(15deg); } /* Cherries */
-        .s4 { top: -35px; right: 15%; font-size: 30px; } /* Lily */
+        .s2 { bottom: -15px; right: 20px; font-size: 45px; } /* Strawberry */
+        .s3 { top: 15%; right: -20px; font-size: 40px; transform: rotate(15deg); } /* Cherries */
+        .s4 { top: -35px; right: 20%; font-size: 35px; } /* Lily */
 
         .license-header-group {
             text-align: right;
@@ -142,8 +145,8 @@
         }
 
         .id-photo-small {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             background: #fff;
             border: 2px solid #664d3d;
             padding: 3px;
@@ -153,7 +156,7 @@
         .id-photo-small img { width: 100%; height: 100%; object-fit: cover; }
 
         .license-fields {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             line-height: 2;
             flex-grow: 1;
@@ -167,12 +170,12 @@
 
         .signature {
             font-family: 'Sacramento', cursive;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             text-align: right;
             margin-top: 5px;
             border-top: 1px solid #222;
             float: right;
-            min-width: 140px;
+            min-width: 150px;
         }
 
         .back-link {
@@ -186,8 +189,8 @@
         }
 
         @media (max-width: 600px) {
-            .license-card { width: 100%; margin-top: -20px; transform: rotate(0); }
-            .photo-container { height: 450px; }
+            .license-card { width: 100%; transform: rotate(0); }
+            .photo-container { height: 500px; }
         }
     </style>
 </head>
@@ -199,10 +202,10 @@
 
     <div class="yearbook-frame">
         <div class="photo-container">
-            <img src="highschoolyearbook.jpg" alt="Yearbook Photo">
+            <img src="highschoolyearbook.jpg" alt="Yearbook Portrait">
         </div>
         <div class="yearbook-name">Aditi K</div>
-        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e;">
+        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e; text-align: center;">
             "I'm not killing people, I'm killing boys."
         </div>
     </div>
