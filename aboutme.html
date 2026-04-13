@@ -4,65 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>About Me - Digital Journal</title>
+    <title>About Me - Stamped Edition</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            --bg-cream: #fdfbfb;
-            --soft-blue: #e3f2fd;
-            --dusty-pink: #fce4ec;
+            --wheat-bg: #f5deb3;
+            --page-cream: #fdfbfb;
             --text-dark: #2c3e50;
             --license-yellow: #e8e0c5;
         }
 
         body {
             margin: 0;
-            background: var(--soft-blue);
+            padding: 0;
+            background-color: var(--wheat-bg);
             font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
             min-height: 100vh;
         }
 
+        /* STRETCHED LANDSCAPE CONTAINER */
         .page-container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--bg-cream);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            width: 95vw;
+            max-width: 1100px;
+            height: 85vh;
+            background: var(--page-cream);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 1px solid var(--dusty-pink);
+            flex-direction: row;
+            gap: 50px;
+            align-items: stretch; /* Stretches children vertically */
+            position: relative;
+            border: 1px solid #d4c4a8;
+            box-sizing: border-box;
         }
 
-        /* 1. YEARBOOK STYLE HEADER */
+        /* Panels stretch to fill container height */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .right-panel {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Pushes ID to the bottom */
+        }
+
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--text-dark);
-            margin: 0 0 10px 0;
+            margin: 0;
         }
 
-        /* 2. YEARBOOK PHOTO FRAME (Visual Doc 1) */
+        /* YEARBOOK FRAME (STRETCHED) */
         .yearbook-frame {
-            width: 240px;
+            width: 100%;
             border: 2px solid #ddd;
-            padding: 5px;
+            padding: 8px;
             background: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             text-align: center;
-            margin-bottom: 25px;
+            flex-grow: 1; /* Stretches the frame to fill panel */
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
         }
 
         .photo-container {
             width: 100%;
-            height: 300px;
-            background: #444; /* Dark grainy background match */
+            flex-grow: 1; /* Stretches the photo area */
+            background: #333;
             overflow: hidden;
         }
 
@@ -74,110 +96,110 @@
 
         .yearbook-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--text-dark);
-            margin: 10px 0 5px;
+            margin: 15px 0 5px;
         }
 
         .yearbook-quote {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #887a6b;
-            margin-bottom: 10px;
-            padding: 0 10px;
+            padding-bottom: 10px;
         }
 
-        /* 3. PERMANENT LICENSE OF TRAVEL (Visual Doc 2) */
+        /* LICENSE AS A "STAMPED DOWN" ITEM */
         .license-card {
             background-color: var(--license-yellow);
             background-image: radial-gradient(#bcaf8d 0.5px, transparent 0.5px);
-            background-size: 4px 4px; /* Slight texture match */
+            background-size: 4px 4px;
             border: 12px solid transparent;
-            border-image: radial-gradient(#333 20%, transparent 20%) 33% repeat; /* Star/Dot border simulation */
+            border-image: radial-gradient(#333 20%, transparent 20%) 33% repeat;
             border-width: 15px;
-            padding: 15px;
+            padding: 25px;
+            color: #333;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            font-family: monospace;
+            transform: rotate(-2deg); /* "Stamped" messy angle */
             width: 100%;
             box-sizing: border-box;
-            color: #333;
-            position: relative;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-            font-family: monospace;
+            align-self: flex-end; /* Keeps it at the bottom */
         }
 
-        .license-title {
-            font-size: 0.7rem;
-            font-weight: bold;
+        .license-header-group {
             text-align: right;
-            margin-bottom: 2px;
-            letter-spacing: 1px;
+            margin-bottom: 15px;
         }
 
-        .license-no {
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-align: right;
-            margin-bottom: 10px;
-        }
+        .license-title { font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
+        .license-no { font-size: 0.8rem; font-weight: bold; }
 
         .license-main {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         .id-photo {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             background: #fff;
             border: 1px solid #999;
             flex-shrink: 0;
         }
 
-        .id-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .id-photo img { width: 100%; height: 100%; object-fit: cover; }
 
         .license-fields {
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            line-height: 1.8;
+            line-height: 2;
             flex-grow: 1;
         }
 
         .field-line {
             border-bottom: 1px dotted #555;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .license-footer-text {
-            font-size: 0.55rem;
-            margin-top: 10px;
+            font-size: 0.6rem;
+            margin-top: 20px;
             text-align: justify;
-            line-height: 1.2;
-            opacity: 0.8;
+            line-height: 1.3;
+            opacity: 0.9;
         }
 
         .signature-area {
             font-family: 'Sacramento', cursive;
-            font-size: 1.5rem;
+            font-size: 2.2rem;
             text-align: right;
-            margin-top: -10px;
+            margin-top: 5px;
             border-top: 1px solid #333;
-            display: inline-block;
             float: right;
-            min-width: 120px;
+            min-width: 150px;
         }
 
         .back-link {
+            position: absolute;
+            top: 15px;
+            left: 20px;
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 0.7rem;
-            margin-bottom: 15px;
-            align-self: flex-start;
-            opacity: 0.6;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            z-index: 10;
+        }
+
+        @media (max-width: 900px) {
+            .page-container {
+                flex-direction: column;
+                height: auto;
+                width: 95vw;
+                padding: 50px 20px 20px;
+            }
+            .photo-container { height: 350px; }
         }
     </style>
 </head>
@@ -186,38 +208,43 @@
 <div class="page-container">
     <a href="index.html" class="back-link">← BACK</a>
     
-    <h1>Student Profile</h1>
-
-    <div class="yearbook-frame">
-        <div class="photo-container">
-            <img src="highschoolyearbook.jpg" alt="Yearbook Photo">
+    <div class="left-panel">
+        <h1>Student Profile</h1>
+        <div class="yearbook-frame">
+            <div class="photo-container">
+                <img src="highschoolyearbook.jpg" alt="Yearbook Photo">
+            </div>
+            <div class="yearbook-name">Aditi K</div>
+            <div class="yearbook-quote">"I'm not killing people, I'm killing boys."</div>
         </div>
-        <div class="yearbook-name">Aditi K</div>
-        <div class="yearbook-quote">"I'm not killing people, I'm killing boys."</div>
     </div>
 
-    <div class="license-card">
-        <div class="license-title">PERMANENT LICENSE OF TRAVEL</div>
-        <div class="license-no">NO. AK6252026</div>
-        
-        <div class="license-main">
-            <div class="id-photo">
-                <img src="highschoolyearbook.jpg" alt="ID Thumbnail">
+    <div class="right-panel">
+        <div class="license-card">
+            <div class="license-header-group">
+                <div class="license-title">PERMANENT LICENSE OF TRAVEL</div>
+                <div class="license-no">NO. AK6252026</div>
             </div>
-            <div class="license-fields">
-                <span class="field-line">Issued to: <b>Aditi K</b></span>
-                <span class="field-line">Date of Birth: <b>01/01/2004</b></span>
-                <span class="field-line">Place of Issue: <b>Digital Journal</b></span>
-                <span class="field-line">Date of Issue: <b>04/14/2026</b></span>
+            
+            <div class="license-main">
+                <div class="id-photo">
+                    <img src="highschoolyearbook.jpg" alt="ID Thumbnail">
+                </div>
+                <div class="license-fields">
+                    <span class="field-line">Issued to: <b>Aditi K</b></span>
+                    <span class="field-line">Date of Birth: <b>01/01/2004</b></span>
+                    <span class="field-line">Place of Issue: <b>Digital Journal</b></span>
+                    <span class="field-line">Date of Issue: <b>04/14/2026</b></span>
+                </div>
             </div>
-        </div>
 
-        <div class="license-footer-text">
-            This is to Certify that the person named and described above is permitted to travel and explore freely unless detained by law.
+            <div class="license-footer-text">
+                This is to Certify that the person named and described above is permitted to travel and explore freely unless detained by law.
+            </div>
+            
+            <div class="signature-area">Aditi</div>
+            <div style="clear:both;"></div>
         </div>
-        
-        <div class="signature-area">Aditi</div>
-        <div style="clear:both;"></div>
     </div>
 </div>
 
