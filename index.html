@@ -101,7 +101,7 @@
         /* Sticker Bow at the top */
         .bow-sticker {
             position: absolute;
-            top: 8%;
+            top: 15%;
             right: 7%;
             width: 180px;
             height: 120px;
@@ -117,7 +117,7 @@
         /* 6. THE ENVELOPE & CIRCLE PHOTO */
         .envelope-link {
             position: absolute;
-            top: 40%;
+            top: 32%;
             right: 7%;
             width: 240px;
             height: 280px;
@@ -164,7 +164,42 @@
             margin-top: 15px;
             font-weight: 500;
         }
+/* Placeholder Sticker Styles */
+.mini-sticker {
+    position: absolute;
+    width: 65px; /* Adjust size as needed */
+    height: 65px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 6; /* Sits above the ribbon, below the envelope hover */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
 
+.mini-sticker:hover {
+    transform: scale(1.1); /* Subtle hover effect */
+}
+
+/* Specific Positions on the Ribbon below the envelope */
+
+/* Sticker 1: Near the open label, slightly tilted */
+#s1 {
+    bottom: 25%; /* Positioned from the bottom of the screen */
+    right: 18%;   /* Positioned near the ribbon's left edge */
+    transform: rotate(12deg); /* "Random" tilt */
+    /* REPLACE WITH YOUR IMAGE LINK */
+    background-image: url('https://via.placeholder.com/65?text=Sticker+1'); 
+}
+
+/* Sticker 2: Further down the ribbon, tilted the other way */
+#s2 {
+    bottom: 12%; /* Closer to the bottom */
+    right: 9%;   /* Placed more to the right */
+    transform: rotate(-8deg); /* "Random" tilt */
+    /* REPLACE WITH YOUR IMAGE LINK */
+    background-image: url('https://via.placeholder.com/65?text=Sticker+2'); 
+}
     </style>
 </head>
 <body>
@@ -191,6 +226,17 @@
             </div>
             <div class="open-label"> <b>Open Journal</b> 🍓</div>
         </a>
+    </div>
+    <a href="home.html" class="envelope-link">
+            <div class="photo-inner">
+                <img src="https://via.placeholder.com/300" alt="Journal Photo">
+            </div>
+            <div class="open-label">Open Journal ♡</div>
+        </a>
+
+        <div class="mini-sticker" id="s1" title="Sticker Place 1"></div>
+        <div class="mini-sticker" id="s2" title="Sticker Place 2"></div>
+
     </div>
 
 </body>
