@@ -98,21 +98,33 @@
             background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.05) 3px);
         }
 
-        /* Sticker Bow at the top */
-        .bow-sticker {
-            position: absolute;
-            top: 15%;
-            right: 5%;
-            width: 2800px;
-            height: 1600px;
-            z-index: 10;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            /* REPLACE WITH YOUR BOW IMAGE LINK */
-            background-image: url('greenbow.png'); 
-            transform: rotate(-5deg);
-        }
+    .bow-sticker {
+    position: absolute;
+    /* 1. Positioning to overlap the envelope */
+    /* Adjust these slightly if your bow isn't hitting the exact spot */
+    top: 28%;      /* Moves it down to meet the top of the envelope */
+    right: 5%;      /* Moves it left to sit over the envelope corner */
+    
+    /* 2. Realistic Size (2800px was definitely the culprit!) */
+    width: 200px;  
+    height: 150px; 
+    
+    /* 3. Stacking - Higher than the envelope (which is 5) */
+    z-index: 20;   
+    
+    /* 4. The Image */
+    background-image: url('greenbow.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* 5. Rotation - Adjust to make it look like it's "pinning" the corner */
+    transform: rotate(-15deg); 
+    
+    /* Pointer-events: none makes it so you can still click the envelope 
+       even if the bow is technically on top of it */
+    pointer-events: none; 
+}
 
         /* 6. THE ENVELOPE & CIRCLE PHOTO */
         .envelope-link {
@@ -194,8 +206,8 @@
 
 /* Sticker 2: Further down the ribbon, tilted the other way */
 #s2 {
-    bottom: 18%; /* Closer to the bottom */
-    right: 15%;   /* Placed more to the right */
+    bottom: 10%; /* Closer to the bottom */
+    right: 10%;   /* Placed more to the right */
     transform: rotate(-8deg); /* "Random" tilt */
     /* REPLACE WITH YOUR IMAGE LINK */
     background-image: url('strawberryicon.png'); 
