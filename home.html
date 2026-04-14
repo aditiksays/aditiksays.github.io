@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrapbook Diary | Unique Borders</title>
+    <title>Scrapbook Diary | Elegant Layout</title>
     <style>
+        /* Precision Reset */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,134 +17,144 @@
             --paper-cream: #FFFDF5;
             --pastel-pink: #FFD1DC;
             --muted-red: #E5989B;
-            --3d-shadow: 2px 4px 15px rgba(0,0,0,0.08);
-            
-            /* Define your 4 different border PNGs here */
-            --border-top: url('border_top.png');
-            --border-bottom: url('border_bottom.png');
-            --border-left: url('border horizontal.png');
-            --border-right: url('border horizontal.png');
+            --3d-shadow: 2px 4px 10px rgba(0,0,0,0.1);
         }
 
         body {
             background-image: var(--bg-pattern);
             background-size: 250px;
             background-repeat: repeat;
-            font-family: 'Segoe UI', serif;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 120px 20px 60px;
+            padding: 100px 20px 60px;
+            position: relative;
         }
 
-        /* --- CENTERED NAVIGATION --- */
-        nav {
+        /* --- TAPE STICKERS (Fixed to Edges) --- */
+        .tape {
             position: fixed;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+            background-color: var(--pastel-pink);
+            border: 1px dashed var(--muted-red);
+            z-index: 999; 
+            mix-blend-mode: multiply;
+            border-radius: 2px;
+        }
+        .tape-top { top: 10px; left: 50%; transform: translateX(-50%); width: 180px; height: 35px; }
+        .tape-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); width: 180px; height: 35px; }
+        .tape-left { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); width: 150px; height: 35px; }
+        .tape-right { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); width: 150px; height: 35px; }
+
+        /* --- TOP CENTER NAVIGATION --- */
+        nav {
+            position: absolute;
+            top: 35px;
             display: flex;
-            gap: 20px;
-            z-index: 1000;
+            gap: 15px;
+            z-index: 100;
             background: white;
-            padding: 12px 30px;
+            padding: 10px 25px;
             border-radius: 50px;
-            border: 2px solid var(--pastel-pink);
+            border: 1.5px solid var(--pastel-pink);
             box-shadow: var(--3d-shadow);
         }
 
         nav a {
             text-decoration: none;
             color: var(--muted-red);
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.85rem;
-            text-transform: uppercase;
             transition: 0.3s;
         }
 
-        nav a.active, nav a:hover { color: var(--pastel-pink); }
+        nav a:hover, nav a.active {
+            color: var(--pastel-pink);
+        }
 
-        /* --- BENTO STRUCTURE --- */
+        /* --- LAYOUT GRID --- */
         .page-wrapper {
             display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 40px;
+            grid-template-columns: 260px 1fr;
+            gap: 25px;
             width: 100%;
             max-width: 1000px;
             z-index: 10;
         }
 
-        /* --- UNIQUE BORDER LOGIC --- */
         .block {
             background: var(--paper-cream);
-            padding: 40px;
-            position: relative; /* Required for pseudo-elements */
+            border-radius: 15px;
+            padding: 25px;
             box-shadow: var(--3d-shadow);
-            border-radius: 10px;
+            border: 2px solid var(--pastel-pink);
+            position: relative;
+            margin-bottom: 25px;
         }
 
-        /* Top Border Sticker */
-        .block::before {
-            content: "";
-            position: absolute;
-            top: -15px; left: 0; right: 0; height: 30px;
-            background: var(--border-top) center/contain no-repeat;
-            z-index: 5;
+        /* --- SIDEBAR / CALENDAR --- */
+        .calendar-mini {
+            text-align: center;
         }
-
-        /* Bottom Border Sticker */
-        .block::after {
-            content: "";
-            position: absolute;
-            bottom: -15px; left: 0; right: 0; height: 30px;
-            background: var(--border-bottom) center/contain no-repeat;
-            z-index: 5;
+        .calendar-title {
+            color: var(--muted-red);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
-
-        /* Left/Right Side Decorators */
-        .side-borders::before, .side-borders::after {
-            content: "";
-            position: absolute;
-            top: 0; bottom: 0; width: 30px;
-            z-index: 5;
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            font-size: 0.75rem;
         }
+        .day-label { font-weight: bold; color: var(--muted-red); opacity: 0.7; }
+        .day.active { background: var(--pastel-pink); color: white; border-radius: 50%; }
 
-        .side-borders::before {
-            left: -15px;
-            background: var(--border-left) center/contain no-repeat;
-        }
-
-        .side-borders::after {
-            right: -15px;
-            background: var(--border-right) center/contain no-repeat;
-        }
-
-        /* --- MINI CALENDAR --- */
-        .calendar-mini { text-align: center; }
-        .calendar-title { color: var(--muted-red); font-size: 1rem; margin-bottom: 10px; font-weight: bold; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.7rem; }
-        .day.active { background: var(--pastel-pink); color: white; border-radius: 50%; padding: 3px; }
-
-        /* --- DIARY CONTENT --- */
-        .page-container h1 {
+        /* --- ENTRY STYLING --- */
+        .entry-block h1 {
             color: var(--muted-red);
             font-family: 'Georgia', serif;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-style: italic;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--pastel-pink);
+            padding-bottom: 5px;
+        }
+        .entry-block p {
+            line-height: 1.8;
+            color: #555;
+            background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            padding: 5px;
         }
 
-        .page-container p {
-            line-height: 2;
-            color: #555;
-            background-image: radial-gradient(#E5989B 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            padding: 10px;
+        /* --- STICKERS --- */
+        .sticker {
+            position: absolute;
+            width: 85px;
+            height: 85px;
+            border: 2px dashed var(--muted-red);
+            background: white;
+            box-shadow: var(--3d-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--muted-red);
+            z-index: 20;
         }
+        .s1 { top: -30px; left: -20px; transform: rotate(-8deg); }
+        .s2 { bottom: -20px; right: -25px; transform: rotate(10deg); }
+
     </style>
 </head>
 <body>
+
+    <div class="tape tape-top"></div>
+    <div class="tape tape-bottom"></div>
+    <div class="tape tape-left"></div>
+    <div class="tape tape-right"></div>
 
     <nav>
         <a href="home.html" class="active">home</a>
@@ -155,23 +166,42 @@
     </nav>
 
     <div class="page-wrapper">
-        <aside class="block side-borders calendar-mini">
-            <div class="calendar-title">🍒 April '26</div>
-            <div class="calendar-grid">
-                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-                <span></span><span></span><span></span>
-                <span>1</span><span>2</span><span>3</span><span class="day active">4</span>
-                <span>5</span><span>6</span><span>7</span><span>8</span>
+        <aside>
+            <div class="block calendar-mini">
+                <div class="sticker s1">STAMP</div>
+                <div class="calendar-title">🍒 April 2026</div>
+                <div class="calendar-grid">
+                    <span class="day-label">S</span><span class="day-label">M</span><span class="day-label">T</span>
+                    <span class="day-label">W</span><span class="day-label">T</span><span class="day-label">F</span><span class="day-label">S</span>
+                    <span></span><span></span><span>1</span><span>2</span><span>3</span><span class="day active">4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+                </div>
             </div>
-            <div style="margin-top: 20px;">☎</div>
+            
+            <div class="block" style="text-align: center;">
+                <p style="font-size: 0.8rem; color: var(--muted-red);">☎ Current Mood: Happy</p>
+                <div style="font-size: 2rem; margin-top: 10px;">🍒</div>
+            </div>
         </aside>
 
-        <main class="block side-borders page-container">
-            <h1>Entry #01: Welcome</h1>
-            <p>
-                This layout now uses 4 distinct image variables for each side. 
-                Each block is wrapped in a "side-borders" class that handles the left and right PNGs, while the base block class handles the top and bottom.
-            </p>
+        <main>
+            <section class="block entry-block">
+                <h1>Entry #01: Welcome</h1>
+                <p>
+                    You've opened the journal. This is my digital space where I keep all my memories and projects.
+                    Everything here is crafted with love and a little bit of pink. Take your time exploring!
+                </p>
+            </section>
+
+            <section class="block entry-block">
+                <div class="sticker s2">STICKER</div>
+                <h1>Today's Goals 🍒</h1>
+                <ul style="list-style: none; color: #666; padding: 10px; line-height: 2;">
+                    <li>🌸 Update the scrapbook theme</li>
+                    <li>🌸 Add new polaroid photos</li>
+                    <li>🌸 Write a letter to a friend</li>
+                </ul>
+            </section>
         </main>
     </div>
 
