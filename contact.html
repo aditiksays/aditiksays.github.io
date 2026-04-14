@@ -1,8 +1,284 @@
-<div class="page-container">
-    <h1>Send a Letter</h1>
-    <p>Feel free to reach out to me via my socials or email!</p>
-    <ul style="list-style: none; padding: 0;">
-        <li>✉️ email@example.com</li>
-        <li>📷 @yourhandle</li>
-    </ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | My Scrapbook Diary</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-pattern: url('download (3).jpg'); 
+            --paper-cream: #FFFDF5;
+            --pastel-pink: #FFD1DC;
+            --muted-red: #E5989B;
+            --3d-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+            --lace-size: 80px; /* Matching your increased size preference */
+        }
+
+        body {
+            background-image: var(--bg-pattern);
+            background-size: 250px;
+            background-repeat: repeat;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 100px 100px; /* Increased padding for the larger lace */
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- LARGE SCREEN-EDGE LACE BORDERS --- */
+        .lace-edge {
+            position: fixed;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .lace-top, .lace-bottom {
+            left: 0; width: 100%; height: var(--lace-size);
+            background-image: url('border horizontal.png');
+            background-repeat: repeat-x;
+            background-size: auto var(--lace-size);
+        }
+        .lace-top { top: 0; }
+        .lace-bottom { bottom: 0; transform: rotate(180deg); }
+
+        .lace-left, .lace-right {
+            top: 0; height: 100%; width: var(--lace-size);
+            background-image: url('border vertical.png');
+            background-repeat: repeat-y;
+            background-size: var(--lace-size) auto;
+        }
+        .lace-left { left: 0; }
+        .lace-right { right: 0; transform: rotate(180deg); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 50px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            background: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            border: 1.5px solid var(--pastel-pink);
+            box-shadow: var(--3d-shadow);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted-red);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        nav a:hover { color: var(--pastel-pink); }
+
+        /* --- LAYOUT --- */
+        .page-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+            z-index: 10;
+        }
+
+        .block {
+            background: var(--paper-cream);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--3d-shadow);
+            border: 2.5px solid var(--pastel-pink);
+            position: relative;
+        }
+
+        /* --- CONTACT FORM (Postcard Style) --- */
+        .contact-container h1 {
+            color: var(--muted-red);
+            font-family: 'Georgia', serif;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            font-size: 0.8rem;
+            color: var(--muted-red);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--pastel-pink);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-family: inherit;
+            color: #555;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: none;
+            background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
+            background-size: 100% 1.5em;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            background: var(--pastel-pink);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 0 var(--muted-red);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--muted-red);
+        }
+
+        /* --- SIDEBAR DECOR --- */
+        .info-item {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .info-label { font-weight: bold; color: var(--muted-red); font-size: 0.9rem; }
+        .info-val { color: #777; font-size: 0.85rem; margin-top: 5px; }
+
+        /* --- STICKERS --- */
+        .sticker {
+            position: absolute;
+            width: 75px; height: 75px;
+            border: 2px dashed var(--muted-red);
+            background: white;
+            box-shadow: var(--3d-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--muted-red);
+        }
+        .s-stamp { top: 20px; right: 20px; transform: rotate(5deg); } /* Postcard stamp */
+
+    </style>
+</head>
+<body>
+
+    <div class="lace-edge lace-top"></div>
+    <div class="lace-edge lace-bottom"></div>
+    <div class="lace-edge lace-left"></div>
+    <div class="lace-edge lace-right"></div>
+
+    <nav>
+        <a href="home.html">home</a>
+        <a href="aboutme.html">about</a>
+        <a href="blog.html">blog</a>
+        <a href="contact.html" style="color: var(--pastel-pink)">contact</a>
+        <a href="feedback.html">feedback</a>
+        <a href="index.html">index</a>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside>
+            <div class="block" style="margin-bottom: 25px; text-align: center;">
+                <div id="month-year" style="color: var(--muted-red); font-weight: bold; margin-bottom: 10px;"></div>
+                <div id="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.7rem;"></div>
+            </div>
+
+            <div class="block">
+                <div class="info-item">
+                    <div class="info-label">📫 Address</div>
+                    <div class="info-val">123 Pastel Lane,<br>Cherry Blossom Town</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">💌 Email</div>
+                    <div class="info-val">hello@scrapbook.com</div>
+                </div>
+                <div style="font-size: 2rem; text-align: center;">✉️</div>
+            </div>
+        </aside>
+
+        <main>
+            <section class="block contact-container">
+                <div class="sticker s-stamp">POSTAGE<br>PAID</div>
+                
+                <h1>Send me a letter...</h1>
+                
+                <form class="contact-form">
+                    <div>
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Who is writing?">
+                    </div>
+                    <div>
+                        <label>Return Email</label>
+                        <input type="email" placeholder="Where should I reply?">
+                    </div>
+                    <div>
+                        <label>Your Message</label>
+                        <textarea placeholder="Write your thoughts here..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message 🍒</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Automatic Real-Time Calendar Logic
+        function generateCalendar() {
+            const now = new Date();
+            const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('month-year').innerText = `🍒 ${monthArr[now.getMonth()]} ${now.getFullYear()}`;
+            
+            const calendarDays = document.getElementById('calendar-days');
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+            calendarDays.innerHTML = '';
+            const headers = ['S','M','T','W','T','F','S'];
+            headers.forEach(h => {
+                const el = document.createElement('span');
+                el.style.fontWeight = 'bold';
+                el.innerText = h;
+                calendarDays.appendChild(el);
+            });
+
+            for (let i = 0; i < firstDay; i++) calendarDays.appendChild(document.createElement('span'));
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const span = document.createElement('span');
+                span.innerText = day;
+                if (day === now.getDate()) {
+                    span.style.background = '#FFD1DC';
+                    span.style.color = 'white';
+                    span.style.borderRadius = '50%';
+                }
+                calendarDays.appendChild(span);
+            }
+        }
+        generateCalendar();
+    </script>
+</body>
+</html>
