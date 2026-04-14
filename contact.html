@@ -12,32 +12,38 @@
         }
 
         :root {
-            --paper-cream: #FDF4E3; /* Beige base */
+            --paper-cream: #FDF4E3; 
             --pastel-pink: #FFD1DC;
             --muted-red: #E5989B;
-            --charcoal: #222;
+            --charcoal: #333333;
             --3d-shadow: 4px 6px 12px rgba(0,0,0,0.1);
+        }
+
+        /* --- CUSTOM FONT REGISTRATION --- */
+        @font-face {
+            font-family: 'MyCustomFont'; 
+            src: url('OrangeAvenueDEMO-Regular.ttf'), url('OrangeAvenueDEMO-Regular.otf'); 
+            font-weight: bold;
         }
 
         body {
             background-color: var(--paper-cream);
-            /* Dotted pattern */
             background-image: radial-gradient(#dcdcdc 1.5px, transparent 1.5px);
             background-size: 20px 20px;
             font-family: 'Segoe UI', Tahoma, sans-serif;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 100px 40px; 
             position: relative;
             overflow-x: hidden;
+            padding: 40px;
         }
 
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
-            top: 30px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             gap: 15px;
             z-index: 1100;
@@ -49,185 +55,141 @@
         }
         nav a { text-decoration: none; color: var(--muted-red); font-weight: 600; font-size: 0.85rem; }
 
-        /* --- CLASSY, BOLD, CAPITAL "CONTACT" --- */
-       /* 1. Register the font at the top of your style section */
-@font-face {
-    font-family: 'ScrapbookCustom';
-    /* Ensure the filename below matches your extracted file exactly */
-    src: url('OrangeAvenueDEMO-Regular.otf'); 
-}
+        /* --- VERTICAL "PASTED NOTE" CONTACT TITLE --- */
+        .contact-title {
+            font-family: 'MyCustomFont', Georgia, serif;
+            font-size: 6vw; 
+            font-weight: 900;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 60px;
+            z-index: 10;
+            pointer-events: none;
+        }
 
-/* 2. Update the title code to use it */
-@font-face {
-    font-family: 'MyCustomFont'; 
-    /* Replace with your exact extracted filename */
-    src: url('OrangeAvenueDEMO-Regular.ttf'); 
-}
+        .note {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 2px;
+            line-height: 1;
+            position: relative;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+        }
 
-.contact-title {
-    font-family: 'MyCustomFont', Georgia, serif;
-    font-size: 12vw; 
-    font-weight: 900;
-    color: var(--charcoal);
-    text-transform: uppercase;
-    line-height: 1;
-    margin-top: 50px;
-    width: 100%;
-    text-align: left;
-    display: flex; flex-direction: column; align-items: flex-start;/* Helps align the spans horizontally */
-    gap: 10px;    /* Space between the chunks */
-}
+        /* Individual Classy Note Styles */
+        .n1 { background: var(--charcoal); color: var(--paper-cream); transform: rotate(-3deg) translateX(5px); }
+        .n2 { background: var(--muted-red); color: #fff; transform: rotate(4deg) translateX(-8px); }
+        .n3 { background: #fff; color: var(--charcoal); transform: rotate(-2deg) translateX(12px); border: 1px solid #ddd; }
+        .n4 { background: #6D6875; color: #fff; transform: rotate(5deg) translateX(-2px); }
+        .n5 { background: #B5838D; color: #fff; transform: rotate(-4deg) translateX(15px); }
+        .n6 { background: var(--charcoal); color: var(--pastel-pink); transform: rotate(2deg) translateX(-5px); }
+        .n7 { background: #fff; color: var(--muted-red); transform: rotate(-1deg) translateX(10px); border: 1px solid var(--muted-red); }
 
-.contact-title span {
-    display: inline-block;
-    /* This creates the 'sticker' shadow you liked */
-    text-shadow: 2px 2px 0 #fff, 5px 5px 0 var(--pastel-pink);
-}
+        /* Washi Tape Decals on Notes */
+        .n2::before, .n5::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 15%;
+            width: 35px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px dashed rgba(0,0,0,0.1);
+            transform: rotate(-12deg);
+        }
 
-/* Moving them 'off the line' */
-.l1 { 
-    transform: translateY(-10px) rotate(-2deg); 
-}
-
-.l2 { 
-    transform: translateY(15px) rotate(3deg); 
-}
-
-.l3 { 
-    transform: translateY(-5px) rotate(-1deg); 
-}
-        /* --- ENVELOPE SCRAPS (RIGHTEST SIDE) --- */
+        /* --- ENVELOPE SCRAPS (RIGHT SIDE) --- */
         .scraps-container {
             position: absolute;
-            top: 250px; /* Aligned vertically with the title space */
-            right: 50px; /* RIGHTEST SIDE */
+            top: 120px;
+            right: 50px;
             display: flex;
             flex-direction: column;
             gap: 40px;
-            z-index: 10;
+            z-index: 15;
         }
 
         .envelope {
-            width: 320px; /* Slightly wider */
+            width: 320px;
             background: white;
-            padding: 30px;
+            padding: 25px;
             border: 2px solid var(--pastel-pink);
             box-shadow: var(--3d-shadow);
             position: relative;
-            transition: 0.3s;
+            transition: transform 0.3s;
         }
+        .envelope:hover { transform: scale(1.02); }
         .envelope:nth-child(1) { transform: rotate(-3deg); }
         .envelope:nth-child(2) { transform: rotate(4deg); }
 
-        /* Envelope Flap Detail */
         .envelope::after {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 12px;
+            height: 10px;
             background: var(--pastel-pink);
             opacity: 0.3;
         }
 
         .envelope h3 {
             color: var(--muted-red);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border-bottom: 1px dashed var(--pastel-pink);
-            padding-bottom: 8px;
         }
 
         .envelope p { 
-            font-size: 1.3rem; 
+            font-size: 1.2rem; 
             color: #444; 
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            word-wrap: break-word;
         }
 
-        /* --- CALENDAR SCRAP --- */
-       .calendar-scrap {
-    position: absolute;
-    /* Moves it to the foot of the massive "CONTACT" text */
-    top: 50%; 
-    /* Centers it more toward the middle */
-    left: 42%; 
-    background: white;
-    padding: 15px;
-    border: 1px solid #ddd;
-    box-shadow: var(--3d-shadow);
-    transform: rotate(-5deg);
-    z-index: 2;
-    width: 180px;
-    /* Removed bottom: 0px to prevent stretching */
-}
+        /* --- CALENDAR SCRAP (FOOTER MIDDLE) --- */
+        .calendar-scrap {
+            position: absolute;
+            bottom: 40px;
+            left: 40%; 
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            box-shadow: var(--3d-shadow);
+            transform: rotate(-5deg);
+            z-index: 5;
+            width: 190px;
+        }
 
-        /* --- STICKER PLACEHOLDERS (ALL OVER) --- */
+        /* --- STICKERS (NON-OVERLAPPING POSITIONS) --- */
         .sticker-placeholder {
             position: absolute;
-            width: 100px;
-            height: 100px;
             background: white;
-            border: 2px dashed #999;
+            border: 2px dashed #bbb;
             box-shadow: var(--3d-shadow);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: #777;
+            font-size: 0.65rem;
+            color: #888;
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: bold;
-            z-index: 4; /* Behind main title/scraps, above background */
-            transition: 0.3s;
+            z-index: 2;
         }
 
-        /* --- STICKER PLACEHOLDERS (REPOSITIONED RIGHT & MIDDLE) --- */
-.s1 { 
-    top: 30%; 
-    left: 65%; 
-    transform: rotate(10deg); 
-    width: 120px; 
-    height: 120px;
-}
+        .s1 { top: 15%; left: 35%; width: 110px; height: 110px; transform: rotate(12deg); }
+        .s2 { top: 50%; left: 45%; width: 90px; height: 90px; transform: rotate(-8deg); }
+        .s3 { bottom: 15%; right: 15%; width: 120px; height: 120px; transform: rotate(5deg); }
+        .s4 { bottom: 30%; left: 15%; width: 100px; height: 100px; transform: rotate(-15deg); }
 
-.s2 { 
-    top: 45%; 
-    left: 75%; 
-    transform: rotate(-8deg); 
-    width: 90px; 
-    height: 90px;
-}
-
-.s3 { 
-    top: 60%; 
-    left: 60%; 
-    transform: rotate(12deg); 
-    width: 110px; 
-    height: 110px;
-}
-
-.s4 { 
-    top: 55%; 
-    left: 80%; 
-    transform: rotate(-15deg); 
-    width: 80px; 
-    height: 80px;
-}
-        @media (max-width: 1200px) {
-            .contact-title { font-size: 10rem; letter-spacing: 10px; }
-            .scraps-container { position: static; flex-direction: row; justify-content: center; margin-top: 40px; right: auto; }
-            .calendar-scrap { position: static; margin: 30px auto; transform: none; width: 100%; }
-            .sticker-placeholder { position: static; display: inline-flex; margin: 10px; transform: none; }
+        @media (max-width: 1024px) {
+            body { flex-direction: column; align-items: center; padding-top: 100px; }
+            .scraps-container, .calendar-scrap, .sticker-placeholder { position: static; margin: 20px auto; transform: none; }
+            .contact-title { font-size: 12vw; align-items: center; width: 100%; }
         }
-
-        @media (max-width: 768px) {
-            .contact-title { font-size: 6rem; letter-spacing: 5px; }
-            .envelope { width: 100%; max-width: 300px; }
-        }
-
     </style>
 </head>
 <body>
@@ -240,16 +202,20 @@
         <a href="index.html">index</a>
     </nav>
 
-    <div class="sticker-placeholder s1">PHOTO [URL_FOR_ASSET]</div>
-    <div class="sticker-placeholder s2">🍒 [URL_FOR_ASSET]</div>
-    <div class="sticker-placeholder s3">MEMENTO [URL_FOR_ASSET]</div>
-    <div class="sticker-placeholder s4">🌸 [URL_FOR_ASSET]</div>
+    <div class="sticker-placeholder s1">PHOTO</div>
+    <div class="sticker-placeholder s2">🍒</div>
+    <div class="sticker-placeholder s3">MEMENTO</div>
+    <div class="sticker-placeholder s4">🌸</div>
 
     <div class="contact-title">
-    <span class="l1">CO</span>
-    <span class="l2">NTA</span>
-    <span class="l3">CT</span>
-</div>
+        <span class="note n1">C</span>
+        <span class="note n2">O</span>
+        <span class="note n3">N</span>
+        <span class="note n4">T</span>
+        <span class="note n5">A</span>
+        <span class="note n6">C</span>
+        <span class="note n7">T</span>
+    </div>
 
     <div class="calendar-scrap">
         <div id="month-year" style="font-weight: bold; color: var(--muted-red); font-size: 0.9rem; text-align: center;"></div>
@@ -260,13 +226,13 @@
         <div class="envelope">
             <h3>Social Channels</h3>
             <p>@aditiii_kk</p>
-            <p style="font-size: 0.8rem; margin-top: 15px; color: #888;">DM me on instagram! 🍒</p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #999;">find me on instagram 🍒</p>
         </div>
 
         <div class="envelope">
             <h3>Direct Mailbox</h3>
-            <p>aditiksays.gmail.com</p>
-            <p style="font-size: 0.8rem; margin-top: 15px; color: #888;"> Response within 24 hours 🌸</p>
+            <p>aditiksays@gmail.com</p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #999;">replying within 24h 🌸</p>
         </div>
     </div>
 
@@ -295,6 +261,7 @@
                     span.style.color = '#E5989B';
                     span.style.fontWeight = 'bold';
                     span.style.border = '1px solid #FFD1DC';
+                    span.style.borderRadius = '2px';
                 }
                 calendarDays.appendChild(span);
             }
