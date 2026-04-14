@@ -58,25 +58,43 @@
 }
 
 /* 2. Update the title code to use it */
+@font-face {
+    font-family: 'MyCustomFont'; 
+    /* Replace with your exact extracted filename */
+    src: url('YourActualFileName.ttf'); 
+}
+
 .contact-title {
-    /* Use the name defined in @font-face above */
-    font-family: 'ScrapbookCustom', 'Georgia', serif;
+    font-family: 'MyCustomFont', Georgia, serif;
     font-size: 12vw; 
-    font-weight: 700;
+    font-weight: 900;
     color: var(--charcoal);
     text-transform: uppercase;
-    letter-spacing: 5px; 
-    line-height: 0.9; 
-    margin-top: 40px;
-    margin-bottom: 10px;
-    z-index: 5;
-    text-align: left;
+    line-height: 1;
+    margin-top: 50px;
     width: 100%;
-    pointer-events: none;
-    opacity: 0.95;
-    
-    /* Keep the shadow for that 3D scrapbook "sticker" effect */
-    text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--pastel-pink);
+    text-align: left;
+    display: flex; /* Helps align the spans horizontally */
+    gap: 10px;    /* Space between the chunks */
+}
+
+.contact-title span {
+    display: inline-block;
+    /* This creates the 'sticker' shadow you liked */
+    text-shadow: 2px 2px 0 #fff, 5px 5px 0 var(--pastel-pink);
+}
+
+/* Moving them 'off the line' */
+.l1 { 
+    transform: translateY(-10px) rotate(-2deg); 
+}
+
+.l2 { 
+    transform: translateY(15px) rotate(3deg); 
+}
+
+.l3 { 
+    transform: translateY(-5px) rotate(-1deg); 
 }
         /* --- ENVELOPE SCRAPS (RIGHTEST SIDE) --- */
         .scraps-container {
@@ -227,12 +245,11 @@
     <div class="sticker-placeholder s3">MEMENTO [URL_FOR_ASSET]</div>
     <div class="sticker-placeholder s4">🌸 [URL_FOR_ASSET]</div>
 
-    <div class="contact-title"><u>
-        CON
-        <br>TA
-        <br>CT
-        </u>
-    </div>
+    <div class="contact-title">
+    <span class="l1">CO</span>
+    <span class="l2">NTA</span>
+    <span class="l3">CT</span>
+</div>
 
     <div class="calendar-scrap">
         <div id="month-year" style="font-weight: bold; color: var(--muted-red); font-size: 0.9rem; text-align: center;"></div>
