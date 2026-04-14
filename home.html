@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             /* Extra padding to avoid content hiding under the lace borders */
-            padding: 120px 60px 80px; 
+            padding: 120px 100px 100px; 
             position: relative;
             overflow-x: hidden;
         }
@@ -44,10 +44,10 @@
         .lace-top, .lace-bottom {
             left: 0;
             width: 100%;
-            height: 40px; /* Adjust based on your PNG height */
+            height: 80px; /* Adjust based on your PNG height */
             background-image: url('border vertical.png');
             background-repeat: repeat-x;
-            background-size: contain;
+            background-size: auto 80px;
         }
         .lace-top { top: 0; }
         .lace-bottom { bottom: 0; transform: rotate(180deg); }
@@ -55,10 +55,10 @@
         .lace-left, .lace-right {
             top: 0;
             height: 100%;
-            width: 40px; /* Adjust based on your PNG width */
+            width: 80px; /* Adjust based on your PNG width */
             background-image: url('border horizontal.png');
             background-repeat: repeat-y;
-            background-size: contain;
+            background-size: 80px auto;
         }
         .lace-left { left: 0; }
         .lace-right { right: 0; transform: rotate(180deg); }
