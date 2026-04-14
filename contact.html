@@ -249,13 +249,30 @@
             z-index: 2;
         }
 
-        /* Positioned strategically to avoid overlap */
-        .s1 { top: 10%; left: 25%; width: 5px; height: 5px; transform: rotate(12deg); } /* PHOTO - LOVE */
-        .s2 { top: 40%; left: 40%; width: 5px; height: 5px; transform: rotate(-8deg); } /* PHOTO - CAMERA */
-        .s3 { bottom: 20%; left: 10%; width: 5px; height: 5px; transform: rotate(5deg); } /* PHOTO - QUESTIONMARK */
-        .s4 { top: 60%; left: 15%; width: 5px; height: 5px; transform: rotate(-15deg); } /* PHOTO - CATYAWNING */
-        .s5 { top: 25%; right: 25%; width: 5px; height: 5px; transform: rotate(-5deg); } /* PHOTO - PINKTELEPHONE */
-        .s6 { bottom: 35%; right: 40%; width: 5px; height: 5px; transform: rotate(10deg); } /* PHOTO - LILY */
+       /* Shared styles for all stickers to ensure they stay tiny */
+.s1, .s2, .s3, .s4, .s5, .s6 {
+    position: absolute;
+    width: 50px;  /* Changed from 5px to 50px so you can actually see them */
+    height: 50px; /* Changed from 5px to 50px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* This is the magic part: it forces the image to fit the box */
+.s1 img, .s2 img, .s3 img, .s4 img, .s5 img, .s6 img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Your specific positioning and rotations */
+.s1 { top: 10%; left: 25%; transform: rotate(12deg); }
+.s2 { top: 40%; left: 40%; transform: rotate(-8deg); }
+.s3 { bottom: 20%; left: 10%; transform: rotate(5deg); }
+.s4 { top: 60%; left: 15%; transform: rotate(-15deg); }
+.s5 { top: 25%; right: 25%; transform: rotate(-5deg); }
+.s6 { bottom: 35%; right: 40%; transform: rotate(10deg); }
 
         @media (max-width: 1024px) {
             body { flex-direction: column; align-items: center; padding-top: 100px; }
@@ -274,21 +291,21 @@
         <a href="index.html">cover</a>
     </nav>
 
-    <div class="sticker-placeholder s1"><img src="love.png"></div>
-    <div class="sticker-placeholder s2"><img src="camera.png"></div>
-    <div class="sticker-placeholder s3"><img src="questionmark.png"></div>
-    <div class="sticker-placeholder s4"><img src="catyawning.png"></div>
-    <div class="sticker-placeholder s5"><img src="pinktelephone.png"></div>
-    <div class="sticker-placeholder s6"><img src="lilydrawing.png"></div>
+    <div class="sticker-placeholder s1"><img src="love.png" alt=" love "></div>
+    <div class="sticker-placeholder s2"><img src="camera.png" alt="camera"></div>
+    <div class="sticker-placeholder s3"><img src="questionmark.png" alt="questionmark"></div>
+    <div class="sticker-placeholder s4"><img src="catyawning.png" alt="catyawning"></div>
+    <div class="sticker-placeholder s5"><img src="pinktelephone.png" alt="telephone"></div>
+    <div class="sticker-placeholder s6"><img src="lilydrawing.png" alt="lilydrawing"></div>
 
-    <div class="contact-title">
+    <div class="contact-title"> <b>
         <span class="note n1">C</span>
         <span class="note n2">O</span>
         <span class="note n3">N</span>
         <span class="note n4">T</span>
         <span class="note n5">A</span>
         <span class="note n6">C</span>
-        <span class="note n7">T</span>
+        <span class="note n7">T</span> </b>
     </div>
 
     <div class="scraps-container">
