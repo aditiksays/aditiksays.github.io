@@ -50,16 +50,23 @@
         nav a { text-decoration: none; color: var(--muted-red); font-weight: 600; font-size: 0.85rem; }
 
         /* --- CLASSY, BOLD, CAPITAL "CONTACT" --- */
-        .contact-title {
-    font-family: 'Georgia', serif;
-    /* Use vw so it scales with the screen width and stays on one line */
+       /* 1. Register the font at the top of your style section */
+@font-face {
+    font-family: 'ScrapbookCustom';
+    /* Ensure the filename below matches your extracted file exactly */
+    src: url('OrangeAvenueDEMO-Regular.otf'); 
+}
+
+/* 2. Update the title code to use it */
+.contact-title {
+    /* Use the name defined in @font-face above */
+    font-family: 'ScrapbookCustom', 'Georgia', serif;
+    
     font-size: 12vw; 
     font-weight: 700;
     color: var(--charcoal);
     text-transform: uppercase;
-    /* Reduced spacing to keep it within the horizontal bounds */
     letter-spacing: 5px; 
-    /* Tightened line-height to stop it from pushing content down */
     line-height: 0.9; 
     margin-top: 40px;
     margin-bottom: 10px;
@@ -68,7 +75,8 @@
     width: 100%;
     pointer-events: none;
     opacity: 0.95;
-    /* Refined shadow for a cleaner look at this scale */
+    
+    /* Keep the shadow for that 3D scrapbook "sticker" effect */
     text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--pastel-pink);
 }
         /* --- ENVELOPE SCRAPS (RIGHTEST SIDE) --- */
