@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrapbook Diary | Elegant Layout</title>
     <style>
-        /* Precision Reset */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -29,33 +28,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 100px 20px 60px;
+            /* Extra padding to avoid content hiding under the lace borders */
+            padding: 120px 60px 80px; 
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- TAPE STICKERS (Fixed to Edges) --- */
-        .tape {
+        /* --- SCREEN-EDGE LACE BORDERS --- */
+        .lace-edge {
             position: fixed;
-            background-color: var(--pastel-pink);
-            border: 1px dashed var(--muted-red);
-            z-index: 999; 
-            mix-blend-mode: multiply;
-            border-radius: 2px;
+            z-index: 1000;
+            pointer-events: none; /* Allows you to click things "under" the lace */
         }
-        .tape-top { top: 10px; left: 50%; transform: translateX(-50%); width: 180px; height: 35px; }
-        .tape-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); width: 180px; height: 35px; }
-        .tape-left { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); width: 150px; height: 35px; }
-        .tape-right { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); width: 150px; height: 35px; }
+
+        .lace-top, .lace-bottom {
+            left: 0;
+            width: 100%;
+            height: 40px; /* Adjust based on your PNG height */
+            background-image: url('border horizontal.png');
+            background-repeat: repeat-x;
+            background-size: contain;
+        }
+        .lace-top { top: 0; }
+        .lace-bottom { bottom: 0; transform: rotate(180deg); }
+
+        .lace-left, .lace-right {
+            top: 0;
+            height: 100%;
+            width: 40px; /* Adjust based on your PNG width */
+            background-image: url('border vertical.png');
+            background-repeat: repeat-y;
+            background-size: contain;
+        }
+        .lace-left { left: 0; }
+        .lace-right { right: 0; transform: rotate(180deg); }
 
         /* --- TOP CENTER NAVIGATION --- */
         nav {
-            position: absolute;
-            top: 35px;
+            position: fixed;
+            top: 50px;
             display: flex;
             gap: 15px;
             z-index: 100;
             background: white;
-            padding: 10px 25px;
+            padding: 8px 25px;
             border-radius: 50px;
             border: 1.5px solid var(--pastel-pink);
             box-shadow: var(--3d-shadow);
@@ -69,92 +85,96 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
-            color: var(--pastel-pink);
-        }
+        nav a:hover, nav a.active { color: var(--pastel-pink); }
 
-        /* --- LAYOUT GRID --- */
+        /* --- ORGANIZED LAYOUT --- */
         .page-wrapper {
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 25px;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             z-index: 10;
         }
 
         .block {
             background: var(--paper-cream);
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 25px;
             box-shadow: var(--3d-shadow);
-            border: 2px solid var(--pastel-pink);
+            border: 2.5px solid var(--pastel-pink);
             position: relative;
             margin-bottom: 25px;
         }
 
-        /* --- SIDEBAR / CALENDAR --- */
-        .calendar-mini {
-            text-align: center;
-        }
+        /* --- REAL-TIME CALENDAR --- */
+        .calendar-mini { text-align: center; }
         .calendar-title {
             color: var(--muted-red);
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            text-transform: capitalize;
         }
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 5px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
-        .day-label { font-weight: bold; color: var(--muted-red); opacity: 0.7; }
-        .day.active { background: var(--pastel-pink); color: white; border-radius: 50%; }
+        .day-header { font-weight: bold; color: var(--muted-red); opacity: 0.6; }
+        .day-num { padding: 5px; cursor: default; }
+        .day-num.today {
+            background: var(--pastel-pink);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
 
         /* --- ENTRY STYLING --- */
         .entry-block h1 {
             color: var(--muted-red);
             font-family: 'Georgia', serif;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             margin-bottom: 15px;
-            border-bottom: 1px solid var(--pastel-pink);
-            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--pastel-pink);
+            padding-bottom: 8px;
         }
         .entry-block p {
-            line-height: 1.8;
+            line-height: 2;
             color: #555;
-            background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            padding: 5px;
+            /* Stationery paper effect */
+            background-image: linear-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 100% 2em;
         }
 
         /* --- STICKERS --- */
         .sticker {
             position: absolute;
-            width: 85px;
-            height: 85px;
+            width: 70px;
+            height: 70px;
             border: 2px dashed var(--muted-red);
             background: white;
             box-shadow: var(--3d-shadow);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 11px;
             color: var(--muted-red);
             z-index: 20;
+            font-weight: bold;
         }
-        .s1 { top: -30px; left: -20px; transform: rotate(-8deg); }
-        .s2 { bottom: -20px; right: -25px; transform: rotate(10deg); }
+        .s1 { top: -20px; left: -15px; transform: rotate(-10deg); }
+        .s2 { bottom: -15px; right: -15px; transform: rotate(15deg); }
 
     </style>
 </head>
 <body>
 
-    <div class="tape tape-top"><img src="border vertical.png" ></div>
-    <div class="tape tape-bottom"><img src="border vertical.png" ></div>
-    <div class="tape tape-left"><img src=" border horizontal.png" ></div>
-    <div class="tape tape-right"><img src=" border horizontal.png" ></div>
+    <div class="lace-edge lace-top"></div>
+    <div class="lace-edge lace-bottom"></div>
+    <div class="lace-edge lace-left"></div>
+    <div class="lace-edge lace-right"></div>
 
     <nav>
         <a href="home.html" class="active">home</a>
@@ -169,20 +189,14 @@
         <aside>
             <div class="block calendar-mini">
                 <div class="sticker s1">STAMP</div>
-                <div class="calendar-title">🍒 April 2026</div>
-                <div class="calendar-grid">
-                    <span class="day-label">S</span><span class="day-label">M</span><span class="day-label">T</span>
-                    <span class="day-label">W</span><span class="day-label">T</span><span class="day-label">F</span><span class="day-label">S</span>
-                    <span></span><span></span><span>1</span><span>2</span><span>3</span><span class="day active">4</span><span>5</span>
-                    <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="day active">16</span><span>17</span>
-                    <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
-                </div>
-                </div>
+                <div id="month-year" class="calendar-title"></div>
+                <div class="calendar-grid" id="calendar-days">
+                    </div>
             </div>
             
             <div class="block" style="text-align: center;">
-                <p style="font-size: 0.8rem; color: var(--muted-red);">☎ Current Mood: Happy</p>
-                <div style="font-size: 2rem; margin-top: 10px;">🍒</div>
+                <p style="font-size: 0.9rem; color: var(--muted-red); font-style: italic;">☎ Status: Dreaming</p>
+                <div style="font-size: 2.5rem; margin-top: 15px;">🍒</div>
             </div>
         </aside>
 
@@ -196,9 +210,9 @@
             </section>
 
             <section class="block entry-block">
-                <div class="sticker s2">STICKER</div>
+                <div class="sticker s2">MEMO</div>
                 <h1>Today's Goals 🍒</h1>
-                <ul style="list-style: none; color: #666; padding: 10px; line-height: 2;">
+                <ul style="list-style: none; color: #666; padding: 10px; line-height: 2.2;">
                     <li>🌸 Update the scrapbook theme</li>
                     <li>🌸 Add new polaroid photos</li>
                     <li>🌸 Write a letter to a friend</li>
@@ -207,5 +221,46 @@
         </main>
     </div>
 
+    <script>
+        function generateCalendar() {
+            const now = new Date();
+            const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('month-year').innerHTML = `🍒 ${monthArr[now.getMonth()]} ${now.getFullYear()}`;
+            
+            const calendarDays = document.getElementById('calendar-days');
+            const dayHeaders = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            
+            // Clear current grid
+            calendarDays.innerHTML = '';
+            
+            // Add Headers
+            dayHeaders.forEach(day => {
+                const span = document.createElement('span');
+                span.className = 'day-header';
+                span.innerText = day;
+                calendarDays.appendChild(span);
+            });
+
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+            // Padding for first week
+            for (let i = 0; i < firstDay; i++) {
+                calendarDays.appendChild(document.createElement('span'));
+            }
+
+            // Actual Days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const span = document.createElement('span');
+                span.className = 'day-num';
+                span.innerText = day;
+                if (day === now.getDate()) span.classList.add('today');
+                calendarDays.appendChild(span);
+            }
+        }
+
+        generateCalendar();
+    </script>
 </body>
 </html>
