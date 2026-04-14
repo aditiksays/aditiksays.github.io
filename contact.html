@@ -252,8 +252,8 @@
        /* Shared styles for all stickers to ensure they stay tiny */
 .s1, .s2, .s3, .s4, .s5, .s6 {
     position: absolute;
-    width: 50px;  /* Changed from 5px to 50px so you can actually see them */
-    height: 50px; /* Changed from 5px to 50px */
+    width: 100px;  /* Changed from 5px to 50px so you can actually see them */
+    height: 100px; /* Changed from 5px to 50px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,8 +261,8 @@
 
 /* This is the magic part: it forces the image to fit the box */
 .s1 img, .s2 img, .s3 img, .s4 img, .s5 img, .s6 img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 300%;
+    max-height: 300%;
     object-fit: contain;
 }
 
@@ -298,14 +298,14 @@
     <div class="sticker-placeholder s5"><img src="pinktelephone.png" alt="telephone"></div>
     <div class="sticker-placeholder s6"><img src="lilydrawing.png" alt="lilydrawing"></div>
 
-    <div class="contact-title"> <b>
+    <div class="contact-title">
         <span class="note n1">C</span>
         <span class="note n2">O</span>
         <span class="note n3">N</span>
         <span class="note n4">T</span>
         <span class="note n5">A</span>
         <span class="note n6">C</span>
-        <span class="note n7">T</span> </b>
+        <span class="note n7">T</span>
     </div>
 
     <div class="scraps-container">
