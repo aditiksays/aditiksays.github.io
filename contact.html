@@ -51,23 +51,26 @@
 
         /* --- CLASSY, BOLD, CAPITAL "CONTACT" --- */
         .contact-title {
-            font-family: 'Georgia', serif;
-            font-size: 15rem; /* Massive size covering half the screen height */
-            font-weight: 700;
-            color: var(--charcoal);
-            text-transform: uppercase; /* BOLD AND CAPITAL */
-            letter-spacing: 20px;
-            line-height: 1.5;
-            margin-top: 80px;
-            margin-bottom: 20px;
-            z-index: 5;
-            text-align: left;
-            width: 100%;
-            pointer-events: none;
-            opacity: 0.95;
-            text-shadow: 3px 3px 0 #0b0b0b, 6px 6px 0 var(--charcoal);
-        }
-
+    font-family: 'Georgia', serif;
+    /* Use vw so it scales with the screen width and stays on one line */
+    font-size: 12vw; 
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    /* Reduced spacing to keep it within the horizontal bounds */
+    letter-spacing: 5px; 
+    /* Tightened line-height to stop it from pushing content down */
+    line-height: 0.9; 
+    margin-top: 40px;
+    margin-bottom: 10px;
+    z-index: 5;
+    text-align: left;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0.95;
+    /* Refined shadow for a cleaner look at this scale */
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--pastel-pink);
+}
         /* --- ENVELOPE SCRAPS (RIGHTEST SIDE) --- */
         .scraps-container {
             position: absolute;
@@ -153,11 +156,38 @@
             transition: 0.3s;
         }
 
-        .s1 { top: 12%; left: 15%; transform: rotate(10deg); width: 120px; height: 120px;}
-        .s2 { top: 50%; left: 8%; transform: rotate(-8deg); width: 90px; height: 90px;}
-        .s3 { bottom: 10%; right: 15%; transform: rotate(12deg); width: 110px; height: 110px;}
-        .s4 { top: 75%; left: 20%; transform: rotate(-15deg); width: 80px; height: 80px;}
+        /* --- STICKER PLACEHOLDERS (REPOSITIONED RIGHT & MIDDLE) --- */
+.s1 { 
+    top: 30%; 
+    left: 65%; 
+    transform: rotate(10deg); 
+    width: 120px; 
+    height: 120px;
+}
 
+.s2 { 
+    top: 45%; 
+    left: 75%; 
+    transform: rotate(-8deg); 
+    width: 90px; 
+    height: 90px;
+}
+
+.s3 { 
+    top: 60%; 
+    left: 60%; 
+    transform: rotate(12deg); 
+    width: 110px; 
+    height: 110px;
+}
+
+.s4 { 
+    top: 55%; 
+    left: 80%; 
+    transform: rotate(-15deg); 
+    width: 80px; 
+    height: 80px;
+}
         @media (max-width: 1200px) {
             .contact-title { font-size: 10rem; letter-spacing: 10px; }
             .scraps-container { position: static; flex-direction: row; justify-content: center; margin-top: 40px; right: auto; }
@@ -203,13 +233,13 @@
     <div class="scraps-container">
         <div class="envelope">
             <h3>Social Channels</h3>
-            <p>@scrapbook_style</p>
+            <p>@aditiii_kk</p>
             <p style="font-size: 0.8rem; margin-top: 15px; color: #888;">DM me on instagram! 🍒</p>
         </div>
 
         <div class="envelope">
             <h3>Direct Mailbox</h3>
-            <p>hello@diary.com</p>
+            <p>aditiksays.gmail.com</p>
             <p style="font-size: 0.8rem; margin-top: 15px; color: #888;"> Response within 24 hours 🌸</p>
         </div>
     </div>
