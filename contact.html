@@ -123,19 +123,21 @@
         }
 
         /* --- CALENDAR SCRAP --- */
-        .calendar-scrap {
-            position: absolute;
-            top: 90px;
-            bottom: 0px;
-            left: 30%; /* Kept separate for balance */
-            background: white;
-            padding: 15px;
-            border: 1px solid #ddd;
-            box-shadow: var(--3d-shadow);
-            transform: rotate(-5deg);
-            z-index: 2;
-            width: 50px;
-        }
+       .calendar-scrap {
+    position: absolute;
+    /* Moves it to the foot of the massive "CONTACT" text */
+    top: 50%; 
+    /* Centers it more toward the middle */
+    left: 42%; 
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    box-shadow: var(--3d-shadow);
+    transform: rotate(-5deg);
+    z-index: 2;
+    width: 180px;
+    /* Removed bottom: 0px to prevent stretching */
+}
 
         /* --- STICKER PLACEHOLDERS (ALL OVER) --- */
         .sticker-placeholder {
