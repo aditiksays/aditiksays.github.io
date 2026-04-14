@@ -5,331 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Scrapbook Edition</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --paper-cream: #FDF4E3; 
-            --pastel-pink: #FFD1DC;
-            --muted-red: #E5989B;
-            --charcoal: #333333;
-            --3d-shadow: 4px 6px 12px rgba(0,0,0,0.15);
-            --stamped-red: #B22222;
-        }
-
-        /* --- CUSTOM FONT REGISTRATION --- */
-        @font-face {
-            font-family: 'MyCustomFont'; 
-            src: url('OrangeAvenueDEMO-Regular.ttf'), url('OrangeAvenueDEMO-Regular.otf'); 
-            font-weight: bold;
+            --paper: #FDF4E3; --pink: #FFD1DC; --red: #E5989B;
+            --dark: #333; --shadow: 4px 6px 12px rgba(0,0,0,0.15);
         }
 
         body {
-            background-color: var(--paper-cream);
-            background-image: radial-gradient(#dcdcdc 1.5px, transparent 1.5px);
-            background-size: 20px 20px;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            position: relative;
-            overflow-x: hidden;
-            padding: 40px;
+            background: var(--paper) radial-gradient(#dcdcdc 1.5px, transparent 1.5px) repeat 20px 20px;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh; display: flex; position: relative;
+            overflow-x: hidden; padding: 40px;
         }
 
         /* --- NAVIGATION --- */
         nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 1100;
-            background: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            border: 1.5px solid var(--pastel-pink);
-            box-shadow: var(--3d-shadow);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: white; padding: 8px 25px; border-radius: 50px;
+            border: 1.5px solid var(--pink); box-shadow: var(--shadow); z-index: 1100;
         }
-        nav a { text-decoration: none; color: var(--muted-red); font-weight: 600; font-size: 0.85rem; }
+        nav a { text-decoration: none; color: var(--red); font-weight: 600; font-size: 0.85rem; margin: 0 7px; }
 
-        /* --- VERTICAL "PASTED NOTE" CONTACT TITLE --- */
+        /* --- CONTACT TITLE (VERTICAL STACK) --- */
         .contact-title {
-            font-family: 'MyCustomFont', Georgia, serif;
-            font-size: 6vw; 
-            font-weight: 900;
-            text-transform: uppercase;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            margin-top: 60px;
-            z-index: 10;
-            pointer-events: none;
+            display: flex; flex-direction: column; gap: 10px;
+            margin-top: 60px; z-index: 10; width: min-content;
         }
-
         .note {
-            display: inline-block;
-            padding: 10px 25px;
-            border-radius: 2px;
-            line-height: 1;
-            position: relative;
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+            font-size: 5vw; font-weight: 900; padding: 10px 25px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.15); border-radius: 2px;
         }
+        .n1, .n6 { background: var(--dark); color: var(--paper); transform: rotate(-3deg); }
+        .n2 { background: var(--red); color: #fff; transform: rotate(4deg); }
+        .n3, .n7 { background: #fff; color: var(--red); border: 1px solid #ddd; transform: rotate(-2deg); }
+        .n4 { background: #6D6875; color: #fff; transform: rotate(5deg); }
+        .n5 { background: #B5838D; color: #fff; transform: rotate(-4deg); }
 
-        /* Individual Classy Note Styles */
-        .n1 { background: var(--charcoal); color: var(--paper-cream); transform: rotate(-3deg) translateX(5px); }
-        .n2 { background: var(--muted-red); color: #fff; transform: rotate(4deg) translateX(-8px); }
-        .n3 { background: #fff; color: var(--charcoal); transform: rotate(-2deg) translateX(12px); border: 1px solid #ddd; }
-        .n4 { background: #6D6875; color: #fff; transform: rotate(5deg) translateX(-2px); }
-        .n5 { background: #B5838D; color: #fff; transform: rotate(-4deg) translateX(15px); }
-        .n6 { background: var(--charcoal); color: var(--pastel-pink); transform: rotate(2deg) translateX(-5px); }
-        .n7 { background: #fff; color: var(--muted-red); transform: rotate(-1deg) translateX(10px); border: 1px solid var(--muted-red); }
+        /* --- STICKERS (FIXED SIZE & COLLAPSED) --- */
+        .s { position: absolute; width: 125px; height: 125px; z-index: 2; }
+        .s img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .s1 { top: 10%; left: 25%; transform: rotate(12deg); }
+        .s2 { top: 40%; left: 40%; transform: rotate(-8deg); }
+        .s3 { bottom: 20%; left: 10%; transform: rotate(5deg); }
+        .s4 { top: 60%; left: 15%; transform: rotate(-15deg); }
+        .s5 { top: 25%; right: 25%; transform: rotate(-5deg); }
+        .s6 { bottom: 35%; right: 40%; transform: rotate(10deg); }
 
-        /* Washi Tape Decals on Notes */
-        .n2::before, .n5::before {
-            content: "";
-            position: absolute;
-            top: -8px;
-            left: 15%;
-            width: 35px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px dashed rgba(0,0,0,0.1);
-            transform: rotate(-12deg);
-        }
-
-        /* --- UPDATED MAILBOX ENVELOPES --- */
-        .scraps-container {
-            position: absolute;
-            top: 120px;
-            right: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Reduced gap to bring them closer */
-            z-index: 15;
-            align-items: center; /* Center items within container */
-        }
-
-        .envelope {
-            width: 320px;
-            background: #fdfdfd; /* Brighter white for paper */
-            padding: 25px;
-            border: 1px solid #ddd; /* Subtle border */
-            box-shadow: var(--3d-shadow);
-            position: relative;
-            transition: transform 0.3s;
-            overflow: hidden; /* For stamp overflow */
-        }
+        /* --- ENVELOPES & SCRAPS --- */
+        .scraps-container { position: absolute; top: 120px; right: 50px; display: flex; flex-direction: column; gap: 20px; z-index: 15; }
+        .envelope { width: 320px; background: #fff; padding: 25px; border: 1px solid #ddd; box-shadow: var(--shadow); transition: 0.3s; }
         .envelope:hover { transform: scale(1.02); }
-        .envelope:nth-child(1) { transform: rotate(-3deg); }
-        .envelope:nth-child(2) { transform: rotate(4deg); }
+        .envelope h3 { color: var(--red); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px dashed var(--pink); margin: 10px 0 15px; }
+        .envelope p { font-family: 'Courier New', monospace; font-weight: bold; }
 
-        /* Fancy Envelope Flap */
-        .envelope::after {
-            content: "";
-            position: absolute;
-            top: -20px; left: 0; right: 0;
-            height: 40px;
-            background: var(--pastel-pink);
-            clip-path: polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%);
-            opacity: 0.8;
-        }
-
-        /* Mock Postmark Stamp */
-        .envelope::before {
-            content: "MAIL";
-            position: absolute;
-            top: 10px; right: 10px;
-            font-family: serif;
-            font-size: 0.6rem;
-            color: var(--stamped-red);
-            border: 2px solid var(--stamped-red);
-            border-radius: 50%;
-            padding: 5px;
-            transform: rotate(20deg);
-            opacity: 0.7;
-        }
-
-        .envelope h3 {
-            color: var(--muted-red);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            margin-top: 10px; /* Space from flap */
-            border-bottom: 1px dashed var(--pastel-pink);
-        }
-
-        .envelope p { 
-            font-size: 1.1rem; 
-            color: #444; 
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-        }
-
-        /* --- UPDATED CALENDAR (FOOT OF 2ND ENVELOPE) --- */
-        .calendar-scrap {
-            margin-top: -10px; /* Slight overlap */
-            transform: rotate(-3deg) translateX(-20px); /* Positioned relative to envelopes */
-            background: white;
-            padding: 15px;
-            border: 1px solid #ddd;
-            box-shadow: var(--3d-shadow);
-            width: 190px;
-            position: relative; /* Normal flow within scraps-container */
-        }
-
-        /* --- CLOSED LOVE ENVELOPES (RIGHT BOTTOM) --- */
-        .love-envelopes {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .love-envelope {
-            width: 80px;
-            height: 60px;
-            background: var(--pastel-pink);
-            border: 2px solid var(--muted-red);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-            position: relative;
-            transform: rotate(-10deg);
-        }
-
-        .love-envelope:nth-child(2) {
-            background: #fff;
-            transform: rotate(15deg);
-        }
-
-        /* Envelope Flap Triangle */
-        .love-envelope::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 30px;
-            background: inherit;
-            border-bottom: 2px solid var(--muted-red);
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-        }
-
-        /* Heart Detail */
-        .love-envelope::before {
-            content: "❤";
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--muted-red);
-            font-size: 1.2rem;
-        }
-        .love-envelope:nth-child(2)::before {
-            color: var(--muted-red);
-        }
-
-        /* --- INCREASED STICKER SIZE & NEW STICKERS --- */
-        .sticker-placeholder {
-            position: absolute;
-            background: white;
-            border: 2px dashed #bbb;
-            box-shadow: var(--3d-shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem; /* Increased font size */
-            color: #888;
-            text-transform: uppercase;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-       /* Shared styles for all stickers to ensure they stay tiny */
-.s1, .s2, .s3, .s4, .s5, .s6 {
-    position: absolute;
-    width: 100px;  /* Changed from 5px to 50px so you can actually see them */
-    height: 100px; /* Changed from 5px to 50px */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* This is the magic part: it forces the image to fit the box */
-.s1 img, .s2 img, .s3 img, .s4 img, .s5 img, .s6 img {
-    max-width: 300%;
-    max-height: 300%;
-    object-fit: contain;
-}
-
-/* Your specific positioning and rotations */
-.s1 { top: 10%; left: 25%; transform: rotate(12deg); }
-.s2 { top: 40%; left: 40%; transform: rotate(-8deg); }
-.s3 { bottom: 20%; left: 10%; transform: rotate(5deg); }
-.s4 { top: 60%; left: 15%; transform: rotate(-15deg); }
-.s5 { top: 25%; right: 25%; transform: rotate(-5deg); }
-.s6 { bottom: 35%; right: 40%; transform: rotate(10deg); }
+        .calendar-scrap { background: white; padding: 15px; border: 1px solid #ddd; box-shadow: var(--shadow); width: 190px; align-self: center; transform: rotate(-3deg); }
 
         @media (max-width: 1024px) {
             body { flex-direction: column; align-items: center; padding-top: 100px; }
-            .scraps-container, .love-envelopes, .sticker-placeholder { position: static; margin: 20px auto; transform: none; }
-            .contact-title { font-size: 12vw; align-items: center; width: 100%; }
+            .scraps-container, .s { position: static; margin: 20px auto; }
+            .contact-title { font-size: 10vw; align-items: center; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="home.html">home</a>
-        <a href="aboutme.html">about</a>
-        <a href="blog.html">blog</a>
-        <a href="contact.html">contact</a>
+        <a href="home.html">home</a><a href="aboutme.html">about</a>
+        <a href="blog.html">blog</a><a href="contact.html">contact</a>
         <a href="index.html">cover</a>
     </nav>
 
-    <div class="sticker-placeholder s1"><img src="love.png" alt=" love "></div>
-    <div class="sticker-placeholder s2"><img src="camera.png" alt="camera"></div>
-    <div class="sticker-placeholder s3"><img src="questionmark.png" alt="questionmark"></div>
-    <div class="sticker-placeholder s4"><img src="catyawning.png" alt="catyawning"></div>
-    <div class="sticker-placeholder s5"><img src="pinktelephone.png" alt="telephone"></div>
-    <div class="sticker-placeholder s6"><img src="lilydrawing.png" alt="lilydrawing"></div>
+    <div class="s s1"><img src="love.png"></div>
+    <div class="s s2"><img src="camera.png"></div>
+    <div class="s s3"><img src="questionmark.png"></div>
+    <div class="s s4"><img src="catyawning.png"></div>
+    <div class="s s5"><img src="pinktelephone.png"></div>
+    <div class="s s6"><img src="lilydrawing.png"></div>
 
     <div class="contact-title">
-        <span class="note n1">C</span>
-        <span class="note n2">O</span>
-        <span class="note n3">N</span>
-        <span class="note n4">T</span>
-        <span class="note n5">A</span>
-        <span class="note n6">C</span>
-        <span class="note n7">T</span>
+        <span class="note n1">C</span><span class="note n2">O</span><span class="note n3">N</span>
+        <span class="note n4">T</span><span class="note n5">A</span><span class="note n6">C</span><span class="note n7">T</span>
     </div>
 
     <div class="scraps-container">
         <div class="envelope">
             <h3>Social Channels</h3>
             <p>@aditiii_kk</p>
-            <p style="font-size: 0.75rem; margin-top: 10px; color: #999;">find me on instagram 🍒</p>
         </div>
-
         <div class="envelope">
             <h3>Direct Mailbox</h3>
             <p>aditiksays@gmail.com</p>
-            <p style="font-size: 0.75rem; margin-top: 10px; color: #999;">replying within 24h 🌸</p>
         </div>
-
         <div class="calendar-scrap">
-            <div id="month-year" style="font-weight: bold; color: var(--muted-red); font-size: 0.9rem; text-align: center;"></div>
+            <div id="month-year" style="font-weight: bold; color: var(--red); text-align: center;"></div>
             <div id="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 0.7rem; margin-top: 10px; text-align: center;"></div>
         </div>
-    </div>
-
-    <div class="love-envelopes">
-        <div class="love-envelope"></div>
-        <div class="love-envelope"></div>
     </div>
 
     <script>
@@ -337,28 +108,17 @@
             const now = new Date();
             const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             document.getElementById('month-year').innerText = `${monthArr[now.getMonth()]} ${now.getFullYear()}`;
-            
             const calendarDays = document.getElementById('calendar-days');
             const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
             const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
-            calendarDays.innerHTML = '';
             ['S','M','T','W','T','F','S'].forEach(h => {
-                const el = document.createElement('span');
-                el.style.fontWeight = 'bold'; el.innerText = h;
-                calendarDays.appendChild(el);
+                const el = document.createElement('span'); el.style.fontWeight='bold'; el.innerText=h; calendarDays.appendChild(el);
             });
-
             for (let i = 0; i < firstDay; i++) calendarDays.appendChild(document.createElement('span'));
             for (let day = 1; day <= daysInMonth; day++) {
-                const span = document.createElement('span');
-                span.innerText = day;
-                if (day === now.getDate()) {
-                    span.style.color = '#E5989B';
-                    span.style.fontWeight = 'bold';
-                    span.style.border = '1px solid #FFD1DC';
-                    span.style.borderRadius = '2px';
-                }
+                const span = document.createElement('span'); span.innerText = day;
+                if (day === now.getDate()) { span.style.color = '#E5989B'; span.style.fontWeight = 'bold'; }
                 calendarDays.appendChild(span);
             }
         }
