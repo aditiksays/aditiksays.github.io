@@ -1,7 +1,248 @@
-<div class="page-container">
-    <h1>Postcards from the Web</h1>
-    <div style="background: #fff; border: 1px solid #ddd; padding: 20px; transform: rotate(-2deg); box-shadow: 5px 5px 10px rgba(0,0,0,0.1);">
-        <h3>Postcard title</h3>
-        <p>A short note about a memory or a thought...</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digi Journal - Contact</title>
+    <style>
+        :root {
+            --scrapbook-bg: url('[URL_FOR_SCRAPBOOK_BASE]');
+            --folder-icon: url('[URL_FOR_FOLDER_IMAGE]');
+            --border-asset: url('[URL_FOR_BORDER_ASSET]');
+            --ink-color: rgba(45, 42, 38, 0.65); /* Fainted ink look */
+            --paper-color: #f4f1ea;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--scrapbook-bg) center center / cover no-repeat fixed;
+            font-family: 'Courier New', Courier, monospace; /* Placeholder for scrapbook typography */
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Typography: The Fainted Look --- */
+        .heading-container {
+            margin-top: 50px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .digi-journal-heading {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-color);
+            /* Simulated stamped/weathered effect */
+            filter: contrast(0.8) sepia(0.2);
+            opacity: 0.7;
+            position: relative;
+            display: inline-block;
+            mask-image: radial-gradient(circle, black 50%, rgba(0,0,0,0.5) 100%);
+            -webkit-mask-image: radial-gradient(circle, black 70%, rgba(0,0,0,0.3) 100%);
+        }
+
+        /* --- Grid Layout --- */
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+            border: 2px solid transparent; /* Container for visual reference */
+            border-image: var(--border-asset) 30 stretch;
+        }
+
+        .folder-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .folder-item:hover {
+            transform: translateY(-5px) rotate(2deg);
+        }
+
+        .folder-icon {
+            width: 120px;
+            height: 100px;
+            background: var(--folder-icon) center center / contain no-repeat;
+            margin-bottom: 10px;
+        }
+
+        .folder-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 2px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Slide-In Sidebar --- */
+        #sidebar-toggle {
+            display: none;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--paper-color);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            /* Torn Paper Edge effect */
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%, 5% 90%, 0 80%, 8% 70%, 2% 60%, 10% 50%, 3% 40%, 9% 30%, 1% 20%, 8% 10%);
+        }
+
+        #sidebar-toggle:checked ~ .sidebar {
+            right: 0;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            margin-top: 60px;
+        }
+
+        .sidebar-nav li {
+            margin: 20px 0;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: #444;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-bottom: 1px dashed #ccc;
+            display: block;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            font-size: 0.7rem;
+            color: #777;
+            line-height: 1.4;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        /* Toggle Button Look */
+        .menu-label {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 101;
+            border: 1px solid #000;
+            box-shadow: 3px 3px 0px #000;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .folder-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, auto);
+            }
+            .digi-journal-heading {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="sidebar-toggle">
+    <label for="sidebar-toggle" class="menu-label">MENU / JOURNAL TABS</label>
+
+    <aside class="sidebar">
+        <nav>
+            <ul class="sidebar-nav">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ARCHIVES</a></li>
+                <li><a href="#">SKETCHBOOK</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>&copy; 2026 DIGI JOURNAL. ALL RIGHTS RESERVED.</p>
+            <br>
+            <p><strong>WARNING:</strong> Unauthorized reproduction of these digital assets is a violation of international copyright laws. Tread carefully.</p>
+        </div>
+    </aside>
+
+    <header class="heading-container">
+        <h1 class="digi-journal-heading">DIGI JOURNAL</h1>
+    </header>
+
+    <main class="main-container">
+        <div class="folder-grid">
+            <a href="/page1" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Project Alpha</span>
+            </a>
+            <a href="/page2" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Manifesto</span>
+            </a>
+            <a href="/page3" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Drafts</span>
+            </a>
+            <a href="/page4" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Clippings</span>
+            </a>
+            <a href="/page5" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Inspiration</span>
+            </a>
+            <a href="/page6" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Resources</span>
+            </a>
+            <a href="/page7" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Timeline</span>
+            </a>
+            <a href="/page8" class="folder-item">
+                <div class="folder-icon"></div>
+                <span class="folder-label">Encrypted</span>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
