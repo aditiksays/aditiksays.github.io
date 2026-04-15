@@ -6,11 +6,9 @@
     <title>Digi Journal - Contact</title>
     <style>
         :root {
-            --scrapbook-bg: url('[URL_FOR_SCRAPBOOK_BASE]');
-            --folder-icon: url('[URL_FOR_FOLDER_IMAGE]');
-            --border-asset: url('[URL_FOR_BORDER_ASSET]');
-            --ink-color: rgba(45, 42, 38, 0.65); /* Fainted ink look */
-            --paper-color: #f4f1ea;
+            --scrapbook-bg: url('checkedbg.jpg');
+            --ink-color: rgba(14, 13, 12, 0.65);
+            --paper-color: #fae6b8;
         }
 
         * {
@@ -21,7 +19,7 @@
 
         body {
             background: var(--scrapbook-bg) center center / cover no-repeat fixed;
-            font-family: 'Courier New', Courier, monospace; /* Placeholder for scrapbook typography */
+            font-family: 'Courier New', Courier, monospace;
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
@@ -29,7 +27,7 @@
             align-items: center;
         }
 
-        /* --- Typography: The Fainted Look --- */
+        /* --- Typography --- */
         .heading-container {
             margin-top: 50px;
             text-align: center;
@@ -42,12 +40,10 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--ink-color);
-            /* Simulated stamped/weathered effect */
             filter: contrast(0.8) sepia(0.2);
             opacity: 0.7;
             position: relative;
             display: inline-block;
-            mask-image: radial-gradient(circle, black 50%, rgba(0,0,0,0.5) 100%);
             -webkit-mask-image: radial-gradient(circle, black 70%, rgba(0,0,0,0.3) 100%);
         }
 
@@ -68,7 +64,7 @@
             gap: 30px;
             max-width: 1000px;
             width: 100%;
-            border: 2px solid transparent; /* Container for visual reference */
+            border: 2px solid transparent;
             border-image: var(--border-asset) 30 stretch;
         }
 
@@ -84,10 +80,11 @@
             transform: translateY(-5px) rotate(2deg);
         }
 
-        .folder-icon {
+        /* CHANGED: Control the size of your unique PNGs here */
+        .folder-img {
             width: 120px;
             height: 100px;
-            background: var(--folder-icon) center center / contain no-repeat;
+            object-fit: contain; /* Keeps PNG proportions clean */
             margin-bottom: 10px;
         }
 
@@ -101,10 +98,8 @@
             text-transform: uppercase;
         }
 
-        /* --- Slide-In Sidebar --- */
-        #sidebar-toggle {
-            display: none;
-        }
+        /* --- Sidebar --- */
+        #sidebar-toggle { display: none; }
 
         .sidebar {
             position: fixed;
@@ -119,23 +114,13 @@
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            /* Torn Paper Edge effect */
             clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%, 5% 90%, 0 80%, 8% 70%, 2% 60%, 10% 50%, 3% 40%, 9% 30%, 1% 20%, 8% 10%);
         }
 
-        #sidebar-toggle:checked ~ .sidebar {
-            right: 0;
-        }
+        #sidebar-toggle:checked ~ .sidebar { right: 0; }
 
-        .sidebar-nav {
-            list-style: none;
-            margin-top: 60px;
-        }
-
-        .sidebar-nav li {
-            margin: 20px 0;
-        }
-
+        .sidebar-nav { list-style: none; margin-top: 60px; }
+        .sidebar-nav li { margin: 20px 0; }
         .sidebar-nav a {
             text-decoration: none;
             color: #444;
@@ -155,7 +140,6 @@
             padding-top: 20px;
         }
 
-        /* Toggle Button Look */
         .menu-label {
             position: fixed;
             top: 20px;
@@ -169,15 +153,12 @@
             font-weight: bold;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .folder-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(4, auto);
             }
-            .digi-journal-heading {
-                font-size: 2.5rem;
-            }
+            .digi-journal-heading { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -189,17 +170,17 @@
     <aside class="sidebar">
         <nav>
             <ul class="sidebar-nav">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ARCHIVES</a></li>
-                <li><a href="#">SKETCHBOOK</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">CONTACT</a></li>
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="aboutme.html">ABOUT</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="index.html">CLOSE</a></li>
             </ul>
         </nav>
         <div class="sidebar-footer">
             <p>&copy; 2026 DIGI JOURNAL. ALL RIGHTS RESERVED.</p>
             <br>
-            <p><strong>WARNING:</strong> Unauthorized reproduction of these digital assets is a violation of international copyright laws. Tread carefully.</p>
+            <p><strong>WARNING:</strong> Unauthorized reproduction of these digital assets is a violation of international copyright laws.</p>
         </div>
     </aside>
 
@@ -209,38 +190,47 @@
 
     <main class="main-container">
         <div class="folder-grid">
-            <a href="/page1" class="folder-item">
-                <div class="folder-icon"></div>
-                <span class="folder-label">Project Alpha</span>
+            
+            <a href="relationships.html" class="folder-item">
+                <img src="project-alpha.png" alt="Project Alpha" class="folder-img">
+                <span class="folder-label">relationships</span>
             </a>
-            <a href="/page2" class="folder-item">
-                <div class="folder-icon"></div>
-                <span class="folder-label">Manifesto</span>
+
+            <a href="femininity.html" class="folder-item">
+                <img src="manifesto.png" alt="Manifesto" class="folder-img">
+                <span class="folder-label">femininity</span>
             </a>
-            <a href="/page3" class="folder-item">
-                <div class="folder-icon"></div>
-                <span class="folder-label">Drafts</span>
+
+            <a href="politics.html" class="folder-item">
+                <img src="drafts.png" alt="Drafts" class="folder-img">
+                <span class="folder-label">politics</span>
             </a>
-            <a href="/page4" class="folder-item">
-                <div class="folder-icon"></div>
-                <span class="folder-label">Clippings</span>
+
+            <a href="photo dumps.html" class="folder-item">
+                <img src="clippings.png" alt="Clippings" class="folder-img">
+                <span class="folder-label">photo dumps</span>
             </a>
-            <a href="/page5" class="folder-item">
-                <div class="folder-icon"></div>
-                <span class="folder-label">Inspiration</span>
+
+            <a href="books.html" class="folder-item">
+                <img src="inspiration.png" alt="Inspiration" class="folder-img">
+                <span class="folder-label">books</span>
             </a>
+
             <a href="/page6" class="folder-item">
-                <div class="folder-icon"></div>
+                <img src="resources.png" alt="Resources" class="folder-img">
                 <span class="folder-label">Resources</span>
             </a>
+
             <a href="/page7" class="folder-item">
-                <div class="folder-icon"></div>
+                <img src="timeline.png" alt="Timeline" class="folder-img">
                 <span class="folder-label">Timeline</span>
             </a>
+
             <a href="/page8" class="folder-item">
-                <div class="folder-icon"></div>
+                <img src="encrypted.png" alt="Encrypted" class="folder-img">
                 <span class="folder-label">Encrypted</span>
             </a>
+
         </div>
     </main>
 
