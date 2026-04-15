@@ -32,6 +32,7 @@
             margin-top: 50px;
             text-align: center;
             width: 100%;
+            padding: 0 20px;
         }
 
         .digi-journal-heading {
@@ -47,25 +48,24 @@
             -webkit-mask-image: radial-gradient(circle, black 70%, rgba(0,0,0,0.3) 100%);
         }
 
-        /* --- Grid Layout --- */
+        /* --- Grid Layout Updated --- */
         .main-container {
             flex-grow: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 40px;
+            align-items: flex-start; /* Changed from center to prevent jumping on short screens */
+            padding: 40px 20px;
             width: 100%;
         }
 
         .folder-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, auto);
-            gap: 30px;
+            /* Desktop: 4 Columns */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 40px 20px;
             max-width: 1000px;
             width: 100%;
-            border: 2px solid transparent;
-            border-image: var(--border-asset) 30 stretch;
+            justify-items: center; /* Centers items horizontally in their cell */
         }
 
         .folder-item {
@@ -74,28 +74,31 @@
             align-items: center;
             text-decoration: none;
             transition: transform 0.2s ease;
+            text-align: center;
+            width: 100%;
         }
 
         .folder-item:hover {
             transform: translateY(-5px) rotate(2deg);
         }
 
-        /* CHANGED: Control the size of your unique PNGs here */
         .folder-img {
             width: 120px;
             height: 100px;
-            object-fit: contain; /* Keeps PNG proportions clean */
-            margin-bottom: 10px;
+            object-fit: contain;
+            margin-bottom: 12px;
         }
 
         .folder-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #333;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 10px;
             border-radius: 2px;
             text-transform: uppercase;
+            max-width: 150px; /* Keeps text from stretching the folder width */
+            line-height: 1.2;
         }
 
         /* --- Sidebar --- */
@@ -153,12 +156,38 @@
             font-weight: bold;
         }
 
+        /* --- Mobile Responsive Logic --- */
         @media (max-width: 768px) {
-            .folder-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(4, auto);
+            .digi-journal-heading { 
+                font-size: 2.2rem; 
+                letter-spacing: 0.1em;
             }
-            .digi-journal-heading { font-size: 2.5rem; }
+
+            .folder-grid {
+                /* Mobile: 2 Columns, rows will automatically stack as 4 */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px 15px;
+            }
+
+            .folder-img {
+                width: 100px; /* Slightly smaller for mobile screens */
+                height: 85px;
+            }
+
+            .folder-label {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 380px) {
+            .folder-grid {
+                gap: 20px 10px;
+            }
+            .folder-img {
+                width: 80px;
+                height: 70px;
+            }
         }
     </style>
 </head>
@@ -208,7 +237,7 @@
 
             <a href="2026.html" class="folder-item">
                 <img src="folder 6.png" alt="Clippings" class="folder-img">
-                <span class="folder-label"> year of false dawn</span>
+                <span class="folder-label">year of false dawn</span>
             </a>
 
             <a href="books.html" class="folder-item">
