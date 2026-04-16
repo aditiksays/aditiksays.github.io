@@ -3,216 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive // Baddie Digital Scrapbook</title>
+    <title>UNFILTERED ARCHIVE // 2026</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,700&family=Montserrat:wght@300;900&family=Megrim&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card: #121212;
+            --bg: #050505;
             --chrome: #ffffff;
-            --accent: #ff0055; 
-            --glass-tape: rgba(255, 255, 255, 0.15);
+            --accent: #ff0055;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg);
-            /* Unified background grain/grid */
             background-image: 
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
+                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 40px 40px;
             color: var(--chrome);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            min-height: 250vh;
         }
 
-        /* --- Header --- */
+        /* --- Fixed Header (Right Aligned) --- */
         header {
             position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 3000;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            mix-blend-mode: difference; /* Makes it pop over any element */
+            top: 40px;
+            right: 50px;
+            z-index: 5000;
+            text-align: right;
+            mix-blend-mode: difference;
         }
 
-        .nav-trigger {
+        .menu-btn {
             font-family: 'Megrim', cursive;
-            font-size: 1.2rem;
+            font-size: 2rem;
             cursor: pointer;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
 
-        /* --- Main Layout: Unified --- */
+        /* --- THE CANVAS --- */
         .scrapbook-canvas {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            min-height: 100vh;
-            padding: 120px 5vw;
-            gap: 0; /* Removed gap to merge sides */
             position: relative;
-        }
-
-        /* --- Left Side: Fixed Visuals --- */
-        .visual-stack {
-            position: sticky;
-            top: 120px;
-            height: fit-content;
-            z-index: 10;
-        }
-
-        .main-img-frame {
-            position: relative;
-            background: #111;
-            padding: 10px;
-            border: 1px solid #222;
-            transform: rotate(-1.5deg);
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.8);
-        }
-
-        .base-img {
             width: 100%;
-            display: block;
-            filter: grayscale(100%) contrast(110%);
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 150px 20px;
         }
 
-        /* --- The Stickers (URL Placeholders) --- */
+        /* --- LARGE STICKERS --- */
         .sticker {
             position: absolute;
-            z-index: 50;
-            pointer-events: auto;
-            filter: drop-shadow(5px 5px 8px rgba(0,0,0,0.4));
-            transition: 0.3s;
+            z-index: 100;
+            filter: drop-shadow(15px 15px 30px rgba(0,0,0,0.8));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: grab;
         }
 
-        .sticker:hover { transform: scale(1.1) rotate(0deg) !important; }
-
-        /* Spread stickers across the center line to unify the page */
-        .s1 { width: 100px; top: -30px; left: -20px; transform: rotate(-10deg); } /* Top left */
-        .s2 { width: 80px; top: 10%; right: -40px; transform: rotate(15deg); }  /* Overlaps right side */
-        .s3 { width: 120px; bottom: 15%; left: -50px; transform: rotate(-20deg); }
-        .s4 { width: 90px; bottom: -40px; right: 10%; transform: rotate(5deg); }
-        .s5 { width: 110px; top: 50%; right: -60px; transform: rotate(-12deg); } /* Deep overlap */
-        .s6 { width: 70px; top: -10px; left: 40%; transform: rotate(5deg); }
-        .s7 { width: 130px; bottom: 5%; left: 20%; transform: rotate(-5deg); opacity: 0.9; }
-        .s8 { width: 85px; top: 25%; left: -30px; transform: rotate(-15deg); }
-
-        /* --- Right Side: Flowing Content --- */
-        .content-stack {
-            padding-left: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 100px;
+        .sticker:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 1000;
         }
 
-        .journal-entry {
-            background: var(--card);
-            padding: 60px 40px;
-            position: relative;
+        /* Sizes & Overlapping Positions */
+        .s1 { width: 220px; top: 100px; left: -30px; transform: rotate(-15deg); } 
+        .s2 { width: 180px; top: 15%; left: 45%; transform: rotate(12deg); }  
+        .s3 { width: 280px; top: 45%; left: 25%; transform: rotate(-20deg); }
+        .s4 { width: 200px; top: 65%; right: 5%; transform: rotate(10deg); }
+        .s5 { width: 240px; bottom: 15%; left: 2%; transform: rotate(-8deg); } 
+        .s6 { width: 150px; top: 5%; right: 20%; transform: rotate(5deg); }
+        .s7 { width: 300px; bottom: 5%; left: 30%; transform: rotate(-5deg); }
+        .s8 { width: 190px; top: 55%; right: 35%; transform: rotate(-12deg); }
+
+        /* --- MAIN VISUAL --- */
+        .main-visual {
+            position: absolute;
+            width: 50%;
+            top: 250px;
+            left: 5%;
+            z-index: 5;
+            transform: rotate(-1.5deg);
+        }
+
+        .main-visual img {
+            width: 100%;
+            filter: grayscale(100%) contrast(115%);
             border: 1px solid #1a1a1a;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+            display: block;
         }
 
-        /* Tape Effect to "Stick" entries to the background */
-        .journal-entry::before {
-            content: "";
+        /* --- BLOG ENTRIES (Editorial Style) --- */
+        .blog-entry {
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%) rotate(2deg);
-            width: 120px;
-            height: 35px;
-            background: var(--glass-tape);
-            backdrop-filter: blur(2px);
-            border-left: 1px solid rgba(255,255,255,0.2);
-            border-right: 1px solid rgba(255,255,255,0.2);
+            z-index: 10;
+            max-width: 450px;
         }
 
-        .journal-entry h2 {
+        .blog-entry h2 {
             font-family: 'Bodoni Moda', serif;
-            font-size: 3rem;
             font-style: italic;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
             line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
         }
 
-        .journal-entry p {
-            font-size: 0.9rem;
-            color: #aaa;
-            max-width: 400px;
+        .blog-entry p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #ccc;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
         }
 
-        /* --- Global Decorations --- */
-        .floating-text {
-            position: absolute;
-            font-family: 'Megrim';
-            font-size: 8rem;
-            opacity: 0.03;
+        .entry-meta {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Placement of Blog Posts */
+        .b1 { top: 350px; right: 8%; text-align: right; }
+        .b2 { top: 1000px; left: 12%; }
+        .b3 { top: 1600px; right: 10%; }
+
+        /* Decorative BG elements */
+        .bg-text {
+            position: fixed;
+            font-size: 20vw;
+            font-weight: 900;
+            color: rgba(255,255,255,0.02);
+            z-index: -1;
             pointer-events: none;
-            z-index: 0;
-            white-space: nowrap;
         }
 
         @media (max-width: 900px) {
-            .scrapbook-canvas { grid-template-columns: 1fr; }
-            .visual-stack { position: relative; top: 0; margin-bottom: 80px; }
+            .main-visual { width: 90%; position: relative; top: 0; left: 5%; }
+            .blog-entry { position: relative; width: 90%; top: 50px !important; left: 5% !important; right: 0 !important; text-align: left !important; margin-bottom: 150px; }
+            .sticker { display: none; }
+            header { right: 20px; top: 20px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="nav-trigger">MENU</div>
-        <div class="nav-trigger">ARCHIVE_2026</div>
+        <div class="menu-btn">MENU</div>
+        <div style="font-size: 0.6rem; letter-spacing: 3px; margin-top: 5px; opacity: 0.4;">VOL. 01 / 2026</div>
     </header>
 
-    <div class="floating-text" style="top: 20%; left: -5%;">BADDIE BADDIE</div>
-    <div class="floating-text" style="bottom: 10%; right: -5%;">MANIFESTO</div>
+    <div class="bg-text" style="top: 0; left: -5%;">RAW</div>
+    <div class="bg-text" style="bottom: 0; right: -5%;">CORE</div>
 
     <main class="scrapbook-canvas">
         
-        <section class="visual-stack">
-            <div class="main-img-frame">
-                <img src="newspaper cutout.png" alt="Scrapbook Base" class="base-img">
-                
-                <img src="URL_HERE" alt="sticker_1" class="sticker s1">
-                <img src="URL_HERE" alt="sticker_2" class="sticker s2">
-                <img src="URL_HERE" alt="sticker_3" class="sticker s3">
-                <img src="URL_HERE" alt="sticker_4" class="sticker s4">
-                <img src="URL_HERE" alt="sticker_5" class="sticker s5">
-                <img src="URL_HERE" alt="sticker_6" class="sticker s6">
-                <img src="URL_HERE" alt="sticker_7" class="sticker s7">
-                <img src="URL_HERE" alt="sticker_8" class="sticker s8">
-            </div>
-        </section>
+        <div class="main-visual">
+            <img src="newspaper cutout.png" alt="Archive Image">
+        </div>
 
-        <section class="content-stack">
-            
-            <article class="journal-entry" style="transform: rotate(1deg);">
-                <span style="font-size: 0.7rem; letter-spacing: 5px; color: var(--accent);">01 // VISION</span>
-                <h2>The Main Character</h2>
-                <p>Stop asking for room. Just take it. This season is about oversized silhouettes, sharp lines, and unapologetic energy.</p>
-            </article>
+        <img src="URL_HERE" alt="st-1" class="sticker s1">
+        <img src="URL_HERE" alt="st-2" class="sticker s2">
+        <img src="URL_HERE" alt="st-3" class="sticker s3">
+        <img src="URL_HERE" alt="st-4" class="sticker s4">
+        <img src="URL_HERE" alt="st-5" class="sticker s5">
+        <img src="URL_HERE" alt="st-6" class="sticker s6">
+        <img src="URL_HERE" alt="st-7" class="sticker s7">
+        <img src="URL_HERE" alt="st-8" class="sticker s8">
 
-            <article class="journal-entry" style="transform: rotate(-2deg); align-self: flex-end;">
-                <span style="font-size: 0.7rem; letter-spacing: 5px; color: var(--accent);">02 // MOOD</span>
-                <h2>Silver & Spice</h2>
-                <p>Metallic textures mixed with grunge basics. It's not just an outfit; it's a digital defense mechanism.</p>
-            </article>
+        <article class="blog-entry b1">
+            <span class="entry-meta">01 // VISION</span>
+            <h2>The Main Character</h2>
+            <p>Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention without a single word.</p>
+        </article>
 
-            <article class="journal-entry" style="transform: rotate(1.5deg);">
-                <span style="font-size: 0.7rem; letter-spacing: 5px; color: var(--accent);">03 // NOTES</span>
-                <h2>Stay Glossy</h2>
-                <p>The archive is never finished. Keep adding layers until the original canvas is a mystery.</p>
-            </article>
+        <article class="blog-entry b2">
+            <span class="entry-meta">02 // TEXTURE</span>
+            <h2>Silver & Spice</h2>
+            <p>Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit, the glitter, and the evolution of the aesthetic.</p>
+        </article>
 
-        </section>
+        <article class="blog-entry b3">
+            <span class="entry-meta">03 // ARCHIVE</span>
+            <h2>Stay Glossy</h2>
+            <p>The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where the most honest styling lives.</p>
+        </article>
+
     </main>
 
 </body>
