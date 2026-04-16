@@ -28,34 +28,34 @@
         /* --- Search Bar (Top Center) --- */
         .search-container {
             position: fixed;
-            top: 40px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 6000;
-            width: 300px;
+            width: 250px;
         }
 
         #blog-search {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
-            border-radius: 30px;
+            padding: 10px 15px;
+            border-radius: 20px;
             color: white;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             outline: none;
             text-align: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             transition: all 0.3s ease;
         }
 
         #blog-search:focus {
             border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.1);
-            width: 350px;
+            width: 300px;
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* --- Fixed Header --- */
@@ -70,7 +70,7 @@
 
         .menu-btn {
             font-family: 'Megrim', cursive;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
             letter-spacing: 5px;
         }
@@ -79,7 +79,7 @@
         .scrapbook-canvas {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 180px 20px 100px;
             gap: 60px;
@@ -96,7 +96,6 @@
             position: relative;
             width: 100%;
             z-index: 5;
-            transform: rotate(-0.5deg);
         }
 
         .main-visual img {
@@ -106,29 +105,29 @@
             display: block;
         }
 
-        /* Stickers: Reduced Size & Repositioned */
+        /* --- TINY STICKERS (Reduced further) --- */
         .sticker {
             position: absolute;
             z-index: 100;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s ease;
             cursor: grab;
-            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+            filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.5));
         }
 
         .sticker:hover {
-            transform: scale(1.15) rotate(0deg) !important;
+            transform: scale(1.4) rotate(0deg) !important;
             z-index: 1000;
         }
 
-        /* Scaled down PNG sizes (approx 60px - 100px range) */
-        .s1 { width: 70px; top: -20px; left: -10px; transform: rotate(-15deg); } 
-        .s2 { width: 90px; top: 5%; right: 5%; transform: rotate(10deg); }  
-        .s3 { width: 100px; top: 40%; left: -30px; transform: rotate(-12deg); }
-        .s4 { width: 65px; bottom: 5%; right: -10px; transform: rotate(15deg); }
-        .s5 { width: 85px; top: 20%; left: 10%; transform: rotate(-5deg); } 
-        .s6 { width: 60px; top: -30px; right: 30%; transform: rotate(20deg); }
-        .s7 { width: 80px; bottom: -20px; left: 15%; transform: rotate(-8deg); }
-        .s8 { width: 75px; bottom: 35%; right: 10%; transform: rotate(-18deg); }
+        /* Micro-sizes (40px to 60px) */
+        .s1 { width: 45px; top: -10px; left: -10px; transform: rotate(-10deg); } 
+        .s2 { width: 55px; top: 10px; right: 10px; transform: rotate(15deg); }  
+        .s3 { width: 60px; top: 50%; left: -20px; transform: rotate(-20deg); }
+        .s4 { width: 40px; bottom: 10px; right: -5px; transform: rotate(25deg); }
+        .s5 { width: 50px; top: 25%; left: 15%; transform: rotate(-5deg); } 
+        .s6 { width: 35px; top: -15px; right: 40%; transform: rotate(10deg); }
+        .s7 { width: 50px; bottom: -15px; left: 20%; transform: rotate(-12deg); }
+        .s8 { width: 45px; bottom: 40%; right: 20%; transform: rotate(-15deg); }
 
         /* --- RIGHT SIDE: BLOG FEED --- */
         .blog-feed {
@@ -139,35 +138,31 @@
 
         .blog-entry {
             max-width: 450px;
-            padding: 30px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-        }
-
-        .blog-entry.hidden {
-            display: none;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: opacity 0.4s ease;
         }
 
         .blog-entry h2 {
             font-family: 'Bodoni Moda', serif;
             font-style: italic;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             line-height: 1.1;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .blog-entry p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 300;
-            color: #bbb;
-            line-height: 1.7;
+            color: #aaa;
+            line-height: 1.6;
         }
 
         .entry-meta {
-            font-size: 0.7rem;
-            letter-spacing: 4px;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
             color: var(--accent);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
         }
 
@@ -181,21 +176,21 @@
         }
 
         @media (max-width: 900px) {
-            .scrapbook-canvas { grid-template-columns: 1fr; padding-top: 150px; }
-            .visual-container { position: relative; top: 0; margin-bottom: 50px; }
-            .search-container { width: 80%; }
+            .scrapbook-canvas { grid-template-columns: 1fr; padding-top: 140px; }
+            .visual-container { position: relative; top: 0; margin-bottom: 40px; }
+            .search-container { width: 70%; }
         }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <input type="text" id="blog-search" placeholder="Search Archive..." onkeyup="filterPosts()">
+        <input type="text" id="blog-search" placeholder="Filter archive..." onkeyup="filterPosts()">
     </div>
 
     <header>
         <div class="menu-btn">MENU</div>
-        <div style="font-size: 0.6rem; letter-spacing: 3px; margin-top: 5px; opacity: 0.4;">VOL. 01 / 2026</div>
+        <div style="font-size: 0.6rem; letter-spacing: 2px; margin-top: 5px; opacity: 0.3;">VOL. 01 / 2026</div>
     </header>
 
     <div class="bg-text" style="top: 0; left: -5%;">RAW</div>
@@ -222,9 +217,9 @@
 
     <script>
         const postData = [
-            { meta: "01 // VISION", title: "The Main Character", body: "Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention." },
-            { meta: "02 // TEXTURE", title: "Silver & Spice", body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit and the evolution of the aesthetic." },
-            { meta: "03 // ARCHIVE", title: "Stay Glossy", body: "The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where styling lives." }
+            { meta: "01 // VISION", title: "The Main Character", body: "Confidence is the only accessory that matters. This season, we’re stripping away the noise." },
+            { meta: "02 // TEXTURE", title: "Silver & Spice", body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered." },
+            { meta: "03 // ARCHIVE", title: "Stay Glossy", body: "The archive is a living breathing organism. Layer by layer, we build the truth." }
         ];
 
         const container = document.getElementById('post-container');
@@ -249,7 +244,6 @@
             loadPosts(filtered);
         }
 
-        // Initial load
         loadPosts(postData);
     </script>
 </body>
