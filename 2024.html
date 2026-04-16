@@ -25,6 +25,43 @@
             overflow-x: hidden;
         }
 
+        /* --- SLIDE-IN MENU --- */
+        #side-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background: #1a1a1a;
+            z-index: 9000;
+            padding: 100px 40px;
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #side-menu.active {
+            right: 0;
+        }
+
+        .menu-link {
+            display: block;
+            font-family: 'Megrim', cursive;
+            font-size: 2.5rem;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            cursor: pointer;
+            color: var(--accent);
+        }
+
         /* --- Search Bar (Top Center) --- */
         .search-container {
             position: fixed;
@@ -64,6 +101,7 @@
             font-family: 'Megrim', cursive;
             font-size: 1.8rem;
             letter-spacing: 5px;
+            cursor: pointer;
         }
 
         /* --- THE CANVAS GRID --- */
@@ -76,7 +114,6 @@
             gap: 60px;
         }
 
-        /* --- LEFT SIDE: VISUAL & STICKERS --- */
         .visual-container {
             position: sticky;
             top: 150px;
@@ -84,18 +121,18 @@
         }
 
         .main-visual {
-            position: relative; /* All stickers are positioned relative to this box */
+            position: relative;
             width: 100%;
-            max-width: 500px; /* Limits the base image size */
+            max-width: 500px;
         }
 
         .main-visual img:not(.sticker) {
             width: 100%;
             display: block;
-            border: none;
+            border: none; /* Border removed */
         }
 
-        /* --- STICKER SETTINGS (LOCKED SIZE) --- */
+        /* --- STICKER SETTINGS (REVERTED TO 100PX) --- */
         .sticker {
             position: absolute;
             z-index: 100;
@@ -104,7 +141,6 @@
             filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.5));
         }
 
-        /* Fixed Micro Sizes - Adjust these pixels to go even smaller if needed */
         .s1 { width: 100px !important; top: -10px; left: -10px; transform: rotate(-10deg); } 
         .s2 { width: 100px !important; top: 10px; right: 10px; transform: rotate(15deg); }  
         .s3 { width: 100px !important; top: 40%; left: -15px; transform: rotate(-20deg); }
@@ -156,19 +192,26 @@
 </head>
 <body>
 
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">CLOSE</div>
+        <a href="#" class="menu-link">HOME</a>
+        <a href="#" class="menu-link">ARCHIVE</a>
+        <a href="#" class="menu-link">ABOUT</a>
+        <a href="#" class="menu-link">CONTACT</a>
+    </nav>
+
     <div class="search-container">
         <input type="text" id="blog-search" placeholder="FILTER ARCHIVE..." onkeyup="filterPosts()">
     </div>
 
     <header>
-        <div class="menu-btn">MENU</div>
+        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
     </header>
 
     <main class="scrapbook-canvas">
         <div class="visual-container">
             <div class="main-visual">
                 <img src="newspaper cutout.png" alt="Archive Image">
-                
                 <img src="scrappedeyes.png" class="sticker s1">
                 <img src="inhumane text.png" class="sticker s2">
                 <img src="iamgod.png" class="sticker s3">
@@ -179,11 +222,14 @@
                 <img src="eyeinheart.png" class="sticker s8">
             </div>
         </div>
-
         <div class="blog-feed" id="post-container"></div>
     </main>
 
     <script>
+        function toggleMenu() {
+            document.getElementById('side-menu').classList.toggle('active');
+        }
+
         const postData = [
             { meta: "01 // VISION", title: "The Main Character", body: "Confidence is the only accessory that matters. This season, we’re stripping away the noise." },
             { meta: "02 // TEXTURE", title: "Silver & Spice", body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered." },
