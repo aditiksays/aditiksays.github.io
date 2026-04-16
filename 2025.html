@@ -3,12 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
+    <title>Inferno Digital Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red-inferno: #AF2B1E; /* Specific Pantone-inspired shade */
+            --cotton-white: #FDFCF0;
+            --charcoal: #2A2A2A;
+            --shadow: rgba(0, 0, 0, 0.15);
+            --serif: 'Playfair Display', serif;
+            --sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--red-inferno);
+            color: var(--charcoal);
+            font-family: var(--sans);
+            line-height: 1.6;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Scrapbook Stickers Positioning */
+        .sticker {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(253, 252, 240, 0.3);
+            border: 1px dashed var(--cotton-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            text-align: center;
+            pointer-events: none;
+            z-index: 1;
+            transform: rotate(var(--rot));
+        }
+
+        /* Layout Structure */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 60px;
+            color: var(--cotton-white);
+        }
+
+        .search-bar {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--cotton-white);
+            color: var(--cotton-white);
+            font-family: var(--sans);
+            padding: 5px;
+            outline: none;
+            width: 150px;
+        }
+
+        nav a {
+            color: var(--cotton-white);
+            text-decoration: none;
+            margin-left: 20px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* Blog Post Styling */
+        .journal-post {
+            background: var(--cotton-white);
+            padding: 60px;
+            margin-bottom: 80px;
+            box-shadow: 15px 15px 0px rgba(0,0,0,0.1);
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .journal-post:nth-child(even) {
+            transform: rotate(0.8deg);
+        }
+
+        .post-date {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #888;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .post-body {
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Media Integration */
+        .media-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #eee;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            border: 1px solid #ddd;
+        }
+
+        /* Comment Section */
+        .comments-section {
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        .comments-section h4 {
+            font-family: var(--serif);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .comment-input {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            background: #fafafa;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            .journal-post { padding: 30px; transform: none !important; }
+            header { flex-direction: column; gap: 20px; }
+            .sticker { display: none; } /* Remove stickers on mobile for UX */
+            h2 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
-    <p>This is a basic paragraph on my new webpage.</p>
+    <div id="sticker-container"></div>
 
+    <div class="container">
+        <header>
+            <input type="text" class="search-bar" placeholder="SEARCH...">
+            <nav>
+                <a href="#">Notes</a>
+                <a href="#">Archive</a>
+                <a href="#">About</a>
+            </nav>
+        </header>
+
+        <main id="journal-feed">
+            </main>
+    </div>
+
+    <script>
+        // 1. Data Structure: Add new objects here to create new posts
+        const posts = [
+            {
+                title: "The Architecture of Silence",
+                date: "October 14, 2026",
+                content: "In the heart of the city, there are pockets of stillness that defy the surrounding chaos. Today I sat in the courtyard of a library built in 1924. The weight of the stone felt like a physical anchor...",
+                comments: ["Thoughtful piece.", "I love that library."]
+            },
+            {
+                title: "Crimson Horizons",
+                date: "October 12, 2026",
+                content: "The sky tonight matched the very ink of this journal. There is a specific kind of beauty in the transitions—the moments where day hasn't quite surrendered and night hasn't quite claimed victory.",
+                comments: []
+            },
+            {
+                title: "Analog Rituals in a Digital Age",
+                date: "October 09, 2026",
+                content: "We spend our lives behind glass screens. Turning a physical page, feeling the grit of paper, and the smell of a binding—these are the small rebellions that keep us human.",
+                comments: ["Hard agree.", "Sent from my iPhone lol."]
+            }
+        ];
+
+        // 2. Render Engine
+        const feed = document.getElementById('journal-feed');
+
+        function renderPosts() {
+            feed.innerHTML = posts.map((post, index) => {
+                const mediaHtml = (index === 2) ? `<div class="media-placeholder">[ FEATURED_IMAGE_PLACEHOLDER ]</div>` : '';
+                
+                return `
+                    <article class="journal-post">
+                        <span class="post-date">${post.date}</span>
+                        <h2>${post.title}</h2>
+                        <div class="post-body">
+                            <p>${post.content}</p>
+                        </div>
+                        ${mediaHtml}
+                        <section class="comments-section">
+                            <h4>Reflections</h4>
+                            <input type="text" class="comment-input" placeholder="Leave a note...">
+                        </section>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // 3. Sticker Logic (Random Positioning)
+        function generateStickers() {
+            const container = document.getElementById('sticker-container');
+            for (let i = 1; i <= 10; i++) {
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker';
+                sticker.innerText = `PLACEHOLDER_FOR_STICKER${i}`;
+                
+                // Random positions
+                const top = Math.random() * 150;
+                const left = Math.random() * 90;
+                const rot = (Math.random() * 40 - 20) + 'deg';
+                
+                sticker.style.top = `${top}vh`;
+                sticker.style.left = `${left}vw`;
+                sticker.style.setProperty('--rot', rot);
+                sticker.style.zIndex = Math.random() > 0.5 ? 5 : 15; // Random layering
+                
+                container.appendChild(sticker);
+            }
+        }
+
+        // Initialize
+        renderPosts();
+        generateStickers();
+    </script>
 </body>
 </html>
