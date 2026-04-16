@@ -25,6 +25,39 @@
             overflow-x: hidden;
         }
 
+        /* --- Search Bar (Top Center) --- */
+        .search-container {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6000;
+            width: 300px;
+        }
+
+        #blog-search {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            outline: none;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        #blog-search:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+            width: 350px;
+        }
+
         /* --- Fixed Header --- */
         header {
             position: fixed;
@@ -40,23 +73,22 @@
             font-size: 2rem;
             cursor: pointer;
             letter-spacing: 5px;
-            text-transform: uppercase;
         }
 
         /* --- THE CANVAS GRID --- */
         .scrapbook-canvas {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr; /* Weighted more for the visual side */
+            grid-template-columns: 1.1fr 0.9fr;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 150px 20px;
+            padding: 180px 20px 100px;
             gap: 60px;
         }
 
         /* --- LEFT SIDE: VISUAL & STICKERS --- */
         .visual-container {
             position: sticky;
-            top: 100px;
+            top: 150px;
             height: fit-content;
         }
 
@@ -64,80 +96,78 @@
             position: relative;
             width: 100%;
             z-index: 5;
-            transform: rotate(-1deg);
+            transform: rotate(-0.5deg);
         }
 
         .main-visual img {
             width: 100%;
-            /* REMOVED GRAYSCALE FILTER TO SHOW ORIGINAL COLORS */
             filter: contrast(110%);
             border: 1px solid #1a1a1a;
             display: block;
         }
 
-        /* Stickers: Digital Scrapbook Style */
+        /* Stickers: Reduced Size & Repositioned */
         .sticker {
             position: absolute;
             z-index: 100;
-            filter: drop-shadow(8px 8px 15px rgba(0,0,0,0.6));
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: grab;
-            /* Ensure colors stay vibrant */
-            filter: saturate(1.2) drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
         }
 
         .sticker:hover {
-            transform: scale(1.1) rotate(0deg) !important;
+            transform: scale(1.15) rotate(0deg) !important;
             z-index: 1000;
         }
 
-        /* Digital Scrapbook Positions & Sizes */
-        .s1 { width: 140px; top: -30px; left: -10px; transform: rotate(-15deg); } 
-        .s2 { width: 180px; top: 5%; right: 5%; transform: rotate(10deg); }  
-        .s3 { width: 220px; top: 40%; left: -60px; transform: rotate(-12deg); z-index: 101; }
-        .s4 { width: 130px; bottom: 10%; right: -20px; transform: rotate(15deg); }
-        .s5 { width: 190px; top: 20%; left: 15%; transform: rotate(-5deg); opacity: 0.9; } 
-        .s6 { width: 110px; top: -40px; right: 25%; transform: rotate(20deg); }
-        .s7 { width: 160px; bottom: -40px; left: 10%; transform: rotate(-8deg); }
-        .s8 { width: 150px; bottom: 30%; right: 15%; transform: rotate(-18deg); }
+        /* Scaled down PNG sizes (approx 60px - 100px range) */
+        .s1 { width: 70px; top: -20px; left: -10px; transform: rotate(-15deg); } 
+        .s2 { width: 90px; top: 5%; right: 5%; transform: rotate(10deg); }  
+        .s3 { width: 100px; top: 40%; left: -30px; transform: rotate(-12deg); }
+        .s4 { width: 65px; bottom: 5%; right: -10px; transform: rotate(15deg); }
+        .s5 { width: 85px; top: 20%; left: 10%; transform: rotate(-5deg); } 
+        .s6 { width: 60px; top: -30px; right: 30%; transform: rotate(20deg); }
+        .s7 { width: 80px; bottom: -20px; left: 15%; transform: rotate(-8deg); }
+        .s8 { width: 75px; bottom: 35%; right: 10%; transform: rotate(-18deg); }
 
         /* --- RIGHT SIDE: BLOG FEED --- */
         .blog-feed {
             display: flex;
             flex-direction: column;
-            gap: 120px;
+            gap: 40px;
         }
 
         .blog-entry {
-            position: relative;
             max-width: 450px;
-            padding-bottom: 40px;
+            padding: 30px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .blog-entry.hidden {
+            display: none;
         }
 
         .blog-entry h2 {
             font-family: 'Bodoni Moda', serif;
             font-style: italic;
-            font-size: 3rem;
+            font-size: 2.8rem;
             line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            margin-bottom: 15px;
         }
 
         .blog-entry p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 300;
-            color: #ddd;
-            line-height: 1.8;
-            letter-spacing: 0.5px;
+            color: #bbb;
+            line-height: 1.7;
         }
 
         .entry-meta {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 4px;
-            text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
         }
 
@@ -151,13 +181,17 @@
         }
 
         @media (max-width: 900px) {
-            .scrapbook-canvas { grid-template-columns: 1fr; }
-            .visual-container { position: relative; top: 0; margin-bottom: 80px; }
-            .sticker { width: 100px; } /* Smaller stickers for mobile */
+            .scrapbook-canvas { grid-template-columns: 1fr; padding-top: 150px; }
+            .visual-container { position: relative; top: 0; margin-bottom: 50px; }
+            .search-container { width: 80%; }
         }
     </style>
 </head>
 <body>
+
+    <div class="search-container">
+        <input type="text" id="blog-search" placeholder="Search Archive..." onkeyup="filterPosts()">
+    </div>
 
     <header>
         <div class="menu-btn">MENU</div>
@@ -168,7 +202,6 @@
     <div class="bg-text" style="bottom: 0; right: -5%;">CORE</div>
 
     <main class="scrapbook-canvas">
-        
         <div class="visual-container">
             <div class="main-visual">
                 <img src="newspaper cutout.png" alt="Archive Image">
@@ -184,34 +217,20 @@
             </div>
         </div>
 
-        <div class="blog-feed" id="post-container">
-            </div>
-
+        <div class="blog-feed" id="post-container"></div>
     </main>
 
     <script>
         const postData = [
-            {
-                meta: "01 // VISION",
-                title: "The Main Character",
-                body: "Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention without a single word."
-            },
-            {
-                meta: "02 // TEXTURE",
-                title: "Silver & Spice",
-                body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit, the glitter, and the evolution of the aesthetic."
-            },
-            {
-                meta: "03 // ARCHIVE",
-                title: "Stay Glossy",
-                body: "The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where the most honest styling lives."
-            }
+            { meta: "01 // VISION", title: "The Main Character", body: "Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention." },
+            { meta: "02 // TEXTURE", title: "Silver & Spice", body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit and the evolution of the aesthetic." },
+            { meta: "03 // ARCHIVE", title: "Stay Glossy", body: "The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where styling lives." }
         ];
 
         const container = document.getElementById('post-container');
 
-        function loadPosts() {
-            container.innerHTML = postData.map(post => `
+        function loadPosts(data) {
+            container.innerHTML = data.map(post => `
                 <article class="blog-entry">
                     <span class="entry-meta">${post.meta}</span>
                     <h2>${post.title}</h2>
@@ -220,8 +239,18 @@
             `).join('');
         }
 
-        loadPosts();
-    </script>
+        function filterPosts() {
+            const query = document.getElementById('blog-search').value.toLowerCase();
+            const filtered = postData.filter(post => 
+                post.title.toLowerCase().includes(query) || 
+                post.body.toLowerCase().includes(query) || 
+                post.meta.toLowerCase().includes(query)
+            );
+            loadPosts(filtered);
+        }
 
+        // Initial load
+        loadPosts(postData);
+    </script>
 </body>
 </html>
