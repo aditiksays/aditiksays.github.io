@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digi Journal | Split Scroll</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <title>Digi Journal | Post Feed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-writing: #0a0a0a;
+            --bg-writing: #000000;
             --accent: #ff3e3e;
-            --card-radius: 24px;
+            --card-radius: 20px; /* For songs only */
             --topbar-height: 70px;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%; /* Required for internal scrolling */
+            height: 100%;
             font-family: 'Work Sans', sans-serif;
             background-color: #ffffff;
-            overflow: hidden; /* Prevents the main window from scrolling */
+            overflow: hidden; /* Lock main window */
         }
 
         /* Top Nav */
@@ -29,20 +29,20 @@
             top: 0;
             width: 100%;
             height: var(--topbar-height);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid #efefef;
         }
 
         .header-nav input {
             width: 300px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid #eee;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid #dbdbdb;
+            background: #fafafa;
             outline: none;
         }
 
@@ -56,8 +56,9 @@
             color: #fff;
             border: none;
             padding: 8px 16px;
-            border-radius: 4px;
             cursor: pointer;
+            font-size: 0.7rem;
+            text-transform: uppercase;
         }
 
         /* Main Container: Split 60/40 */
@@ -70,88 +71,91 @@
         /* INDEPENDENT SCROLL PANELS */
         .left-panel, .right-panel {
             height: 100%;
-            overflow-y: auto; /* Each panel scrolls itself */
-            scrollbar-width: none; /* Hide scrollbar for Firefox */
-            -ms-overflow-style: none; /* Hide for IE/Edge */
+            overflow-y: auto;
+            scrollbar-width: none;
         }
+        .left-panel::-webkit-scrollbar, .right-panel::-webkit-scrollbar { display: none; }
 
-        .left-panel::-webkit-scrollbar, 
-        .right-panel::-webkit-scrollbar {
-            display: none; /* Hide for Chrome/Safari */
-        }
-
-        /* LEFT PANEL (60%) */
+        /* LEFT PANEL (60%): THE POST FEED */
         .left-panel {
             width: 60%;
-            padding: 40px;
+            padding: 20px;
             box-sizing: border-box;
-            border-right: 1px solid #f0f0f0;
+            background-color: #ffffff;
         }
 
         .journal-heading { 
             font-family: 'Playfair Display', serif; 
-            font-size: 5rem; 
-            margin: 0 0 30px 0; 
-            letter-spacing: -4px; 
+            font-size: 4rem; 
+            margin: 20px 0 40px 10px; 
+            letter-spacing: -2px; 
         }
 
         .photo-dump-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            padding-bottom: 100px; /* Space to ensure last items aren't cut off */
+            grid-template-columns: repeat(3, 1fr); /* Strict 3-post row */
+            gap: 4px; /* Tight gap like a photo grid */
+            padding-bottom: 100px;
+        }
+
+        .photo-item {
+            position: relative;
+            background: #000;
+            overflow: hidden;
         }
 
         .photo-item img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            border-radius: 12px;
+            display: block;
+            border-radius: 0; /* No round corners for posts */
+            transition: opacity 0.3s;
         }
 
-        /* RIGHT PANEL (40%) */
+        .photo-item:hover img {
+            opacity: 0.8;
+        }
+
+        /* RIGHT PANEL (40%): MIXTAPES & CONTENT */
         .right-panel {
             width: 40%;
             padding: 40px;
             box-sizing: border-box;
             background-color: #fafafa;
+            border-left: 1px solid #efefef;
         }
 
         /* Mixtape Section */
         .mixtape-section {
             position: relative;
-            background: #fff;
-            padding: 30px 10px;
-            border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .song-grill {
             display: flex;
             overflow-x: auto;
-            gap: 25px;
-            padding: 40px 10px;
+            gap: 20px;
+            padding: 20px 0 40px 0;
             scrollbar-width: none;
             scroll-behavior: smooth;
         }
         .song-grill::-webkit-scrollbar { display: none; }
 
-        /* Realistic Tall Card */
+        /* Realistic Tall Song Card */
         .song-card {
             position: relative;
-            min-width: 240px;
-            height: 440px;
+            min-width: 220px;
+            height: 400px; /* Increased height */
             flex-shrink: 0;
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s;
         }
 
         .card-blur-bg {
             position: absolute;
             top: 15px; left: 0; width: 100%; height: 100%;
             background-size: cover;
-            filter: blur(30px) opacity(0.4);
-            transform: scale(0.9);
+            filter: blur(25px) opacity(0.3);
             z-index: 1;
         }
 
@@ -159,22 +163,22 @@
             position: relative;
             width: 100%; height: 100%;
             background: #fff;
-            border-radius: var(--card-radius);
+            border-radius: var(--card-radius); /* Rounded for songs only */
             overflow: hidden;
             z-index: 2;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
         }
         .card-main img { width: 100%; height: 100%; object-fit: cover; }
-        .song-card:hover { transform: translateY(-10px); }
+        .song-card:hover { transform: translateY(-8px); }
 
         /* Continuous Writing Box */
         .content-box {
             background-color: var(--bg-writing);
             color: #fff;
-            padding: 60px 40px;
-            border-radius: 30px;
+            padding: 50px 30px;
+            border-radius: 0; /* Boxy aesthetic to match posts */
             font-family: 'Playfair Display', serif;
-            padding-bottom: 100px; /* Padding for long-term adding */
+            min-height: 600px;
         }
 
         .content-box p::first-letter {
@@ -182,24 +186,25 @@
             padding-right: 15px; color: var(--accent); font-weight: bold;
         }
 
-        .content-box p { font-size: 1.3rem; line-height: 1.8; opacity: 0.9; margin-bottom: 30px; }
+        .content-box p { font-size: 1.2rem; line-height: 1.8; opacity: 0.85; margin-bottom: 25px; }
 
         /* Nav Arrows */
         .nav-btn {
             position: absolute;
             top: 50%; transform: translateY(-50%);
-            background: #000; color: #fff; border: none;
-            width: 35px; height: 35px; border-radius: 50%;
-            cursor: pointer; z-index: 10;
+            background: #fff; color: #000; border: 1px solid #ddd;
+            width: 30px; height: 30px; border-radius: 50%;
+            cursor: pointer; z-index: 10; font-size: 12px;
         }
-        .b-l { left: 5px; }
-        .b-r { right: 5px; }
+        .b-l { left: -15px; }
+        .b-r { right: -15px; }
 
-        /* Mobile Fix */
-        @media (max-width: 900px) {
+        /* Mobile */
+        @media (max-width: 800px) {
             body { overflow: auto; }
             .main-container { flex-direction: column; height: auto; }
             .left-panel, .right-panel { width: 100%; height: auto; overflow: visible; }
+            .journal-heading { font-size: 3rem; }
         }
     </style>
 </head>
@@ -208,7 +213,7 @@
     <button class="menu-btn">MENU</button>
 
     <header class="header-nav">
-        <input type="text" placeholder="Search archive...">
+        <input type="text" placeholder="Search...">
     </header>
 
     <div class="main-container">
@@ -221,20 +226,20 @@
 
         <section class="right-panel">
             <div class="mixtape-section">
-                <button class="nav-btn b-l" onclick="mv(-250)">&#10094;</button>
+                <button class="nav-btn b-l" onclick="mv(-200)">&#10094;</button>
                 <div class="song-grill" id="songGrill">
                     </div>
-                <button class="nav-btn b-r" onclick="mv(250)">&#10095;</button>
+                <button class="nav-btn b-r" onclick="mv(200)">&#10095;</button>
             </div>
 
             <div class="content-box">
                 <p>
-                    This right panel now scrolls independently. You can keep adding paragraphs here, and it will continue downward forever inside this 40% column.
+                    This is your continuous writing panel. As you add more text, it will flow downwards independently of the photo feed on the left.
                 </p>
                 <p>
-                    The 60% side with your photos won't move while you read this. This creates a "sticky" utility feel where your music and words are always accessible regardless of how many photos you have in your dump.
+                    The 60:40 ratio ensures that your visual posts remain the anchor of the page, while the music and writing provide the atmosphere. The photo grid has been stripped of rounded corners to mimic a professional photography feed.
                 </p>
-                </div>
+            </div>
         </section>
 
     </div>
@@ -243,25 +248,26 @@
         const grill = document.getElementById('songGrill');
         const grid = document.getElementById('photoGrid');
 
-        // Future-proof addition of 15 songs
+        // Logic to add 18 photos (6 rows of 3)
+        for (let i = 1; i <= 18; i++) {
+            const div = document.createElement('div');
+            div.className = 'photo-item';
+            div.innerHTML = `<img src="https://picsum.photos/600/600?random=${i+500}">`;
+            grid.appendChild(div);
+        }
+
+        // Logic to add 15 songs
         for (let i = 1; i <= 15; i++) {
-            const img = `https://picsum.photos/500/800?random=${i+200}`;
+            const img = `https://picsum.photos/500/800?random=${i+600}`;
             const card = document.createElement('div');
             card.className = 'song-card';
             card.innerHTML = `<div class="card-blur-bg" style="background-image: url('${img}')"></div><div class="card-main"><img src="${img}"></div>`;
             grill.appendChild(card);
         }
 
-        // Future-proof addition of 20 photos
-        for (let i = 1; i <= 20; i++) {
-            const div = document.createElement('div');
-            div.className = 'photo-item';
-            div.innerHTML = `<img src="https://picsum.photos/600/600?random=${i+300}">`;
-            grid.appendChild(div);
-        }
-
         function mv(v) { grill.scrollBy({ left: v, behavior: 'smooth' }); }
 
+        // Horizontal wheel scroll
         grill.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) { e.preventDefault(); grill.scrollLeft += e.deltaY; }
         });
