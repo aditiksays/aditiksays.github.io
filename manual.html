@@ -3,51 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digi Journal | Manual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Digi Journal | Aesthetic Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400;600&family=Reenie+Beanie&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-writing: #000000;
-            --accent: #ff3e3e;
+            --bg-writing: #0e0e0e;
+            --accent: #d4a373; /* Journal gold/tan accent */
             --topbar-height: 70px;
             --song-w: 240px;
-            --song-h: 480px;
+            --song-h: 440px;
+            --paper: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
         }
 
         body, html {
             margin: 0; padding: 0; height: 100%;
             font-family: 'Work Sans', sans-serif;
-            background-color: #ffffff;
+            background-color: #f4f1ea; /* Creamy paper base color */
             overflow: hidden; 
         }
 
         /* --- NAVIGATION & SIDEBAR --- */
         .header-nav {
             position: fixed; top: 0; width: 100%; height: var(--topbar-height);
-            background: white; display: flex; justify-content: center; align-items: center;
-            z-index: 900; border-bottom: 1px solid #efefef;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 900; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .header-nav input {
-            width: 300px; padding: 8px 15px; border-radius: 8px;
-            border: 1px solid #dbdbdb; background: #fafafa; outline: none;
+            width: 300px; padding: 10px 20px; border-radius: 50px;
+            border: 1px solid #ddd; background: #fff; outline: none;
+            font-size: 0.8rem;
         }
 
         .sidebar {
             position: fixed; right: -280px; top: 0; width: 280px; height: 100%;
-            background: #000; transition: 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+            background: #1a1a1a; transition: 0.4s cubic-bezier(0.7, 0, 0.3, 1);
             z-index: 1000; padding-top: 100px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
         }
         .sidebar.active { right: 0; }
-        .sidebar a { display: block; padding: 20px 40px; color: #888; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; }
-        .sidebar a:hover { color: #fff; }
+        .sidebar a { display: block; padding: 15px 40px; color: #888; text-decoration: none; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; transition: 0.3s; }
+        .sidebar a:hover { color: #fff; padding-left: 50px; }
 
         .menu-btn {
             position: fixed; right: 30px; top: 20px; z-index: 1001;
             background: #000; color: #fff; border: none;
-            padding: 8px 16px; border-radius: 4px; cursor: pointer;
-            font-size: 0.7rem; letter-spacing: 1px;
+            padding: 10px 18px; border-radius: 2px; cursor: pointer;
+            font-size: 0.65rem; letter-spacing: 2px; font-weight: 600;
         }
 
         /* --- MAIN LAYOUT --- */
@@ -58,42 +63,85 @@
         /* --- LEFT PANEL: MASONRY GRID (60%) --- */
         .left-panel {
             width: 60%; height: 100%; overflow-y: auto; scrollbar-width: none;
-            background-image: url('[GLOBAL_LEFT_BG_IMAGE]');
+            background-image: linear-gradient(rgba(244, 241, 234, 0.85), rgba(244, 241, 234, 0.85)), url('denim.jpg');
             background-size: cover; background-attachment: local;
         }
         .left-panel::-webkit-scrollbar { display: none; }
 
-        .grid-overlay { padding: 40px 20px; box-sizing: border-box; min-height: 100%; }
+        .grid-overlay { padding: 60px 40px; box-sizing: border-box; min-height: 100%; }
 
-        .masonry-grid { column-count: 3; column-gap: 8px; width: 100%; }
-        .photo-item { display: inline-block; width: 100%; margin-bottom: 8px; background: #f9f9f9; }
-        .photo-item img { width: 100%; display: block; border-radius: 0; transition: 0.3s; }
-        .photo-item img:hover { opacity: 0.8; }
+        /* Journal Heading */
+        .journal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem; font-style: italic; font-weight: 700;
+            margin-bottom: 50px; color: #2c2c2c; letter-spacing: -2px;
+            position: relative; display: inline-block;
+        }
+        .journal-title::after {
+            content: ''; position: absolute; bottom: 12px; left: 0; width: 100%; height: 10px;
+            background: var(--accent); opacity: 0.2; z-index: -1;
+        }
+
+        .masonry-grid { column-count: 3; column-gap: 25px; width: 100%; }
+
+        /* Aesthetic "Scrapbook" Photo Items */
+        .photo-item {
+            display: inline-block; width: 100%; margin-bottom: 35px;
+            background: #fff; padding: 12px 12px 40px 12px; /* Polaroid frame */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            position: relative;
+            transform: rotate(var(--r, 0deg)); /* Individual rotation */
+            transition: 0.3s ease-in-out;
+        }
+        .photo-item:hover { transform: rotate(0deg) scale(1.03); z-index: 10; }
+
+        /* Washi Tape Tape Decor */
+        .photo-item::before {
+            content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 20px; background: rgba(212, 163, 115, 0.3);
+            backdrop-filter: blur(1px); border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .photo-item img { width: 100%; display: block; }
+        
+        /* Handwritten Captions */
+        .photo-item::after {
+            content: 'archive_0' attr(data-id); 
+            position: absolute; bottom: 10px; left: 0; width: 100%;
+            text-align: center; font-family: 'Reenie Beanie', cursive;
+            font-size: 1.4rem; color: #777;
+        }
 
         /* --- RIGHT PANEL: SONGS & CONTENT (40%) --- */
         .right-panel {
             width: 40%; height: 100%; overflow-y: auto; scrollbar-width: none;
             padding: 40px; box-sizing: border-box;
             background-color: #fafafa; border-left: 1px solid #efefef;
+            background-image: var(--paper); /* Subtle paper texture */
         }
         .right-panel::-webkit-scrollbar { display: none; }
 
-        .mixtape-section { position: relative; margin-bottom: 50px; }
-        .song-grill { display: flex; overflow-x: auto; gap: 20px; padding: 20px 0; scrollbar-width: none; scroll-behavior: smooth; }
-        .song-grill::-webkit-scrollbar { display: none; }
+        .mixtape-section { position: relative; margin-bottom: 60px; }
+        .mixtape-section h3 { font-family: 'Playfair Display'; font-style: italic; color: #555; margin-bottom: 10px; }
 
-        .song-card { position: relative; min-width: var(--song-w); height: var(--song-h); flex-shrink: 0; transition: 0.4s; text-decoration: none; }
-        .card-blur-bg { position: absolute; top: 15px; left: 0; width: 100%; height: 100%; background-size: cover; filter: blur(25px) opacity(0.3); z-index: 1; }
-        .card-main { position: relative; width: 100%; height: 100%; background: #fff; border-radius: 24px; overflow: hidden; z-index: 2; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        .song-grill { display: flex; overflow-x: auto; gap: 25px; padding: 20px 0; scrollbar-width: none; scroll-behavior: smooth; }
+        
+        .song-card { position: relative; min-width: var(--song-w); height: var(--song-h); flex-shrink: 0; transition: 0.4s; }
+        .card-main { position: relative; width: 100%; height: 100%; background: #fff; border-radius: 4px; overflow: hidden; z-index: 2; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 8px solid #fff; }
         .card-main img { width: 100%; height: 100%; object-fit: cover; }
-        .song-card:hover { transform: translateY(-10px); }
+        .song-card:hover { transform: translateY(-12px) rotate(-1deg); }
 
-        .content-box { background-color: var(--bg-writing); color: #fff; padding: 60px 40px; font-family: 'Playfair Display', serif; }
-        .content-box p { font-size: 1.3rem; line-height: 1.8; opacity: 0.9; margin-bottom: 30px; }
-        .content-box p::first-letter { float: left; font-size: 6rem; line-height: 0.7; padding-right: 15px; color: var(--accent); font-weight: bold; }
+        .content-box { 
+            background-color: var(--bg-writing); color: #f4f1ea; 
+            padding: 70px 45px; font-family: 'Playfair Display', serif;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .content-box p { font-family: 'Work Sans'; font-weight: 300; font-size: 1.2rem; line-height: 1.9; opacity: 0.85; margin-bottom: 30px; }
+        .content-box p::first-letter { float: left; font-size: 5rem; line-height: 0.8; padding-right: 15px; color: var(--accent); font-weight: bold; }
 
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: 1px solid #ddd; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; }
-        .b-l { left: -15px; } .b-r { right: -15px; }
+        .nav-btn { position: absolute; top: 60%; transform: translateY(-50%); background: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .b-l { left: -20px; } .b-r { right: -20px; }
 
         @media (max-width: 1000px) {
             .main-container { flex-direction: column; overflow-y: auto; }
@@ -111,7 +159,7 @@
         <a href="aboutme.html">aboutme</a>
         <a href="blog.html">blog</a>
         <a href="contact.html">contact</a>
-        <a href="index.html">close</a>
+        <a href="#" onclick="toggleMenu()">close</a>
     </nav>
 
     <header class="header-nav">
@@ -122,44 +170,61 @@
         
         <section class="left-panel">
             <div class="grid-overlay">
-                <h1 style="font-family: 'Playfair Display'; font-size: 4rem; margin-bottom: 30px; background-image: 'denim.jpg' ;">GUIDE to FEEL</h1>
+                <h1 class="journal-title">GUIDE to FEEL</h1>
+                
                 <div class="masonry-grid">
-                    <div class="photo-item"><img src="[PHOTO_1]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_2]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_3]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_4]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_5]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_6]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_7]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_8]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_9]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_10]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_11]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_12]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_13]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_14]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_15]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_16]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_17]" style="height: auto;"></div>
-                    <div class="photo-item"><img src="[PHOTO_18]" style="height: auto;"></div>
+                    <div class="photo-item" data-id="1" style="--r: -1.5deg;"><img src="[PHOTO_1]"></div>
+                    <div class="photo-item" data-id="2" style="--r: 2deg;"><img src="[PHOTO_2]"></div>
+                    <div class="photo-item" data-id="3" style="--r: -1deg;"><img src="[PHOTO_3]"></div>
+                    <div class="photo-item" data-id="4" style="--r: 1deg;"><img src="[PHOTO_4]"></div>
+                    <div class="photo-item" data-id="5" style="--r: -2deg;"><img src="[PHOTO_5]"></div>
+                    <div class="photo-item" data-id="6" style="--r: 1.5deg;"><img src="[PHOTO_6]"></div>
+                    <div class="photo-item" data-id="7" style="--r: -1deg;"><img src="[PHOTO_7]"></div>
+                    <div class="photo-item" data-id="8" style="--r: 2.5deg;"><img src="[PHOTO_8]"></div>
+                    <div class="photo-item" data-id="9" style="--r: -2.2deg;"><img src="[PHOTO_9]"></div>
+                    <div class="photo-item" data-id="10" style="--r: 1deg;"><img src="[PHOTO_10]"></div>
+                    <div class="photo-item" data-id="11" style="--r: -1.8deg;"><img src="[PHOTO_11]"></div>
+                    <div class="photo-item" data-id="12" style="--r: 2deg;"><img src="[PHOTO_12]"></div>
+                    <div class="photo-item" data-id="13" style="--r: -0.5deg;"><img src="[PHOTO_13]"></div>
+                    <div class="photo-item" data-id="14" style="--r: 1.2deg;"><img src="[PHOTO_14]"></div>
+                    <div class="photo-item" data-id="15" style="--r: -1.5deg;"><img src="[PHOTO_15]"></div>
+                    <div class="photo-item" data-id="16" style="--r: 2.1deg;"><img src="[PHOTO_16]"></div>
+                    <div class="photo-item" data-id="17" style="--r: -1deg;"><img src="[PHOTO_17]"></div>
+                    <div class="photo-item" data-id="18" style="--r: 1.5deg;"><img src="[PHOTO_18]"></div>
                 </div>
             </div>
         </section>
 
         <section class="right-panel">
             <div class="mixtape-section">
-                <button class="nav-btn b-l" onclick="mv(-250)">&#10094;</button>
+                <h3>Current Rotation</h3>
+                <button class="nav-btn b-l" onclick="mv(-300)">&#10094;</button>
                 <div class="song-grill" id="songGrill">
                     <a href="[LINK_1]" class="song-card">
-                        <div class="card-blur-bg" style="background-image: url('[COVER_1]')"></div>
                         <div class="card-main"><img src="[COVER_1]"></div>
                     </a>
-                    </div>
-                <button class="nav-btn b-r" onclick="mv(250)">&#10095;</button>
+                    <a href="[LINK_2]" class="song-card">
+                        <div class="card-main"><img src="[COVER_2]"></div>
+                    </a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                    <a href="#" class="song-card"><div class="card-main"></div></a>
+                </div>
+                <button class="nav-btn b-r" onclick="mv(300)">&#10095;</button>
             </div>
 
             <div class="content-box">
-                <p>[CONTINUOUS_WRITING]</p>
+                <p>There is a specific rhythm to the way we archive our lives. This journal is a guide to that feeling—the intersection of noise and silence. Scroll through the left to see the fragments, while the text remains steady on the right.</p>
             </div>
         </section>
     </div>
