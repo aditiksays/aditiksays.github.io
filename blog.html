@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Hub</title>
+    <title>Digi Journal</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --sidebar-width: 250px;
             --topbar-height: 70px;
-            --bg-content: #fdf6e3; /* Creamy parchment color */
-            --accent: #d33682;
-            --text-main: #073642;
+            --bg-content: #121212; /* Darker theme for content */
+            --accent: #e0e0e0;
+            --border-color: #ffffff;
         }
 
-        /* Basic Setup - Make the whole page scrollable */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Work Sans', sans-serif;
-            background-color: #fff;
-            overflow-x: hidden; /* Prevent horizontal page shaking */
+            background-color: #fafafa;
+            overflow-x: hidden;
         }
 
         /* Top Center Search Bar */
@@ -40,162 +39,167 @@
         .header-nav input {
             width: 300px;
             padding: 10px 20px;
-            border-radius: 30px;
+            border-radius: 5px;
             border: 1px solid #ddd;
             outline: none;
-            transition: width 0.3s;
+            font-family: inherit;
         }
-
-        .header-nav input:focus { width: 400px; border-color: var(--accent); }
 
         /* Slide-In Right Sidebar */
         .sidebar {
             position: fixed;
-            right: -250px; /* Hidden by default */
+            right: -250px;
             top: 0;
             width: var(--sidebar-width);
             height: 100%;
-            background: #002b36;
+            background: #111;
             color: white;
-            transition: 0.4s ease-in-out;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             z-index: 1000;
             padding-top: 80px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         }
 
         .sidebar.active { right: 0; }
 
         .sidebar a {
             display: block;
-            padding: 15px 25px;
-            color: #93a1a1;
+            padding: 15px 30px;
+            color: #888;
             text-decoration: none;
-            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
 
-        .sidebar a:hover { color: white; background: #073642; }
+        .sidebar a:hover { color: white; }
 
-        /* Sidebar Toggle Button */
         .menu-btn {
             position: fixed;
             right: 20px;
-            top: 15px;
+            top: 20px;
             z-index: 1001;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            background: none;
+            border: 1px solid #000;
+            padding: 5px 12px;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        /* Layout Structure */
-        .container {
+        /* Layout Container */
+        .main-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             min-height: 100vh;
         }
 
-        /* LEFT PANEL: NOW THE SONG GRILL (SWAPPED) */
+        /* LEFT PANEL: PHOTO DUMP (Reference Analysis) */
         .left-panel {
-            background: #f8f9fa;
-            border-right: 1px solid #eee;
-            padding: 20px;
+            padding: 40px 20px;
+            background-color: #f0f0f0;
+            border-right: 1px solid #ddd;
         }
 
-        .grill-title { font-weight: bold; margin-bottom: 20px; }
-
-        /* THE GRILL: Continuous horizontal scroll */
-        .song-grill {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
+        .journal-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: left;
+            padding-left: 10px;
         }
 
-        .song-card {
-            min-width: 200px;
-            height: 280px;
+        /* 3-Column Grid matching reference */
+        .photo-dump-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; /* Tight gap as seen in reference */
+            padding: 10px;
+        }
+
+        .scrapbook-item {
+            box-sizing: border-box;
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            flex-shrink: 0;
-            text-align: center;
+            padding: 8px 8px 20px 8px; /* Polaroid feel */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
         }
 
-        /* Pop-up effect */
-        .song-card:hover {
-            transform: scale(1.1) translateY(-15px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            z-index: 10;
+        .scrapbook-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Square images as per feed reference */
+            object-fit: cover;
+            display: block;
         }
 
-        .song-card img { width: 100%; height: 180px; object-fit: cover; }
-        .song-card a { 
-            display: inline-block; 
-            margin-top: 15px; 
-            text-decoration: none; 
-            color: var(--accent);
-            font-weight: bold;
-        }
+        /* Subtle random rotations for scrapbook feel */
+        .scrapbook-item:nth-child(odd) { transform: rotate(-1deg); }
+        .scrapbook-item:nth-child(even) { transform: rotate(1.5deg); }
+        .scrapbook-item:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
 
-        /* RIGHT PANEL: PHOTO DUMP + CONTENT (SWAPPED) */
+        /* RIGHT PANEL */
         .right-panel {
             display: flex;
             flex-direction: column;
         }
 
-        .photo-dump {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
+        /* Song Grill (Horizontal Scroll) */
+        .song-grill-container {
+            height: 300px;
             background: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        .photo-dump img {
-            width: 100%;
+        .song-grill-container::-webkit-scrollbar { display: none; }
+
+        .song-track {
+            display: flex;
+            gap: 25px;
+        }
+
+        .song-card {
+            min-width: 160px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        /* Pop-up effect */
+        .song-card:hover {
+            transform: translateY(-20px);
+        }
+
+        .song-card img {
+            width: 150px;
             height: 150px;
+            border-radius: 50%; /* Record style */
             object-fit: cover;
-            border-radius: 8px;
-            filter: grayscale(40%);
-            transition: 0.3s;
+            border: 5px solid #eee;
         }
 
-        .photo-dump img:hover { filter: grayscale(0%); transform: scale(1.02); }
-
-        /* Bottom Writing Box */
+        /* Writing Section */
         .content-box {
-            background-color: var(--bg-content);
-            padding: 60px;
             flex-grow: 1;
-            color: var(--text-main);
-            /* New Font Face applied here */
+            background-color: var(--bg-content);
+            color: #fff;
+            padding: 60px;
             font-family: 'Playfair Display', serif;
         }
 
-        /* Stylized Dropcap */
         .content-box p::first-letter {
             float: left;
-            font-size: 6rem;
-            line-height: 0.7;
-            padding-top: 8px;
-            padding-right: 15px;
-            color: var(--accent);
-            font-weight: bold;
-            font-style: italic;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            color: #555;
         }
 
         .content-box p {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            margin: 0;
+            font-size: 1.2rem;
+            line-height: 1.7;
         }
-
     </style>
 </head>
 <body>
@@ -203,61 +207,63 @@
     <button class="menu-btn" onclick="toggleSidebar()">MENU</button>
 
     <nav class="sidebar" id="sidebar">
-        <a href="#">Home</a>
-        <a href="#">Galleries</a>
-        <a href="#">Soundcloud</a>
-        <a href="#">Contact</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Visual Archives</a>
+        <a href="#">The Playlist</a>
+        <a href="#">Settings</a>
     </nav>
 
     <header class="header-nav">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search entries...">
     </header>
 
-    <div class="container">
+    <div class="main-container">
         <section class="left-panel">
-            <h2 class="grill-title">The Mixtapes</h2>
-            <div class="song-grill">
-                <div class="song-card">
-                    <img src="https://picsum.photos/400/400?random=20" alt="Song">
-                    <a href="YOUR_URL">Listen Now</a>
-                </div>
-                <div class="song-card">
-                    <img src="https://picsum.photos/400/400?random=21" alt="Song">
-                    <a href="YOUR_URL">Track 02</a>
-                </div>
-                <div class="song-card">
-                    <img src="https://picsum.photos/400/400?random=22" alt="Song">
-                    <a href="YOUR_URL">Track 03</a>
-                </div>
-                </div>
+            <h1 class="journal-heading">DIGI JOURNAL</h1>
+            <div class="photo-dump-grid">
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_1]" alt="Ref 1"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_2]" alt="Ref 2"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_3]" alt="Ref 3"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_4]" alt="Ref 4"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_5]" alt="Ref 5"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_6]" alt="Ref 6"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_7]" alt="Ref 7"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_8]" alt="Ref 8"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_9]" alt="Ref 9"></div>
+            </div>
         </section>
 
         <section class="right-panel">
-            <div class="photo-dump">
-                <img src="https://picsum.photos/300/300?random=1">
-                <img src="https://picsum.photos/300/300?random=2">
-                <img src="https://picsum.photos/300/300?random=3">
-                <img src="https://picsum.photos/300/300?random=4">
-                <img src="https://picsum.photos/300/300?random=5">
-                <img src="https://picsum.photos/300/300?random=6">
+            <div class="song-grill-container">
+                <div class="song-track">
+                    <div class="song-card">
+                        <img src="https://via.placeholder.com/150" alt="Song Cover">
+                        <p><a href="SONG_URL">Track 01</a></p>
+                    </div>
+                    <div class="song-card">
+                        <img src="https://via.placeholder.com/150" alt="Song Cover">
+                        <p><a href="SONG_URL">Track 02</a></p>
+                    </div>
+                    </div>
             </div>
 
             <div class="content-box">
                 <p>
-                    Everything you write here will now use the "Playfair Display" font, which gives it a sophisticated, editorial look. The first letter is significantly larger to act as a classic drop-cap. This entire right panel is now the home for your visual archives and your long-form thoughts.
+                    Begin your entry here. This section is designed for deep writing. The font choice and 
+                    dark background contrast with the visual heavy left panel to create focus. 
+                    Your thoughts flow as the anchor to your visual memories.
                 </p>
             </div>
         </section>
     </div>
 
     <script>
-        // Sidebar Toggle Logic
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
         }
 
-        // Horizontal scroll for the grill using mouse wheel
-        const grill = document.querySelector('.song-grill');
+        // Horizontal scroll for song grill
+        const grill = document.querySelector('.song-grill-container');
         grill.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) {
                 e.preventDefault();
@@ -265,6 +271,5 @@
             }
         });
     </script>
-
 </body>
 </html>
