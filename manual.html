@@ -3,253 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Portfolio</title>
+    <title>Digi Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- CSS STYLING --- */
         :root {
-            --sidebar-width: 220px;
-            --topbar-height: 60px;
-            --bg-left: #ffffff;
-            --bg-right-bottom: #1e293b; /* Deep slate blue for contrast */
-            --text-color: #f8fafc;
-            --accent: #38bdf8;
+            --sidebar-width: 250px;
+            --topbar-height: 70px;
+            --bg-content: #121212; /* Darker theme for content */
+            --accent: #e0e0e0;
+            --border-color: #ffffff;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            overflow: hidden; /* Prevents double scrollbars */
+            padding: 0;
+            font-family: 'Work Sans', sans-serif;
+            background-color: #fafafa;
+            overflow-x: hidden;
         }
 
-        /* Top Search Bar */
-        .search-container {
-            position: fixed;
+        /* Top Center Search Bar */
+        .header-nav {
+            position: sticky;
             top: 0;
-            left: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
             height: var(--topbar-height);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-bottom: 1px solid #eee;
             z-index: 100;
-            border-bottom: 1px solid #e2e8f0;
         }
 
-        .search-container input {
-            width: 50%;
+        .header-nav input {
+            width: 300px;
             padding: 10px 20px;
-            border-radius: 25px;
-            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            border: 1px solid #ddd;
             outline: none;
+            font-family: inherit;
         }
 
-        /* Sidebar Nav */
+        /* Slide-In Right Sidebar */
         .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: #0f172a;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
             position: fixed;
+            right: -250px;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100%;
+            background: #111;
+            color: white;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1000;
+            padding-top: 80px;
         }
 
-        .sidebar h2 { text-align: center; font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 2px; }
+        .sidebar.active { right: 0; }
 
         .sidebar a {
+            display: block;
             padding: 15px 30px;
-            color: #94a3b8;
+            color: #888;
             text-decoration: none;
-            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
 
-        .sidebar a:hover { color: white; background: #1e293b; }
+        .sidebar a:hover { color: white; }
+
+        .menu-btn {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            z-index: 1001;
+            background: none;
+            border: 1px solid #000;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
         /* Layout Container */
-        .main-wrapper {
-            margin-left: var(--sidebar-width);
-            margin-top: var(--topbar-height);
-            display: flex;
-            width: 100%;
-            height: calc(100vh - var(--topbar-height));
-        }
-
-        /* LEFT PANEL: PHOTO DUMP */
-        .left-panel {
-            width: 50%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 20px;
-            background: var(--bg-left);
+        .main-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            grid-auto-rows: 200px;
-            gap: 15px;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
         }
 
-        .photo-card {
+        /* LEFT PANEL: PHOTO DUMP (Reference Analysis) */
+        .left-panel {
+            padding: 40px 20px;
+            background-color: #f0f0f0;
+            border-right: 1px solid #ddd;
+        }
+
+        .journal-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        /* 3-Column Grid matching reference */
+        .photo-dump-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; /* Tight gap as seen in reference */
+            padding: 10px;
+        }
+
+        .scrapbook-item {
+            box-sizing: border-box;
+            background: white;
+            padding: 8px 8px 20px 8px; /* Polaroid feel */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
             position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #eee;
         }
 
-        .photo-card img {
+        .scrapbook-item img {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1 / 1; /* Square images as per feed reference */
             object-fit: cover;
-            transition: 0.5s;
+            display: block;
         }
 
-        .photo-card:hover img { transform: scale(1.1); }
-
-        .song-overlay {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.8rem;
-        }
+        /* Subtle random rotations for scrapbook feel */
+        .scrapbook-item:nth-child(odd) { transform: rotate(-1deg); }
+        .scrapbook-item:nth-child(even) { transform: rotate(1.5deg); }
+        .scrapbook-item:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
 
         /* RIGHT PANEL */
         .right-panel {
-            width: 50%;
-            height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        /* Upper Slider */
-        .slider-section {
-            height: 45%;
-            background: #f1f5f9;
+        /* Song Grill (Horizontal Scroll) */
+        .song-grill-container {
+            height: 300px;
+            background: #fff;
+            padding: 20px;
             display: flex;
             align-items: center;
             overflow-x: auto;
-            padding: 0 20px;
-            scrollbar-width: none; /* Hide scrollbar for Chrome/Safari */
+            scrollbar-width: none;
         }
 
-        .slider-section::-webkit-scrollbar { display: none; }
+        .song-grill-container::-webkit-scrollbar { display: none; }
 
-        .slider-track {
+        .song-track {
             display: flex;
             gap: 25px;
-            padding: 20px;
         }
 
-        .slide-item {
+        .song-card {
             min-width: 160px;
-            height: 220px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
-            padding: 10px;
-            cursor: pointer;
+            transition: 0.4s;
         }
 
-        /* POP-UP EFFECT */
-        .slide-item:hover {
-            transform: scale(1.15) translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            z-index: 50;
+        /* Pop-up effect */
+        .song-card:hover {
+            transform: translateY(-20px);
         }
 
-        .slide-item img { width: 100%; height: 70%; object-fit: cover; border-radius: 10px; }
-        .slide-item a { display: block; margin-top: 10px; color: #334155; text-decoration: none; font-weight: bold; }
-
-        /* Downward Content Section */
-        .bottom-content {
-            height: 55%;
-            background-color: var(--bg-right-bottom);
-            color: var(--text-color);
-            padding: 50px;
-            overflow-y: auto;
-            line-height: 1.8;
+        .song-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Record style */
+            object-fit: cover;
+            border: 5px solid #eee;
         }
 
-        /* Dropcap styling */
-        .drop-cap::first-letter {
+        /* Writing Section */
+        .content-box {
+            flex-grow: 1;
+            background-color: var(--bg-content);
+            color: #fff;
+            padding: 60px;
             font-family: 'Playfair Display', serif;
+        }
+
+        .content-box p::first-letter {
             float: left;
-            font-size: 5.5rem;
+            font-size: 5rem;
             line-height: 0.8;
-            padding-top: 4px;
             padding-right: 12px;
-            color: var(--accent);
-            font-weight: bold;
+            color: #555;
+        }
+
+        .content-box p {
+            font-size: 1.2rem;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
 
-    <header class="search-container">
-        <input type="text" placeholder="Search images, songs, or topics...">
-    </header>
+    <button class="menu-btn" onclick="toggleSidebar()">MENU</button>
 
-    <nav class="sidebar">
-        <h2>COLLECTION</h2>
-        <a href="#home">Main Hub</a>
-        <a href="#visuals">Visual Dumps</a>
-        <a href="#tapes">The Mixtapes</a>
-        <a href="#archives">Archives</a>
+    <nav class="sidebar" id="sidebar">
+        <a href="#">Dashboard</a>
+        <a href="#">Visual Archives</a>
+        <a href="#">The Playlist</a>
+        <a href="#">Settings</a>
     </nav>
 
-    <div class="main-wrapper">
-        <div class="left-panel">
-            <div class="photo-card">
-                <img src="https://picsum.photos/400/400?random=1" alt="Dump 1">
-                <a href="YOUR_SONG_URL" class="song-overlay">🎵 Song Link</a>
+    <header class="header-nav">
+        <input type="text" placeholder="Search entries...">
+    </header>
+
+    <div class="main-container">
+        <section class="left-panel">
+            <h1 class="journal-heading">DIGI JOURNAL</h1>
+            <div class="photo-dump-grid">
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_1]" alt="Ref 1"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_2]" alt="Ref 2"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_3]" alt="Ref 3"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_4]" alt="Ref 4"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_5]" alt="Ref 5"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_6]" alt="Ref 6"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_7]" alt="Ref 7"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_8]" alt="Ref 8"></div>
+                <div class="scrapbook-item"><img src="[PHOTO_DUMP_IMAGE_9]" alt="Ref 9"></div>
             </div>
-            <div class="photo-card">
-                <img src="https://picsum.photos/400/400?random=2" alt="Dump 2">
-                <a href="#" class="song-overlay">🎵 Song Link</a>
-            </div>
+        </section>
+
+        <section class="right-panel">
+            <div class="song-grill-container">
+                <div class="song-track">
+                    <div class="song-card">
+                        <img src="https://via.placeholder.com/150" alt="Song Cover">
+                        <p><a href="SONG_URL">Track 01</a></p>
+                    </div>
+                    <div class="song-card">
+                        <img src="https://via.placeholder.com/150" alt="Song Cover">
+                        <p><a href="SONG_URL">Track 02</a></p>
+                    </div>
+                    </div>
             </div>
 
-        <div class="right-panel">
-            <div class="slider-section">
-                <div class="slider-track">
-                    <div class="slide-item">
-                        <img src="https://picsum.photos/200/300?random=10" alt="Slide">
-                        <a href="SONG_URL">Track 01</a>
-                    </div>
-                    <div class="slide-item">
-                        <img src="https://picsum.photos/200/300?random=11" alt="Slide">
-                        <a href="SONG_URL">Track 02</a>
-                    </div>
-                    </div>
-            </div>
-
-            <div class="bottom-content">
-                <p class="drop-cap">
-                    Your content goes here. Start typing your story, notes, or descriptions. 
-                    The first letter of this paragraph is automatically enlarged via the CSS "drop-cap" class.
-                    This section is intentionally set against a darker background to provide a 
-                    clean reading experience separate from the visual media above.
+            <div class="content-box">
+                <p>
+                    Begin your entry here. This section is designed for deep writing. The font choice and 
+                    dark background contrast with the visual heavy left panel to create focus. 
+                    Your thoughts flow as the anchor to your visual memories.
                 </p>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
-        // Optional: Manual scroll wheel to horizontal scroll for the slider
-        const slider = document.querySelector('.slider-section');
-        slider.addEventListener('wheel', (evt) => {
-            evt.preventDefault();
-            slider.scrollLeft += evt.deltaY;
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Horizontal scroll for song grill
+        const grill = document.querySelector('.song-grill-container');
+        grill.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                grill.scrollLeft += e.deltaY;
+            }
         });
     </script>
-
 </body>
 </html>
