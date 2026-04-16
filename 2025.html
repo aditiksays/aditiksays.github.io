@@ -3,259 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inferno Digital Journal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <title>Dark Cherry Digital Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red-inferno: #AF2B1E; /* Specific Pantone-inspired shade */
-            --cotton-white: #FDFCF0;
-            --charcoal: #2A2A2A;
-            --shadow: rgba(0, 0, 0, 0.15);
+            --cherry-dark: #4a0404;
+            --cherry-mid: #800020;
+            --condensed-milk: #FFF8E7;
             --serif: 'Playfair Display', serif;
             --sans: 'Montserrat', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--red-inferno);
-            color: var(--charcoal);
+            background: linear-gradient(135deg, var(--cherry-dark) 0%, var(--cherry-mid) 50%, var(--cherry-dark) 100%);
+            background-attachment: fixed;
+            color: var(--condensed-milk);
             font-family: var(--sans);
-            line-height: 1.6;
-            padding: 40px 20px;
-            overflow-x: hidden;
             min-height: 100vh;
-        }
-
-        /* Scrapbook Stickers Positioning */
-        .sticker {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(253, 252, 240, 0.3);
-            border: 1px dashed var(--cotton-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            text-align: center;
-            pointer-events: none;
-            z-index: 1;
-            transform: rotate(var(--rot));
-        }
-
-        /* Layout Structure */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+            overflow-x: hidden;
             position: relative;
-            z-index: 10;
         }
 
+        /* --- Header & Sticky Navigation --- */
         header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 80px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding-bottom: 60px;
-            color: var(--cotton-white);
+            justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(74, 4, 4, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 248, 231, 0.1);
+        }
+
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .search-bar {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--cotton-white);
-            color: var(--cotton-white);
-            font-family: var(--sans);
-            padding: 5px;
+            background: rgba(255, 248, 231, 0.1);
+            border: 1px solid rgba(255, 248, 231, 0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: var(--condensed-milk);
+            width: 220px;
             outline: none;
-            width: 150px;
+            text-align: center;
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        nav a {
-            color: var(--cotton-white);
+        .search-bar:focus { width: 350px; border-color: var(--condensed-milk); }
+
+        .menu-trigger { cursor: pointer; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* --- Slide-in Menu --- */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 320px;
+            height: 100%;
+            background: var(--cherry-dark);
+            z-index: 1001;
+            transition: right 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 50px;
+            box-shadow: -20px 0 60px rgba(0,0,0,0.6);
+        }
+
+        .side-drawer.active { right: 0; }
+
+        .side-drawer a {
+            color: var(--condensed-milk);
             text-decoration: none;
-            margin-left: 20px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }
-
-        /* Blog Post Styling */
-        .journal-post {
-            background: var(--cotton-white);
-            padding: 60px;
-            margin-bottom: 80px;
-            box-shadow: 15px 15px 0px rgba(0,0,0,0.1);
-            transform: rotate(-0.5deg);
-            position: relative;
-        }
-
-        .journal-post:nth-child(even) {
-            transform: rotate(0.8deg);
-        }
-
-        .post-date {
-            font-family: var(--sans);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #888;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        h2 {
             font-family: var(--serif);
-            font-size: 2.8rem;
-            margin-bottom: 25px;
-            line-height: 1.1;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
-        .post-body {
-            font-size: 1.05rem;
-            color: #333;
-            margin-bottom: 40px;
+        /* --- Content Layout --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 20; 
         }
 
-        /* Media Integration */
-        .media-placeholder {
+        .journal-post {
+            background: var(--condensed-milk);
+            color: var(--cherry-dark);
+            padding: 80px;
+            margin-bottom: 120px;
+            box-shadow: 30px 30px 0px rgba(0,0,0,0.15);
+            transform: rotate(-0.5deg);
+        }
+
+        .journal-post:nth-child(even) { transform: rotate(0.8deg); }
+
+        h2 { font-family: var(--serif); font-size: 3.5rem; margin-bottom: 25px; line-height: 1.1; }
+
+        .post-date { font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; opacity: 0.5; display: block; margin-bottom: 15px; }
+
+        .post-body { font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px; }
+
+        /* --- Media Placeholder --- */
+        .featured-media {
             width: 100%;
-            height: 400px;
-            background: #eee;
-            margin: 40px 0;
+            height: 500px;
+            background: rgba(255, 248, 231, 0.05);
+            border: 2px dashed rgba(255, 248, 231, 0.4);
+            margin: 80px 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-style: italic;
-            border: 1px solid #ddd;
-        }
-
-        /* Comment Section */
-        .comments-section {
-            border-top: 1px solid #eee;
-            padding-top: 30px;
-            margin-top: 30px;
-        }
-
-        .comments-section h4 {
             font-family: var(--serif);
             font-style: italic;
-            margin-bottom: 15px;
+            color: var(--condensed-milk);
         }
 
-        .comment-input {
+        /* --- Stickers & Scrapbook Feel --- */
+        #sticker-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border: 1px solid #ddd;
-            padding: 10px;
-            font-family: var(--sans);
-            font-size: 0.9rem;
-            background: #fafafa;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10; /* Placed so they can slightly overlap post corners */
         }
 
-        /* Mobile Adjustments */
+        .sticker {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sticker img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.3));
+        }
+
+        /* Fallback text if image fails or before you add URL */
+        .sticker-label {
+            position: absolute;
+            font-size: 9px;
+            background: rgba(255,255,255,0.8);
+            color: black;
+            padding: 2px 5px;
+            top: -10px;
+            white-space: nowrap;
+        }
+
+        /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
-            body { padding: 20px 10px; }
-            .journal-post { padding: 30px; transform: none !important; }
-            header { flex-direction: column; gap: 20px; }
-            .sticker { display: none; } /* Remove stickers on mobile for UX */
-            h2 { font-size: 2rem; }
+            .journal-post { padding: 40px 25px; transform: none !important; }
+            .sticker { display: none; }
+            h2 { font-size: 2.5rem; }
+            .search-bar { width: 140px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="sticker-container"></div>
+    <div id="sticker-layer"></div>
+
+    <header>
+        <div style="font-family: var(--serif); font-size: 1.2rem; font-weight: bold;">MEMOIR.</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="SEARCH...">
+        </div>
+        <div class="menu-trigger" onclick="toggleMenu()">MENU //</div>
+    </header>
+
+    <nav class="side-drawer" id="sideDrawer">
+        <a href="#" onclick="toggleMenu()">CHRONICLE</a>
+        <a href="#" onclick="toggleMenu()">FRAGMENTS</a>
+        <a href="#" onclick="toggleMenu()">MANIFESTO</a>
+        <a href="#" onclick="toggleMenu()">ABOUT</a>
+    </nav>
 
     <div class="container">
-        <header>
-            <input type="text" class="search-bar" placeholder="SEARCH...">
-            <nav>
-                <a href="#">Notes</a>
-                <a href="#">Archive</a>
-                <a href="#">About</a>
-            </nav>
-        </header>
-
-        <main id="journal-feed">
-            </main>
+        <main id="journal-feed"></main>
     </div>
 
     <script>
-        // 1. Data Structure: Add new objects here to create new posts
-        const posts = [
-            {
-                title: "The Architecture of Silence",
-                date: "October 14, 2026",
-                content: "In the heart of the city, there are pockets of stillness that defy the surrounding chaos. Today I sat in the courtyard of a library built in 1924. The weight of the stone felt like a physical anchor...",
-                comments: ["Thoughtful piece.", "I love that library."]
-            },
-            {
-                title: "Crimson Horizons",
-                date: "October 12, 2026",
-                content: "The sky tonight matched the very ink of this journal. There is a specific kind of beauty in the transitions—the moments where day hasn't quite surrendered and night hasn't quite claimed victory.",
-                comments: []
-            },
-            {
-                title: "Analog Rituals in a Digital Age",
-                date: "October 09, 2026",
-                content: "We spend our lives behind glass screens. Turning a physical page, feeling the grit of paper, and the smell of a binding—these are the small rebellions that keep us human.",
-                comments: ["Hard agree.", "Sent from my iPhone lol."]
-            }
+        // --- ADD YOUR 10 STICKER URLs HERE ---
+        const stickerUrls = [
+            "https://via.placeholder.com/150?text=STICKER_1", // Replace with your PNG URL
+            "https://via.placeholder.com/150?text=STICKER_2",
+            "https://via.placeholder.com/150?text=STICKER_3",
+            "https://via.placeholder.com/150?text=STICKER_4",
+            "https://via.placeholder.com/150?text=STICKER_5",
+            "https://via.placeholder.com/150?text=STICKER_6",
+            "https://via.placeholder.com/150?text=STICKER_7",
+            "https://via.placeholder.com/150?text=STICKER_8",
+            "https://via.placeholder.com/150?text=STICKER_9",
+            "https://via.placeholder.com/150?text=STICKER_10"
         ];
 
-        // 2. Render Engine
-        const feed = document.getElementById('journal-feed');
+        // --- BLOG POSTS ---
+        const posts = [
+            { title: "Crimson Solitude", date: "NOV 15, 2026", content: "There is a specific kind of clarity that comes with isolation. Surrounded by the deep reds of this study, I finally find the words that have been eluding me all season." },
+            { title: "The Dust of Archives", date: "NOV 12, 2026", content: "History is not a static line; it is a collection of fragments. Today I found a pressed flower inside a book from 1890. Its color was gone, but its shape was a perfect ghost." },
+            { title: "Ink and Shadow", date: "NOV 09, 2026", content: "The way the candle light dances across the paper makes the words feel alive. Sometimes I think the shadows are writing back to me." },
+            { title: "Resonance", date: "NOV 05, 2026", content: "After seeing the visual centerpiece, the narrative takes a turn toward the abstract. We are more than the sum of our experiences; we are the echo they leave behind." },
+            { title: "Final Winter Note", date: "OCT 28, 2026", content: "The temperature dropped ten degrees in an hour. The journal feels colder to the touch. Winter is no longer a promise; it is a presence." }
+        ];
 
-        function renderPosts() {
-            feed.innerHTML = posts.map((post, index) => {
-                const mediaHtml = (index === 2) ? `<div class="media-placeholder">[ FEATURED_IMAGE_PLACEHOLDER ]</div>` : '';
-                
-                return `
+        // --- RENDER FUNCTION ---
+        function renderFeed() {
+            const feed = document.getElementById('journal-feed');
+            let html = '';
+
+            posts.forEach((post, index) => {
+                html += `
                     <article class="journal-post">
                         <span class="post-date">${post.date}</span>
                         <h2>${post.title}</h2>
-                        <div class="post-body">
-                            <p>${post.content}</p>
+                        <div class="post-body"><p>${post.content}</p></div>
+                        <div style="border-top: 1px solid #ddd; padding-top: 20px;">
+                            <small style="font-style:italic; letter-spacing: 1px;">Leave a reflection...</small>
                         </div>
-                        ${mediaHtml}
-                        <section class="comments-section">
-                            <h4>Reflections</h4>
-                            <input type="text" class="comment-input" placeholder="Leave a note...">
-                        </section>
                     </article>
                 `;
-            }).join('');
+                // Insert media placeholder after exactly 3 posts
+                if (index === 2) {
+                    html += `<div class="featured-media">PLACEHOLDER_FOR_FEATURED_MEDIA_AFTER_3RD_POST</div>`;
+                }
+            });
+            feed.innerHTML = html;
         }
 
-        // 3. Sticker Logic (Random Positioning)
-        function generateStickers() {
-            const container = document.getElementById('sticker-container');
-            for (let i = 1; i <= 10; i++) {
+        // --- STICKER ENGINE ---
+        function spawnStickers() {
+            const layer = document.getElementById('sticker-layer');
+            const totalHeight = document.body.scrollHeight;
+            
+            for (let i = 0; i < 10; i++) {
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
-                sticker.innerText = `PLACEHOLDER_FOR_STICKER${i}`;
                 
-                // Random positions
-                const top = Math.random() * 150;
-                const left = Math.random() * 90;
-                const rot = (Math.random() * 40 - 20) + 'deg';
+                // Position Stickers
+                const yPos = (totalHeight / 11) * (i + 1) + (Math.random() * 200 - 100);
+                // Keep them mostly to the sides to avoid covering text, but allow slight overlap
+                const xPos = Math.random() > 0.5 ? (Math.random() * 12) : (82 + Math.random() * 6);
+                const rot = Math.random() * 50 - 25;
+
+                sticker.style.top = `${yPos}px`;
+                sticker.style.left = `${xPos}%`;
+                sticker.style.transform = `rotate(${rot}deg)`;
                 
-                sticker.style.top = `${top}vh`;
-                sticker.style.left = `${left}vw`;
-                sticker.style.setProperty('--rot', rot);
-                sticker.style.zIndex = Math.random() > 0.5 ? 5 : 15; // Random layering
+                // Add Image and Label for easy identification
+                sticker.innerHTML = `
+                    <span class="sticker-label">PLACEHOLDER_FOR_STICKER${i+1}</span>
+                    <img src="${stickerUrls[i]}" alt="Sticker ${i+1}">
+                `;
                 
-                container.appendChild(sticker);
+                layer.appendChild(sticker);
             }
         }
 
-        // Initialize
-        renderPosts();
-        generateStickers();
+        function toggleMenu() {
+            document.getElementById('sideDrawer').classList.toggle('active');
+        }
+
+        window.onload = () => {
+            renderFeed();
+            // Wait for feed to render to get accurate page height
+            setTimeout(spawnStickers, 300);
+        };
     </script>
 </body>
 </html>
