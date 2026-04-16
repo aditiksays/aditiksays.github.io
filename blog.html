@@ -3,265 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Media Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --scrapbook-bg: url('checkedbg.jpg');
-            --ink-color: rgba(14, 13, 12, 0.65);
-            --paper-color: #d9f5f7;
+            --sidebar-width: 250px;
+            --topbar-height: 70px;
+            --bg-content: #fdf6e3; /* Creamy parchment color */
+            --accent: #d33682;
+            --text-main: #073642;
         }
 
-        * {
-            box-sizing: border-box;
+        /* Basic Setup - Make the whole page scrollable */
+        body {
             margin: 0;
             padding: 0;
+            font-family: 'Work Sans', sans-serif;
+            background-color: #fff;
+            overflow-x: hidden; /* Prevent horizontal page shaking */
         }
 
-        body {
-            background: var(--scrapbook-bg) center center / cover no-repeat fixed;
-            font-family: 'Courier New', Courier, monospace;
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- Typography --- */
-        .heading-container {
-            margin-top: 50px;
-            text-align: center;
-            width: 100%;
-            padding: 0 20px;
-        }
-
-        .digi-journal-heading {
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--ink-color);
-            filter: contrast(0.8) sepia(0.2);
-            opacity: 0.7;
-            position: relative;
-            display: inline-block;
-            -webkit-mask-image: radial-gradient(circle, black 70%, rgba(0,0,0,0.3) 100%);
-        }
-
-        /* --- Grid Layout Updated --- */
-        .main-container {
-            flex-grow: 1;
+        /* Top Center Search Bar */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            height: var(--topbar-height);
+            background: white;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed from center to prevent jumping on short screens */
-            padding: 40px 20px;
-            width: 100%;
-        }
-
-        .folder-grid {
-            display: grid;
-            /* Desktop: 4 Columns */
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 40px 20px;
-            max-width: 1000px;
-            width: 100%;
-            justify-items: center; /* Centers items horizontally in their cell */
-        }
-
-        .folder-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-            text-align: center;
-            width: 100%;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
         }
 
-        .folder-item:hover {
-            transform: translateY(-5px) rotate(2deg);
+        .header-nav input {
+            width: 300px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: width 0.3s;
         }
 
-        .folder-img {
-            width: 120px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 12px;
-        }
+        .header-nav input:focus { width: 400px; border-color: var(--accent); }
 
-        .folder-label {
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #333;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 4px 10px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            max-width: 150px; /* Keeps text from stretching the folder width */
-            line-height: 1.2;
-        }
-
-        /* --- Sidebar --- */
-        #sidebar-toggle { display: none; }
-
+        /* Slide-In Right Sidebar */
         .sidebar {
             position: fixed;
+            right: -250px; /* Hidden by default */
             top: 0;
-            right: -300px;
-            width: 300px;
+            width: var(--sidebar-width);
             height: 100%;
-            background: var(--paper-color);
+            background: #002b36;
+            color: white;
+            transition: 0.4s ease-in-out;
+            z-index: 1000;
+            padding-top: 80px;
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 100;
-            padding: 40px 20px;
+        }
+
+        .sidebar.active { right: 0; }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+            color: #93a1a1;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .sidebar a:hover { color: white; background: #073642; }
+
+        /* Sidebar Toggle Button */
+        .menu-btn {
+            position: fixed;
+            right: 20px;
+            top: 15px;
+            z-index: 1001;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Layout Structure */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        /* LEFT PANEL: NOW THE SONG GRILL (SWAPPED) */
+        .left-panel {
+            background: #f8f9fa;
+            border-right: 1px solid #eee;
+            padding: 20px;
+        }
+
+        .grill-title { font-weight: bold; margin-bottom: 20px; }
+
+        /* THE GRILL: Continuous horizontal scroll */
+        .song-grill {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+        }
+
+        .song-card {
+            min-width: 200px;
+            height: 280px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        /* Pop-up effect */
+        .song-card:hover {
+            transform: scale(1.1) translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .song-card img { width: 100%; height: 180px; object-fit: cover; }
+        .song-card a { 
+            display: inline-block; 
+            margin-top: 15px; 
+            text-decoration: none; 
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* RIGHT PANEL: PHOTO DUMP + CONTENT (SWAPPED) */
+        .right-panel {
             display: flex;
             flex-direction: column;
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%, 5% 90%, 0 80%, 8% 70%, 2% 60%, 10% 50%, 3% 40%, 9% 30%, 1% 20%, 8% 10%);
         }
 
-        #sidebar-toggle:checked ~ .sidebar { right: 0; }
-
-        .sidebar-nav { list-style: none; margin-top: 60px; }
-        .sidebar-nav li { margin: 20px 0; }
-        .sidebar-nav a {
-            text-decoration: none;
-            color: #444;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-bottom: 1px dashed #ccc;
-            display: block;
-            padding-bottom: 5px;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-            font-size: 0.7rem;
-            color: #777;
-            line-height: 1.4;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-
-        .menu-label {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        .photo-dump {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
             background: #fff;
-            padding: 10px 15px;
-            cursor: pointer;
-            z-index: 101;
-            border: 1px solid #000;
-            box-shadow: 3px 3px 0px #000;
+        }
+
+        .photo-dump img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            filter: grayscale(40%);
+            transition: 0.3s;
+        }
+
+        .photo-dump img:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+        /* Bottom Writing Box */
+        .content-box {
+            background-color: var(--bg-content);
+            padding: 60px;
+            flex-grow: 1;
+            color: var(--text-main);
+            /* New Font Face applied here */
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Stylized Dropcap */
+        .content-box p::first-letter {
+            float: left;
+            font-size: 6rem;
+            line-height: 0.7;
+            padding-top: 8px;
+            padding-right: 15px;
+            color: var(--accent);
             font-weight: bold;
+            font-style: italic;
         }
 
-        /* --- Mobile Responsive Logic --- */
-        @media (max-width: 768px) {
-            .digi-journal-heading { 
-                font-size: 2.2rem; 
-                letter-spacing: 0.1em;
-            }
-
-            .folder-grid {
-                /* Mobile: 2 Columns, rows will automatically stack as 4 */
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px 15px;
-            }
-
-            .folder-img {
-                width: 100px; /* Slightly smaller for mobile screens */
-                height: 85px;
-            }
-
-            .folder-label {
-                font-size: 0.75rem;
-            }
+        .content-box p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin: 0;
         }
 
-        /* Extra small devices */
-        @media (max-width: 380px) {
-            .folder-grid {
-                gap: 20px 10px;
-            }
-            .folder-img {
-                width: 80px;
-                height: 70px;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <input type="checkbox" id="sidebar-toggle">
-    <label for="sidebar-toggle" class="menu-label">JOURNAL TABS</label>
+    <button class="menu-btn" onclick="toggleSidebar()">MENU</button>
 
-    <aside class="sidebar">
-        <nav>
-            <ul class="sidebar-nav">
-                <li><a href="home.html">HOME</a></li>
-                <li><a href="aboutme.html">ABOUT</a></li>
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
-                <li><a href="index.html">CLOSE</a></li>
-            </ul>
-        </nav>
-        <div class="sidebar-footer">
-            <p>&copy; 2026 DIGI JOURNAL. ALL RIGHTS RESERVED.</p>
-            <br>
-            <p><strong>WARNING:</strong> Unauthorized reproduction of these digital assets is a violation of international copyright laws.</p>
-        </div>
-    </aside>
+    <nav class="sidebar" id="sidebar">
+        <a href="#">Home</a>
+        <a href="#">Galleries</a>
+        <a href="#">Soundcloud</a>
+        <a href="#">Contact</a>
+    </nav>
 
-    <header class="heading-container">
-        <h1 class="digi-journal-heading">DIGI JOURNAL</h1>
+    <header class="header-nav">
+        <input type="text" placeholder="Search...">
     </header>
 
-    <main class="main-container">
-        <div class="folder-grid">
-            
-            <a href="photo dumps.html" class="folder-item">
-                <img src="folder 1.png" alt="Project Alpha" class="folder-img">
-                <span class="folder-label">manual</span>
-            </a>
+    <div class="container">
+        <section class="left-panel">
+            <h2 class="grill-title">The Mixtapes</h2>
+            <div class="song-grill">
+                <div class="song-card">
+                    <img src="https://picsum.photos/400/400?random=20" alt="Song">
+                    <a href="YOUR_URL">Listen Now</a>
+                </div>
+                <div class="song-card">
+                    <img src="https://picsum.photos/400/400?random=21" alt="Song">
+                    <a href="YOUR_URL">Track 02</a>
+                </div>
+                <div class="song-card">
+                    <img src="https://picsum.photos/400/400?random=22" alt="Song">
+                    <a href="YOUR_URL">Track 03</a>
+                </div>
+                </div>
+        </section>
 
-            <a href="2024.html" class="folder-item">
-                <img src="folder 2.png" alt="Manifesto" class="folder-img">
-                <span class="folder-label">year of synchronicity?</span>
-            </a>
+        <section class="right-panel">
+            <div class="photo-dump">
+                <img src="https://picsum.photos/300/300?random=1">
+                <img src="https://picsum.photos/300/300?random=2">
+                <img src="https://picsum.photos/300/300?random=3">
+                <img src="https://picsum.photos/300/300?random=4">
+                <img src="https://picsum.photos/300/300?random=5">
+                <img src="https://picsum.photos/300/300?random=6">
+            </div>
 
-            <a href="2025.html" class="folder-item">
-                <img src="folder 3.png" alt="Drafts" class="folder-img">
-                <span class="folder-label">year of siren songs</span>
-            </a>
+            <div class="content-box">
+                <p>
+                    Everything you write here will now use the "Playfair Display" font, which gives it a sophisticated, editorial look. The first letter is significantly larger to act as a classic drop-cap. This entire right panel is now the home for your visual archives and your long-form thoughts.
+                </p>
+            </div>
+        </section>
+    </div>
 
-            <a href="2026.html" class="folder-item">
-                <img src="folder 6.png" alt="Clippings" class="folder-img">
-                <span class="folder-label">year of false dawn</span>
-            </a>
+    <script>
+        // Sidebar Toggle Logic
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
 
-            <a href="books.html" class="folder-item">
-                <img src="folder 4.png" alt="Inspiration" class="folder-img">
-                <span class="folder-label">Poke the bear</span>
-            </a>
-
-            <a href="patriarchy.html" class="folder-item">
-                <img src="folder 5.png" alt="Resources" class="folder-img">
-                <span class="folder-label">serve the men </span>
-            </a>
-
-            <a href="draft 1.html" class="folder-item">
-                <img src="folder 7.png" alt="Timeline" class="folder-img">
-                <span class="folder-label">draft</span>
-            </a>
-
-            <a href="draft 2.html" class="folder-item">
-                <img src="folder 8.png" alt="Encrypted" class="folder-img">
-                <span class="folder-label">draft</span>
-            </a>
-
-        </div>
-    </main>
+        // Horizontal scroll for the grill using mouse wheel
+        const grill = document.querySelector('.song-grill');
+        grill.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                grill.scrollLeft += e.deltaY;
+            }
+        });
+    </script>
 
 </body>
 </html>
