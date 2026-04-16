@@ -60,13 +60,22 @@
             display: flex; height: calc(100vh - var(--topbar-height)); margin-top: var(--topbar-height);
         }
 
-        /* --- LEFT PANEL: MASONRY GRID (60%) --- */
-        .left-panel {
-            width: 60%; height: 100%;
-            background-image:url('denimbg.jpg');
-            background-size: cover; background-attachment: local;
-        }
-        .left-panel::-webkit-scrollbar { display: none; }
+      /* --- LEFT PANEL: MASONRY GRID (60%) --- */
+.left-panel {
+    width: 60%; 
+    height: 100%; 
+    overflow-y: auto; /* THIS TURNS ON THE SCROLLING */
+    overflow-x: hidden; /* PREVENTS JITTERY SIDE MOTION */
+    background-image: url('denimbg.jpg');
+    background-size: cover; 
+    background-attachment: local;
+    scrollbar-width: none; /* HIDES SCROLLBAR FOR CLEAN LOOK (Firefox) */
+}
+
+/* Hides scrollbar for Chrome, Safari, and Edge */
+.left-panel::-webkit-scrollbar { 
+    display: none; 
+}
 
         .grid-overlay { padding: 60px 40px; box-sizing: border-box; min-height: 100%; }
 
