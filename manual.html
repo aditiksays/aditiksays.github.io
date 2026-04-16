@@ -3,242 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digi Journal | Post Feed</title>
+    <title>Digi Journal | Robust Grid</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-writing: #000000;
             --accent: #ff3e3e;
-            --card-radius: 20px; /* For songs only */
             --topbar-height: 70px;
+            /* Default heights - you can override these inline in the HTML */
+            --default-song-w: 240px;
+            --default-song-h: 480px;
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            margin: 0; padding: 0; height: 100%;
             font-family: 'Work Sans', sans-serif;
             background-color: #ffffff;
-            overflow: hidden; /* Lock main window */
+            overflow: hidden; /* Locks body to enable independent panel scrolling */
         }
 
-        /* Top Nav */
+        /* Top Navigation */
         .header-nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: var(--topbar-height);
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid #efefef;
+            position: fixed; top: 0; width: 100%; height: var(--topbar-height);
+            background: white; display: flex; justify-content: center; align-items: center;
+            z-index: 1000; border-bottom: 1px solid #efefef;
         }
 
         .header-nav input {
-            width: 300px;
-            padding: 8px 15px;
-            border-radius: 8px;
-            border: 1px solid #dbdbdb;
-            background: #fafafa;
-            outline: none;
+            width: 300px; padding: 8px 15px; border-radius: 8px;
+            border: 1px solid #dbdbdb; background: #fafafa; outline: none;
         }
 
-        /* Sidebar Toggle */
-        .menu-btn {
-            position: fixed;
-            right: 30px;
-            top: 20px;
-            z-index: 1001;
-            background: #000;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-        }
-
-        /* Main Container: Split 60/40 */
+        /* Main 60:40 Container */
         .main-container {
             display: flex;
             height: calc(100vh - var(--topbar-height));
             margin-top: var(--topbar-height);
         }
 
-        /* INDEPENDENT SCROLL PANELS */
-        .left-panel, .right-panel {
-            height: 100%;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-        .left-panel::-webkit-scrollbar, .right-panel::-webkit-scrollbar { display: none; }
-
-        /* LEFT PANEL (60%): THE POST FEED */
+        /* --- LEFT PANEL: SELF-ADJUSTING PHOTO DUMP (60%) --- */
         .left-panel {
-            width: 60%;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #ffffff;
+            width: 60%; height: 100%;
+            overflow-y: auto; scrollbar-width: none;
+            background-image: url('[GLOBAL_LEFT_BG_IMAGE]');
+            background-size: cover; background-attachment: local;
+        }
+        .left-panel::-webkit-scrollbar { display: none; }
+
+        .grid-overlay {
+            padding: 40px 20px; box-sizing: border-box;
+            min-height: 100%;
         }
 
-        .journal-heading { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 4rem; 
-            margin: 20px 0 40px 10px; 
-            letter-spacing: -2px; 
-        }
-
-        .photo-dump-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Strict 3-post row */
-            gap: 4px; /* Tight gap like a photo grid */
-            padding-bottom: 100px;
+        /* CSS Columns: This ensures images stack and flow without breaking rows */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 8px;
+            width: 100%;
         }
 
         .photo-item {
-            position: relative;
-            background: #000;
-            overflow: hidden;
+            display: inline-block; /* Essential for masonry flow */
+            width: 100%;
+            margin-bottom: 8px;
+            background: #f9f9f9;
         }
 
         .photo-item img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
+            width: 100%; 
             display: block;
-            border-radius: 0; /* No round corners for posts */
-            transition: opacity 0.3s;
+            border-radius: 0; /* Sharp edges for posts */
+            /* Height is determined by the specific image or inline style */
         }
 
-        .photo-item:hover img {
-            opacity: 0.8;
-        }
-
-        /* RIGHT PANEL (40%): MIXTAPES & CONTENT */
+        /* --- RIGHT PANEL: SONGS & WRITING (40%) --- */
         .right-panel {
-            width: 40%;
-            padding: 40px;
-            box-sizing: border-box;
-            background-color: #fafafa;
-            border-left: 1px solid #efefef;
+            width: 40%; height: 100%;
+            overflow-y: auto; scrollbar-width: none;
+            padding: 40px; box-sizing: border-box;
+            background-color: #fafafa; border-left: 1px solid #efefef;
         }
+        .right-panel::-webkit-scrollbar { display: none; }
 
-        /* Mixtape Section */
-        .mixtape-section {
-            position: relative;
-            margin-bottom: 60px;
-        }
+        .mixtape-section { position: relative; margin-bottom: 60px; }
 
         .song-grill {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0 40px 0;
-            scrollbar-width: none;
-            scroll-behavior: smooth;
+            display: flex; overflow-x: auto; gap: 20px;
+            padding: 30px 10px; scrollbar-width: none; scroll-behavior: smooth;
         }
         .song-grill::-webkit-scrollbar { display: none; }
 
-        /* Realistic Tall Song Card */
         .song-card {
-            position: relative;
-            min-width: 220px;
-            height: 400px; /* Increased height */
-            flex-shrink: 0;
-            transition: transform 0.4s;
+            position: relative; 
+            min-width: var(--default-song-w); 
+            height: var(--default-song-h);
+            flex-shrink: 0; transition: transform 0.4s;
+            text-decoration: none;
         }
 
         .card-blur-bg {
-            position: absolute;
-            top: 15px; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            filter: blur(25px) opacity(0.3);
-            z-index: 1;
+            position: absolute; top: 15px; left: 0; width: 100%; height: 100%;
+            background-size: cover; filter: blur(25px) opacity(0.35); z-index: 1;
         }
 
         .card-main {
-            position: relative;
-            width: 100%; height: 100%;
-            background: #fff;
-            border-radius: var(--card-radius); /* Rounded for songs only */
-            overflow: hidden;
-            z-index: 2;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            position: relative; width: 100%; height: 100%;
+            background: #fff; border-radius: 20px;
+            overflow: hidden; z-index: 2; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .card-main img { width: 100%; height: 100%; object-fit: cover; }
-        .song-card:hover { transform: translateY(-8px); }
+        .song-card:hover { transform: translateY(-10px); }
 
-        /* Continuous Writing Box */
+        /* Writing Box */
         .content-box {
-            background-color: var(--bg-writing);
-            color: #fff;
-            padding: 50px 30px;
-            border-radius: 0; /* Boxy aesthetic to match posts */
-            font-family: 'Playfair Display', serif;
-            min-height: 600px;
+            background-color: var(--bg-writing); color: #fff;
+            padding: 60px 40px; font-family: 'Playfair Display', serif;
         }
-
+        .content-box p { font-size: 1.3rem; line-height: 1.8; opacity: 0.9; margin-bottom: 30px; }
         .content-box p::first-letter {
             float: left; font-size: 6rem; line-height: 0.7;
             padding-right: 15px; color: var(--accent); font-weight: bold;
         }
 
-        .content-box p { font-size: 1.2rem; line-height: 1.8; opacity: 0.85; margin-bottom: 25px; }
-
         /* Nav Arrows */
         .nav-btn {
-            position: absolute;
-            top: 50%; transform: translateY(-50%);
-            background: #fff; color: #000; border: 1px solid #ddd;
-            width: 30px; height: 30px; border-radius: 50%;
-            cursor: pointer; z-index: 10; font-size: 12px;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: white; border: 1px solid #ddd; width: 35px; height: 35px;
+            border-radius: 50%; cursor: pointer; z-index: 10;
         }
-        .b-l { left: -15px; }
-        .b-r { right: -15px; }
+        .b-l { left: -15px; } .b-r { right: -15px; }
 
-        /* Mobile */
-        @media (max-width: 800px) {
-            body { overflow: auto; }
-            .main-container { flex-direction: column; height: auto; }
+        @media (max-width: 1000px) {
+            .main-container { flex-direction: column; overflow-y: auto; }
             .left-panel, .right-panel { width: 100%; height: auto; overflow: visible; }
-            .journal-heading { font-size: 3rem; }
+            .masonry-grid { column-count: 2; }
         }
     </style>
 </head>
 <body>
 
-    <button class="menu-btn">MENU</button>
-
     <header class="header-nav">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search archive...">
     </header>
 
     <div class="main-container">
         
         <section class="left-panel">
-            <h1 class="journal-heading">DIGI JOURNAL</h1>
-            <div class="photo-dump-grid" id="photoGrid">
+            <div class="grid-overlay">
+                <h1 style="font-family: 'Playfair Display'; font-size: 4rem; margin-bottom: 30px;">DIGI JOURNAL</h1>
+                <div class="masonry-grid">
+                    <div class="photo-item"><img src="[PHOTO_URL_1]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_2]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_3]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_4]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_5]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_6]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_7]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_8]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_9]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_10]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_11]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_12]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_13]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_14]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_15]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_16]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_17]" style="height: auto;"></div>
+                    <div class="photo-item"><img src="[PHOTO_URL_18]" style="height: auto;"></div>
                 </div>
+            </div>
         </section>
 
         <section class="right-panel">
             <div class="mixtape-section">
-                <button class="nav-btn b-l" onclick="mv(-200)">&#10094;</button>
+                <button class="nav-btn b-l" onclick="mv(-250)">&#10094;</button>
                 <div class="song-grill" id="songGrill">
-                    </div>
-                <button class="nav-btn b-r" onclick="mv(200)">&#10095;</button>
+                    <a href="[SONG_LINK_1]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_1]')"></div>
+                        <div class="card-main"><img src="[COVER_1]"></div>
+                    </a>
+                    <a href="[SONG_LINK_2]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_2]')"></div>
+                        <div class="card-main"><img src="[COVER_2]"></div>
+                    </a>
+                    <a href="[SONG_LINK_3]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_3]')"></div>
+                        <div class="card-main"><img src="[COVER_3]"></div>
+                    </a>
+                    <a href="[SONG_LINK_4]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_4]')"></div>
+                        <div class="card-main"><img src="[COVER_4]"></div>
+                    </a>
+                    <a href="[SONG_LINK_5]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_5]')"></div>
+                        <div class="card-main"><img src="[COVER_5]"></div>
+                    </a>
+                    <a href="[SONG_LINK_6]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_6]')"></div>
+                        <div class="card-main"><img src="[COVER_6]"></div>
+                    </a>
+                    <a href="[SONG_LINK_7]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_7]')"></div>
+                        <div class="card-main"><img src="[COVER_7]"></div>
+                    </a>
+                    <a href="[SONG_LINK_8]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_8]')"></div>
+                        <div class="card-main"><img src="[COVER_8]"></div>
+                    </a>
+                    <a href="[SONG_LINK_9]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_9]')"></div>
+                        <div class="card-main"><img src="[COVER_9]"></div>
+                    </a>
+                    <a href="[SONG_LINK_10]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_10]')"></div>
+                        <div class="card-main"><img src="[COVER_10]"></div>
+                    </a>
+                    <a href="[SONG_LINK_11]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_11]')"></div>
+                        <div class="card-main"><img src="[COVER_11]"></div>
+                    </a>
+                    <a href="[SONG_LINK_12]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_12]')"></div>
+                        <div class="card-main"><img src="[COVER_12]"></div>
+                    </a>
+                    <a href="[SONG_LINK_13]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_13]')"></div>
+                        <div class="card-main"><img src="[COVER_13]"></div>
+                    </a>
+                    <a href="[SONG_LINK_14]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_14]')"></div>
+                        <div class="card-main"><img src="[COVER_14]"></div>
+                    </a>
+                    <a href="[SONG_LINK_15]" class="song-card">
+                        <div class="card-blur-bg" style="background-image: url('[COVER_15]')"></div>
+                        <div class="card-main"><img src="[COVER_15]"></div>
+                    </a>
+                </div>
+                <button class="nav-btn b-r" onclick="mv(250)">&#10095;</button>
             </div>
 
             <div class="content-box">
-                <p>
-                    This is your continuous writing panel. As you add more text, it will flow downwards independently of the photo feed on the left.
-                </p>
-                <p>
-                    The 60:40 ratio ensures that your visual posts remain the anchor of the page, while the music and writing provide the atmosphere. The photo grid has been stripped of rounded corners to mimic a professional photography feed.
-                </p>
+                <p>[CONTINUOUS_WRITING_BOX]</p>
             </div>
         </section>
 
@@ -246,28 +252,7 @@
 
     <script>
         const grill = document.getElementById('songGrill');
-        const grid = document.getElementById('photoGrid');
-
-        // Logic to add 18 photos (6 rows of 3)
-        for (let i = 1; i <= 18; i++) {
-            const div = document.createElement('div');
-            div.className = 'photo-item';
-            div.innerHTML = `<img src="https://picsum.photos/600/600?random=${i+500}">`;
-            grid.appendChild(div);
-        }
-
-        // Logic to add 15 songs
-        for (let i = 1; i <= 15; i++) {
-            const img = `https://picsum.photos/500/800?random=${i+600}`;
-            const card = document.createElement('div');
-            card.className = 'song-card';
-            card.innerHTML = `<div class="card-blur-bg" style="background-image: url('${img}')"></div><div class="card-main"><img src="${img}"></div>`;
-            grill.appendChild(card);
-        }
-
         function mv(v) { grill.scrollBy({ left: v, behavior: 'smooth' }); }
-
-        // Horizontal wheel scroll
         grill.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) { e.preventDefault(); grill.scrollLeft += e.deltaY; }
         });
