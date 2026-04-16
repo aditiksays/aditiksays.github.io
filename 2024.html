@@ -18,16 +18,14 @@
 
         body {
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
             background-size: 40px 40px;
             color: var(--chrome);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            min-height: 250vh;
         }
 
-        /* --- Fixed Header (Right Aligned) --- */
+        /* --- Fixed Header --- */
         header {
             position: fixed;
             top: 40px;
@@ -45,16 +43,38 @@
             text-transform: uppercase;
         }
 
-        /* --- THE CANVAS --- */
+        /* --- THE CANVAS GRID --- */
         .scrapbook-canvas {
-            position: relative;
-            width: 100%;
-            max-width: 1300px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Left for visual/stickers, Right for feed */
+            max-width: 1400px;
             margin: 0 auto;
             padding: 150px 20px;
+            gap: 40px;
         }
 
-        /* --- LARGE STICKERS --- */
+        /* --- LEFT SIDE: VISUAL & STICKERS --- */
+        .visual-container {
+            position: sticky;
+            top: 150px;
+            height: fit-content;
+        }
+
+        .main-visual {
+            position: relative;
+            width: 100%;
+            z-index: 5;
+            transform: rotate(-1.5deg);
+        }
+
+        .main-visual img {
+            width: 100%;
+            filter: grayscale(100%) contrast(115%);
+            border: 1px solid #1a1a1a;
+            display: block;
+        }
+
+        /* Stickers: Now relative to the main-visual container */
         .sticker {
             position: absolute;
             z-index: 100;
@@ -68,38 +88,29 @@
             z-index: 1000;
         }
 
-        /* Sizes & Overlapping Positions */
-        .s1 { width: 220px; top: 100px; left: -30px; transform: rotate(-15deg); } 
-        .s2 { width: 180px; top: 15%; left: 45%; transform: rotate(12deg); }  
-        .s3 { width: 280px; top: 45%; left: 25%; transform: rotate(-20deg); }
-        .s4 { width: 200px; top: 65%; right: 5%; transform: rotate(10deg); }
-        .s5 { width: 240px; bottom: 15%; left: 2%; transform: rotate(-8deg); } 
-        .s6 { width: 150px; top: 5%; right: 20%; transform: rotate(5deg); }
-        .s7 { width: 300px; bottom: 5%; left: 30%; transform: rotate(-5deg); }
-        .s8 { width: 190px; top: 55%; right: 35%; transform: rotate(-12deg); }
+        /* Positioning stickers over the image (Left Side) */
+        .s1 { width: 180px; top: -40px; left: -20px; transform: rotate(-15deg); } 
+        .s2 { width: 140px; top: 10%; right: -30px; transform: rotate(12deg); }  
+        .s3 { width: 200px; bottom: 20%; left: -40px; transform: rotate(-20deg); }
+        .s4 { width: 150px; bottom: -30px; right: 10%; transform: rotate(10deg); }
+        .s5 { width: 160px; top: 40%; left: 10%; transform: rotate(-8deg); } 
+        .s6 { width: 120px; top: -10px; right: 20%; transform: rotate(5deg); }
+        .s7 { width: 180px; bottom: 5%; left: 30%; transform: rotate(-5deg); }
+        .s8 { width: 130px; top: 60%; right: 5%; transform: rotate(-12deg); }
 
-        /* --- MAIN VISUAL --- */
-        .main-visual {
-            position: absolute;
-            width: 50%;
-            top: 250px;
-            left: 5%;
-            z-index: 5;
-            transform: rotate(-1.5deg);
+        /* --- RIGHT SIDE: BLOG FEED --- */
+        .blog-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 100px; /* Space between posts */
         }
 
-        .main-visual img {
-            width: 100%;
-            filter: grayscale(100%) contrast(115%);
-            border: 1px solid #1a1a1a;
-            display: block;
-        }
-
-        /* --- BLOG ENTRIES (Editorial Style) --- */
         .blog-entry {
-            position: absolute;
-            z-index: 10;
-            max-width: 450px;
+            position: relative;
+            max-width: 500px;
+            /* Removed sticky-note look, added editorial spacing */
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .blog-entry h2 {
@@ -128,12 +139,6 @@
             display: block;
         }
 
-        /* Placement of Blog Posts */
-        .b1 { top: 350px; right: 8%; text-align: right; }
-        .b2 { top: 1000px; left: 12%; }
-        .b3 { top: 1600px; right: 10%; }
-
-        /* Decorative BG elements */
         .bg-text {
             position: fixed;
             font-size: 20vw;
@@ -144,10 +149,9 @@
         }
 
         @media (max-width: 900px) {
-            .main-visual { width: 90%; position: relative; top: 0; left: 5%; }
-            .blog-entry { position: relative; width: 90%; top: 50px !important; left: 5% !important; right: 0 !important; text-align: left !important; margin-bottom: 150px; }
+            .scrapbook-canvas { grid-template-columns: 1fr; }
+            .visual-container { position: relative; top: 0; margin-bottom: 50px; }
             .sticker { display: none; }
-            header { right: 20px; top: 20px; }
         }
     </style>
 </head>
@@ -163,38 +167,62 @@
 
     <main class="scrapbook-canvas">
         
-        <div class="main-visual">
-            <img src="newspaper cutout.png" alt="Archive Image">
+        <div class="visual-container">
+            <div class="main-visual">
+                <img src="newspaper cutout.png" alt="Archive Image">
+                
+                <img src="scrappedeyes.png" alt="st-1" class="sticker s1">
+                <img src="inhumane text.png" alt="st-2" class="sticker s2">
+                <img src="iamgod.png" alt="st-3" class="sticker s3">
+                <img src="mouthstar.png" alt="st-4" class="sticker s4">
+                <img src="maskedjennifer.png" alt="st-5" class="sticker s5">
+                <img src="messystars.png" alt="st-6" class="sticker s6">
+                <img src="handprint.png" alt="st-7" class="sticker s7">
+                <img src="eyeinheart.png" alt="st-8" class="sticker s8">
+            </div>
         </div>
 
-        <img src="URL_HERE" alt="st-1" class="sticker s1">
-        <img src="URL_HERE" alt="st-2" class="sticker s2">
-        <img src="URL_HERE" alt="st-3" class="sticker s3">
-        <img src="URL_HERE" alt="st-4" class="sticker s4">
-        <img src="URL_HERE" alt="st-5" class="sticker s5">
-        <img src="URL_HERE" alt="st-6" class="sticker s6">
-        <img src="URL_HERE" alt="st-7" class="sticker s7">
-        <img src="URL_HERE" alt="st-8" class="sticker s8">
-
-        <article class="blog-entry b1">
-            <span class="entry-meta">01 // VISION</span>
-            <h2>The Main Character</h2>
-            <p>Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention without a single word.</p>
-        </article>
-
-        <article class="blog-entry b2">
-            <span class="entry-meta">02 // TEXTURE</span>
-            <h2>Silver & Spice</h2>
-            <p>Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit, the glitter, and the evolution of the aesthetic.</p>
-        </article>
-
-        <article class="blog-entry b3">
-            <span class="entry-meta">03 // ARCHIVE</span>
-            <h2>Stay Glossy</h2>
-            <p>The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where the most honest styling lives.</p>
-        </article>
+        <div class="blog-feed" id="post-container">
+            </div>
 
     </main>
+
+    <script>
+        // --- DYNAMIC POST DATA ---
+        // To add a new post, just add a new {} block to this list.
+        const postData = [
+            {
+                meta: "01 // VISION",
+                title: "The Main Character",
+                body: "Confidence is the only accessory that matters. This season, we’re striping away the noise and focusing on high-contrast silhouettes that demand attention without a single word."
+            },
+            {
+                meta: "02 // TEXTURE",
+                title: "Silver & Spice",
+                body: "Metallic dreams meeting concrete realities. Everything hits differently when it’s unfiltered. We are documenting the grit, the glitter, and the evolution of the aesthetic."
+            },
+            {
+                meta: "03 // ARCHIVE",
+                title: "Stay Glossy",
+                body: "The archive is a living breathing organism. Layer by layer, we build the truth. Don't worry about the mess; the mess is where the most honest styling lives."
+            }
+        ];
+
+        const container = document.getElementById('post-container');
+
+        // Logic to generate HTML for each post
+        function loadPosts() {
+            container.innerHTML = postData.map(post => `
+                <article class="blog-entry">
+                    <span class="entry-meta">${post.meta}</span>
+                    <h2>${post.title}</h2>
+                    <p>${post.body}</p>
+                </article>
+            `).join('');
+        }
+
+        loadPosts();
+    </script>
 
 </body>
 </html>
