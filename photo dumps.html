@@ -3,12 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
+    <title>Media Portfolio</title>
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --sidebar-width: 220px;
+            --topbar-height: 60px;
+            --bg-left: #ffffff;
+            --bg-right-bottom: #1e293b; /* Deep slate blue for contrast */
+            --text-color: #f8fafc;
+            --accent: #38bdf8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            overflow: hidden; /* Prevents double scrollbars */
+        }
+
+        /* Top Search Bar */
+        .search-container {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            height: var(--topbar-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .search-container input {
+            width: 50%;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #cbd5e1;
+            outline: none;
+        }
+
+        /* Sidebar Nav */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            position: fixed;
+        }
+
+        .sidebar h2 { text-align: center; font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 2px; }
+
+        .sidebar a {
+            padding: 15px 30px;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover { color: white; background: #1e293b; }
+
+        /* Layout Container */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--topbar-height);
+            display: flex;
+            width: 100%;
+            height: calc(100vh - var(--topbar-height));
+        }
+
+        /* LEFT PANEL: PHOTO DUMP */
+        .left-panel {
+            width: 50%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--bg-left);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-auto-rows: 200px;
+            gap: 15px;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #eee;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .photo-card:hover img { transform: scale(1.1); }
+
+        .song-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        /* RIGHT PANEL */
+        .right-panel {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Upper Slider */
+        .slider-section {
+            height: 45%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            padding: 0 20px;
+            scrollbar-width: none; /* Hide scrollbar for Chrome/Safari */
+        }
+
+        .slider-section::-webkit-scrollbar { display: none; }
+
+        .slider-track {
+            display: flex;
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .slide-item {
+            min-width: 160px;
+            height: 220px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* POP-UP EFFECT */
+        .slide-item:hover {
+            transform: scale(1.15) translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 50;
+        }
+
+        .slide-item img { width: 100%; height: 70%; object-fit: cover; border-radius: 10px; }
+        .slide-item a { display: block; margin-top: 10px; color: #334155; text-decoration: none; font-weight: bold; }
+
+        /* Downward Content Section */
+        .bottom-content {
+            height: 55%;
+            background-color: var(--bg-right-bottom);
+            color: var(--text-color);
+            padding: 50px;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        /* Dropcap styling */
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            float: left;
+            font-size: 5.5rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 12px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
-    <p>This is a basic paragraph on my new webpage.</p>
+    <header class="search-container">
+        <input type="text" placeholder="Search images, songs, or topics...">
+    </header>
+
+    <nav class="sidebar">
+        <h2>COLLECTION</h2>
+        <a href="#home">Main Hub</a>
+        <a href="#visuals">Visual Dumps</a>
+        <a href="#tapes">The Mixtapes</a>
+        <a href="#archives">Archives</a>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="left-panel">
+            <div class="photo-card">
+                <img src="https://picsum.photos/400/400?random=1" alt="Dump 1">
+                <a href="YOUR_SONG_URL" class="song-overlay">🎵 Song Link</a>
+            </div>
+            <div class="photo-card">
+                <img src="https://picsum.photos/400/400?random=2" alt="Dump 2">
+                <a href="#" class="song-overlay">🎵 Song Link</a>
+            </div>
+            </div>
+
+        <div class="right-panel">
+            <div class="slider-section">
+                <div class="slider-track">
+                    <div class="slide-item">
+                        <img src="https://picsum.photos/200/300?random=10" alt="Slide">
+                        <a href="SONG_URL">Track 01</a>
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://picsum.photos/200/300?random=11" alt="Slide">
+                        <a href="SONG_URL">Track 02</a>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="bottom-content">
+                <p class="drop-cap">
+                    Your content goes here. Start typing your story, notes, or descriptions. 
+                    The first letter of this paragraph is automatically enlarged via the CSS "drop-cap" class.
+                    This section is intentionally set against a darker background to provide a 
+                    clean reading experience separate from the visual media above.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Manual scroll wheel to horizontal scroll for the slider
+        const slider = document.querySelector('.slider-section');
+        slider.addEventListener('wheel', (evt) => {
+            evt.preventDefault();
+            slider.scrollLeft += evt.deltaY;
+        });
+    </script>
 
 </body>
 </html>
