@@ -17,9 +17,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background: linear-gradient(135deg, var(--cherry-dark) 0%, var(--cherry-mid) 50%, var(--cherry-dark) 100%);
+            /* --- BACKGROUND IMAGE PLACEHOLDER --- */
+            /* Replace 'your-image-name.jpg' with your actual file name */
+            background-image: url('download.jpg'); 
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
-            color: var(--condensed-milk);
+            
+            /* Fallback color if image doesn't load */
+            background-color: var(--condensed-milk); 
+            
+            color: var(--cherry-dark); /* Global text is now dark */
             font-family: var(--sans);
             min-height: 100vh;
             overflow-x: hidden;
@@ -36,10 +44,11 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 40px;
-            background: rgba(74, 4, 4, 0.7);
+            /* Light glass effect for header */
+            background: rgba(255, 248, 231, 0.85);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 248, 231, 0.1);
+            border-bottom: 1px solid rgba(74, 4, 4, 0.1);
         }
 
         .search-container {
@@ -49,20 +58,20 @@
         }
 
         .search-bar {
-            background: rgba(255, 248, 231, 0.1);
-            border: 1px solid rgba(255, 248, 231, 0.2);
+            background: rgba(74, 4, 4, 0.05);
+            border: 1px solid rgba(74, 4, 4, 0.2);
             padding: 10px 25px;
             border-radius: 50px;
-            color: var(--condensed-milk);
+            color: var(--cherry-dark);
             width: 220px;
             outline: none;
             text-align: center;
             transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .search-bar:focus { width: 350px; border-color: var(--condensed-milk); }
+        .search-bar:focus { width: 350px; border-color: var(--cherry-dark); }
 
-        .menu-trigger { cursor: pointer; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; }
+        .menu-trigger { cursor: pointer; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; color: var(--cherry-dark); }
 
         /* --- Slide-in Menu --- */
         .side-drawer {
@@ -77,7 +86,7 @@
             display: flex;
             flex-direction: column;
             padding: 100px 50px;
-            box-shadow: -20px 0 60px rgba(0,0,0,0.6);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.4);
         }
 
         .side-drawer.active { right: 0; }
@@ -101,11 +110,12 @@
         }
 
         .journal-post {
-            background: var(--condensed-milk);
-            color: var(--cherry-dark);
+            /* POSTS ARE NOW DARK */
+            background: var(--cherry-dark);
+            color: var(--condensed-milk);
             padding: 80px;
             margin-bottom: 120px;
-            box-shadow: 30px 30px 0px rgba(0,0,0,0.15);
+            box-shadow: 20px 20px 40px rgba(0,0,0,0.3);
             transform: rotate(-0.5deg);
         }
 
@@ -113,7 +123,7 @@
 
         h2 { font-family: var(--serif); font-size: 3.5rem; margin-bottom: 25px; line-height: 1.1; }
 
-        .post-date { font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; opacity: 0.5; display: block; margin-bottom: 15px; }
+        .post-date { font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; opacity: 0.6; display: block; margin-bottom: 15px; }
 
         .post-body { font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px; }
 
@@ -121,18 +131,18 @@
         .featured-media {
             width: 100%;
             height: 500px;
-            background: rgba(255, 248, 231, 0.05);
-            border: 2px dashed rgba(255, 248, 231, 0.4);
+            background: rgba(74, 4, 4, 0.1);
+            border: 2px dashed var(--cherry-dark);
             margin: 80px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: var(--serif);
             font-style: italic;
-            color: var(--condensed-milk);
+            color: var(--cherry-dark);
         }
 
-        /* --- Stickers & Scrapbook Feel --- */
+        /* --- Stickers --- */
         #sticker-layer {
             position: absolute;
             top: 0;
@@ -140,7 +150,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 10; /* Placed so they can slightly overlap post corners */
+            z-index: 10;
         }
 
         .sticker {
@@ -150,22 +160,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
         }
 
         .sticker img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.3));
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
         }
 
-        /* Fallback text if image fails or before you add URL */
         .sticker-label {
             position: absolute;
             font-size: 9px;
-            background: rgba(255,255,255,0.8);
-            color: black;
+            background: var(--cherry-dark);
+            color: var(--condensed-milk);
             padding: 2px 5px;
             top: -10px;
             white-space: nowrap;
@@ -193,12 +201,11 @@
     </header>
 
     <nav class="side-drawer" id="sideDrawer">
-        <div class="menu-trigger" style="text-align: right; margin-bottom: 20px;" onclick="toggleMenu()">CLOSE X</div>
+        <div class="menu-trigger" style="text-align: right; margin-bottom: 20px; color: var(--condensed-milk);" onclick="toggleMenu()">CLOSE X</div>
         <a href="home.html" onclick="toggleMenu()">HOME</a>
         <a href="aboutme.html" onclick="toggleMenu()">ABOUT</a>
         <a href="blog.html" onclick="toggleMenu()">BLOG</a>
         <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
-        <a href="index.html" onclick="toggleMenu()">CLOSE</a>
     </nav>
 
     <div class="container">
@@ -206,9 +213,8 @@
     </div>
 
     <script>
-        // --- ADD YOUR 10 STICKER URLs HERE ---
         const stickerUrls = [
-            "https://via.placeholder.com/150?text=STICKER_1", // Replace with your PNG URL
+            "https://via.placeholder.com/150?text=STICKER_1", 
             "https://via.placeholder.com/150?text=STICKER_2",
             "https://via.placeholder.com/150?text=STICKER_3",
             "https://via.placeholder.com/150?text=STICKER_4",
@@ -220,7 +226,6 @@
             "https://via.placeholder.com/150?text=STICKER_10"
         ];
 
-        // --- BLOG POSTS ---
         const posts = [
             { title: "Crimson Solitude", date: "NOV 15, 2026", content: "There is a specific kind of clarity that comes with isolation. Surrounded by the deep reds of this study, I finally find the words that have been eluding me all season." },
             { title: "The Dust of Archives", date: "NOV 12, 2026", content: "History is not a static line; it is a collection of fragments. Today I found a pressed flower inside a book from 1890. Its color was gone, but its shape was a perfect ghost." },
@@ -229,7 +234,6 @@
             { title: "Final Winter Note", date: "OCT 28, 2026", content: "The temperature dropped ten degrees in an hour. The journal feels colder to the touch. Winter is no longer a promise; it is a presence." }
         ];
 
-        // --- RENDER FUNCTION ---
         function renderFeed() {
             const feed = document.getElementById('journal-feed');
             let html = '';
@@ -240,12 +244,11 @@
                         <span class="post-date">${post.date}</span>
                         <h2>${post.title}</h2>
                         <div class="post-body"><p>${post.content}</p></div>
-                        <div style="border-top: 1px solid #ddd; padding-top: 20px;">
+                        <div style="border-top: 1px solid rgba(255,248,231,0.2); padding-top: 20px;">
                             <small style="font-style:italic; letter-spacing: 1px;">Leave a reflection...</small>
                         </div>
                     </article>
                 `;
-                // Insert media placeholder after exactly 3 posts
                 if (index === 2) {
                     html += `<div class="featured-media">PLACEHOLDER_FOR_FEATURED_MEDIA_AFTER_3RD_POST</div>`;
                 }
@@ -253,7 +256,6 @@
             feed.innerHTML = html;
         }
 
-        // --- STICKER ENGINE ---
         function spawnStickers() {
             const layer = document.getElementById('sticker-layer');
             const totalHeight = document.body.scrollHeight;
@@ -262,19 +264,16 @@
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
                 
-                // Position Stickers
                 const yPos = (totalHeight / 11) * (i + 1) + (Math.random() * 200 - 100);
-                // Keep them mostly to the sides to avoid covering text, but allow slight overlap
                 const xPos = Math.random() > 0.5 ? (Math.random() * 12) : (82 + Math.random() * 6);
-                const rot = Math.random() * 50 - 25;
+                const rot = Math.random() * 40 - 20;
 
                 sticker.style.top = `${yPos}px`;
                 sticker.style.left = `${xPos}%`;
                 sticker.style.transform = `rotate(${rot}deg)`;
                 
-                // Add Image and Label for easy identification
                 sticker.innerHTML = `
-                    <span class="sticker-label">PLACEHOLDER_FOR_STICKER${i+1}</span>
+                    <span class="sticker-label">STICKER ${i+1}</span>
                     <img src="${stickerUrls[i]}" alt="Sticker ${i+1}">
                 `;
                 
@@ -288,7 +287,6 @@
 
         window.onload = () => {
             renderFeed();
-            // Wait for feed to render to get accurate page height
             setTimeout(spawnStickers, 300);
         };
     </script>
