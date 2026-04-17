@@ -7,10 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --alabaster: #F2F0E9;
-            --petal: #DDA0A0;
+            /* Miserable & Betrayal Color Palette Options */
+            --stagnant-sage: #96A08F; /* Muted Sage - Sickly/Dying vibe */
+            --heavy-sand: #D2CABB;    /* Wet Sand - Cold/Waterlogged vibe */
+            --spent-peach: #D4B2A7;   /* Smoked Peach - Bruised/Fading vibe */
+
+            /* Logic: Set --alabaster to your preferred mood from above */
+            --alabaster: var(--spent-peach); 
+            
+            --petal: #A29196;         /* Bruised Mauve */
             --paper-white: #FCFAF5;
-            --text-dark: #4A4540;
+            --text-dark: #545B64;     /* Charcoal Mist */
             --glass: rgba(255, 255, 255, 0.4);
             --header-font: 'Cormorant Garamond', serif;
             --body-font: 'Lato', sans-serif;
@@ -196,7 +203,6 @@
 
     <script>
         // --- 1. THE STICKER URL PLACEHOLDERS ---
-        // Put your 10 image URLs inside the quotes below.
         const stickerUrls = [
             "URL_FOR_STICKER_1", 
             "URL_FOR_STICKER_2",
@@ -248,7 +254,6 @@
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
                 
-                // Distribute through height
                 const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 100);
                 const isLeft = Math.random() > 0.5;
                 const leftPos = isLeft ? (Math.random() * 10) : (88 + Math.random() * 4);
