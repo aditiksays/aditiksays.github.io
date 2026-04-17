@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alabaster & Petal | Digital Journal</title>
+    <title>Coffee & Cream | Digital Journal</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- THE MISERY PALETTE --- */
-            /* Swap the hex codes below to change the mood */
-            --stagnant-sage: #96A08F; /* Use this for a murky, sickly vibe */
-            --heavy-sand: #D2CABB;    /* Use this for a cold, waterlogged vibe */
-            --spent-peach: #D4B2A7;   /* Use this for a bruised, fading vibe */
-
-            /* ACTIVE BACKGROUND COLOR: Change this to one of the variables above */
-            --alabaster: var(--stagnant-sage); 
+            /* --- THE BEIGE COFFEE PALETTE --- */
+            --latte-base: #E3D5CA;    /* Warm beige background */
+            --coffee-milk: #D5BDAF;   /* Soft taupe for accents */
+            --espresso: #5E503F;      /* Deep brown for text */
             
-            --petal: #A29196;         /* Bruised Mauve */
-            --paper-white: #FCFAF5;
-            --text-dark: #545B64;     /* Charcoal Mist */
-            --glass: rgba(255, 255, 255, 0.4);
+            /* ACTIVE BACKGROUND COLOR */
+            --alabaster: var(--latte-base); 
+            
+            --petal: var(--coffee-milk);
+            --paper-white: #FAF9F6;   /* Clean cream paper */
+            --text-dark: var(--espresso);
+            --glass: rgba(255, 255, 255, 0.5);
             --header-font: 'Cormorant Garamond', serif;
             --body-font: 'Lato', sans-serif;
         }
@@ -27,7 +26,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Explicitly using the --alabaster variable here */
             background-color: var(--alabaster) !important; 
             background-image: 
                 radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
@@ -51,10 +49,10 @@
             justify-content: space-between;
             padding: 0 50px;
             z-index: 1000;
-            /* Header background now matches the theme background */
             background: var(--alabaster);
             backdrop-filter: blur(10px);
-            opacity: 0.95;
+            opacity: 0.98;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .search-container {
@@ -66,7 +64,7 @@
         .search-bar {
             background: var(--glass);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             padding: 12px 30px;
             border-radius: 50px;
             width: 250px;
@@ -78,7 +76,7 @@
 
         .search-bar:focus { width: 350px; }
 
-        .menu-btn { cursor: pointer; font-family: var(--header-font); font-size: 1.3rem; color: var(--petal); letter-spacing: 2px; }
+        .menu-btn { cursor: pointer; font-family: var(--header-font); font-size: 1.3rem; color: var(--text-dark); letter-spacing: 2px; }
 
         /* --- Side Drawer --- */
         .nav-drawer {
@@ -91,7 +89,7 @@
             z-index: 2000;
             transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             padding: 100px 50px;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.08);
         }
 
         .nav-drawer.open { right: 0; }
@@ -100,7 +98,7 @@
             display: block;
             font-family: var(--header-font);
             font-size: 2.2rem;
-            color: var(--petal);
+            color: var(--text-dark);
             text-decoration: none;
             margin-bottom: 25px;
         }
@@ -118,7 +116,7 @@
             background: var(--paper-white);
             padding: 60px;
             margin-bottom: 100px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
             border: 1px solid white;
         }
 
@@ -127,7 +125,7 @@
         .image-break {
             width: 100vw;
             height: 450px;
-            background: #B4B8B1; /* Tarnished Silver Interlude */
+            background: #DEDAD6; 
             margin: 80px 0;
             position: relative;
             left: 50%;
@@ -135,9 +133,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--petal);
+            color: var(--text-dark);
             font-family: var(--header-font);
             font-style: italic;
+            opacity: 0.8;
         }
 
         /* --- STICKERS --- */
@@ -164,17 +163,18 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: grayscale(30%) drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
+            filter: sepia(20%) drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
         }
 
         .sticker-label {
             font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--petal);
+            color: var(--text-dark);
             background: rgba(255,255,255,0.9);
             padding: 2px 5px;
             margin-top: 5px;
+            border-radius: 2px;
         }
 
         @media (max-width: 768px) {
@@ -188,9 +188,9 @@
     <div id="sticker-canvas"></div>
 
     <header>
-        <div style="font-family: var(--header-font); font-size: 1.4rem; color: var(--text-dark);">VOL. II</div>
+        <div style="font-family: var(--header-font); font-size: 1.4rem; color: var(--text-dark);">EDITION I</div>
         <div class="search-container">
-            <input type="text" class="search-bar" placeholder="SEARCH...">
+            <input type="text" class="search-bar" placeholder="SEARCH NOTES...">
         </div>
         <div class="menu-btn" onclick="toggleMenu()">MENU</div>
     </header>
@@ -198,7 +198,7 @@
     <nav class="nav-drawer" id="navDrawer">
         <div class="menu-btn" style="text-align: right; margin-bottom: 50px;" onclick="toggleMenu()">CLOSE X</div>
         <a href="#" onclick="toggleMenu()">CHRONICLE</a>
-        <a href="#" onclick="toggleMenu()">FRAGMENTS</a>
+        <a href="#" onclick="toggleMenu()">GALLERY</a>
         <a href="#" onclick="toggleMenu()">ABOUT</a>
     </nav>
 
@@ -221,11 +221,11 @@
         ];
 
         const journalData = [
-            { title: "The Stagnant Hour", date: "APR 17, 2026", content: "The air in this room feels heavy, as if the walls themselves are exhaling the weight of things unsaid.", comments: ["Heavy."] },
-            { title: "Bruised Petals", date: "APR 14, 2026", content: "I found a dried rose in an old book. Time hasn't been kind to it; it's just a cycle of fading until there's nothing left.", comments: ["..."] },
-            { title: "Minimalist Misery", date: "APR 10, 2026", content: "We simplify our surroundings to match the hollowness inside. There is a certain safety in having nothing left to lose.", comments: [] },
-            { title: "Empty Echoes", date: "APR 05, 2026", content: "The gap between memories is where the real betrayal lives. It's the silence that hurts the most.", comments: [] },
-            { title: "Spent Embers", date: "MAR 30, 2026", content: "The fire went out long ago. I'm just sitting here, staring at the ash and wondering if it was ever really warm.", comments: ["Wait for Vol III."] }
+            { title: "First Roast", date: "APR 17, 2026", content: "The scent of coffee is the best introduction to the morning. It's a warm promise of a fresh start.", comments: ["Love this vibe."] },
+            { title: "Warm Beige", date: "APR 14, 2026", content: "Found peace in the neutral tones today. Sometimes, the world doesn't need to be loud; it just needs to be creamy and soft.", comments: ["Cozy."] },
+            { title: "Simple Joys", date: "APR 10, 2026", content: "A blank page and a hot cup. There’s something timeless about this specific ritual.", comments: [] },
+            { title: "Golden Hour", date: "APR 05, 2026", content: "The light hitting the cream-colored walls is everything. A visual exhale.", comments: [] },
+            { title: "Closing the Chapter", date: "MAR 30, 2026", content: "Finishing the cup, finishing the entry. Ready for what comes next.", comments: ["Can't wait."] }
         ];
 
         function renderJournal() {
@@ -234,15 +234,15 @@
             journalData.forEach((post, index) => {
                 html += `
                     <article class="post-card">
-                        <span style="color:var(--petal); font-size:0.8rem;">${post.date}</span>
+                        <span style="color:var(--coffee-milk); font-size:0.8rem; font-weight:bold;">${post.date}</span>
                         <h2>${post.title}</h2>
                         <p>${post.content}</p>
                         <div style="margin-top:30px; border-top:1px solid #eee; padding-top:15px;">
-                            <small style="color:var(--petal); font-style:italic;">Notes...</small>
+                            <small style="color:var(--coffee-milk); font-style:italic;">Add note...</small>
                         </div>
                     </article>
                 `;
-                if (index === 2) html += `<div class="image-break">[ SHADOWED_INTERLUDE ]</div>`;
+                if (index === 2) html += `<div class="image-break">[ CAFE_EDITORIAL_PLACEHOLDER ]</div>`;
             });
             feed.innerHTML = html;
         }
@@ -265,7 +265,7 @@
                 
                 sticker.innerHTML = `
                     <img src="${url}" alt="Placeholder ${i+1}" onerror="this.style.display='none'">
-                    <span class="sticker-label">MEMENTO_${i+1}</span>
+                    <span class="sticker-label">JOURNAL_MEMO_${i+1}</span>
                 `;
                 
                 canvas.appendChild(sticker);
