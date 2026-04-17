@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee & Cream | Digital Journal</title>
+    <title>Bright Coffee Journal | Edition I</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- THE BEIGE COFFEE PALETTE --- */
-            --latte-base: #E3D5CA;    /* Warm beige background */
-            --coffee-milk: #D5BDAF;   /* Soft taupe for accents */
-            --espresso: #5E503F;      /* Deep brown for text */
+            /* --- BRIGHTER BEIGE COFFEE PALETTE --- */
+            --latte-bright: #F5EFE6;   /* Much lighter, cleaner cream background */
+            --warm-foam: #E8DFD8;     /* Soft, clean taupe for accents */
+            --dark-roast: #4F4436;    /* Deep brown for sharp, readable text */
             
-            /* ACTIVE BACKGROUND COLOR */
-            --alabaster: var(--latte-base); 
-            
-            --petal: var(--coffee-milk);
-            --paper-white: #FAF9F6;   /* Clean cream paper */
-            --text-dark: var(--espresso);
-            --glass: rgba(255, 255, 255, 0.5);
+            --alabaster: var(--latte-bright); 
+            --petal: var(--warm-foam);
+            --paper-white: #FFFFFF;    /* Pure white for the cards to pop */
+            --text-dark: var(--dark-roast);
+            --glass: rgba(255, 255, 255, 0.7);
             --header-font: 'Cormorant Garamond', serif;
             --body-font: 'Lato', sans-serif;
         }
@@ -26,10 +24,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
+            /* Removed noise/mold effect - now a clean, soft radial gradient */
             background-color: var(--alabaster) !important; 
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: radial-gradient(circle at top left, #FFFFFF 0%, var(--alabaster) 100%);
             background-attachment: fixed;
             color: var(--text-dark);
             font-family: var(--body-font);
@@ -43,16 +40,15 @@
             position: sticky;
             top: 0;
             width: 100%;
-            height: 90px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 50px;
             z-index: 1000;
-            background: var(--alabaster);
-            backdrop-filter: blur(10px);
-            opacity: 0.98;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(245, 239, 230, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
 
         .search-container {
@@ -62,34 +58,41 @@
         }
 
         .search-bar {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            padding: 12px 30px;
+            background: var(--paper-white);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 10px 25px;
             border-radius: 50px;
-            width: 250px;
+            width: 240px;
             outline: none;
             text-align: center;
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, border-color 0.3s ease;
             color: var(--text-dark);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
-        .search-bar:focus { width: 350px; }
+        .search-bar:focus { width: 320px; border-color: var(--warm-foam); }
 
-        .menu-btn { cursor: pointer; font-family: var(--header-font); font-size: 1.3rem; color: var(--text-dark); letter-spacing: 2px; }
+        .menu-btn { 
+            cursor: pointer; 
+            font-family: var(--header-font); 
+            font-size: 1.1rem; 
+            color: var(--text-dark); 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
         /* --- Side Drawer --- */
         .nav-drawer {
             position: fixed;
             top: 0;
-            right: -350px;
-            width: 350px;
+            right: -320px;
+            width: 320px;
             height: 100%;
             background: var(--paper-white);
             z-index: 2000;
             transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            padding: 100px 50px;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.08);
+            padding: 80px 40px;
+            box-shadow: -15px 0 50px rgba(0,0,0,0.05);
         }
 
         .nav-drawer.open { right: 0; }
@@ -97,15 +100,18 @@
         .nav-drawer a {
             display: block;
             font-family: var(--header-font);
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--text-dark);
             text-decoration: none;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            transition: color 0.3s;
         }
+
+        .nav-drawer a:hover { color: var(--warm-foam); }
 
         /* --- Journal Content --- */
         .container {
-            max-width: 750px;
+            max-width: 720px;
             margin: 0 auto;
             padding: 60px 20px;
             position: relative;
@@ -114,56 +120,57 @@
 
         .post-card {
             background: var(--paper-white);
-            padding: 60px;
-            margin-bottom: 100px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-            border: 1px solid white;
+            padding: 50px;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.01);
         }
 
-        h2 { font-family: var(--header-font); font-size: 3rem; margin-bottom: 20px; color: var(--text-dark); }
+        h2 { font-family: var(--header-font); font-size: 2.8rem; margin-bottom: 15px; color: var(--text-dark); }
+
+        .post-date { color: var(--warm-foam); font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; display: block; }
 
         .image-break {
             width: 100vw;
-            height: 450px;
-            background: #DEDAD6; 
-            margin: 80px 0;
+            height: 400px;
+            background: #FDFBFA; 
+            margin: 60px 0;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-dark);
+            color: var(--warm-foam);
             font-family: var(--header-font);
             font-style: italic;
-            opacity: 0.8;
+            border-top: 1px solid #F0F0F0;
+            border-bottom: 1px solid #F0F0F0;
         }
 
         /* --- STICKERS --- */
         #sticker-canvas {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 10; 
         }
 
         .sticker {
             position: absolute;
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .sticker img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 100%; max-height: 100%;
             object-fit: contain;
-            filter: sepia(20%) drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
         }
 
         .sticker-label {
@@ -171,15 +178,17 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-dark);
-            background: rgba(255,255,255,0.9);
-            padding: 2px 5px;
-            margin-top: 5px;
-            border-radius: 2px;
+            background: rgba(255,255,255,0.95);
+            padding: 3px 8px;
+            margin-top: 8px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         @media (max-width: 768px) {
             .post-card { padding: 30px; }
             .sticker { display: none; }
+            .header { padding: 0 20px; }
         }
     </style>
 </head>
@@ -188,18 +197,19 @@
     <div id="sticker-canvas"></div>
 
     <header>
-        <div style="font-family: var(--header-font); font-size: 1.4rem; color: var(--text-dark);">EDITION I</div>
+        <div style="font-family: var(--header-font); font-size: 1.2rem; font-weight: 600;">JOURNAL . ED I</div>
         <div class="search-container">
-            <input type="text" class="search-bar" placeholder="SEARCH NOTES...">
+            <input type="text" class="search-bar" placeholder="Find a memory...">
         </div>
         <div class="menu-btn" onclick="toggleMenu()">MENU</div>
     </header>
 
     <nav class="nav-drawer" id="navDrawer">
-        <div class="menu-btn" style="text-align: right; margin-bottom: 50px;" onclick="toggleMenu()">CLOSE X</div>
-        <a href="#" onclick="toggleMenu()">CHRONICLE</a>
-        <a href="#" onclick="toggleMenu()">GALLERY</a>
-        <a href="#" onclick="toggleMenu()">ABOUT</a>
+        <div class="menu-btn" style="text-align: right; margin-bottom: 40px; font-size: 0.9rem;" onclick="toggleMenu()">CLOSE X</div>
+        <a href="#" onclick="toggleMenu()">Chronicle</a>
+        <a href="#" onclick="toggleMenu()">Gallery</a>
+        <a href="#" onclick="toggleMenu()">Archive</a>
+        <a href="#" onclick="toggleMenu()">About</a>
     </nav>
 
     <div class="container">
@@ -207,25 +217,20 @@
     </div>
 
     <script>
+        // --- STICKER URLs ---
         const stickerUrls = [
-            "URL_FOR_STICKER_1", 
-            "URL_FOR_STICKER_2",
-            "URL_FOR_STICKER_3",
-            "URL_FOR_STICKER_4",
-            "URL_FOR_STICKER_5",
-            "URL_FOR_STICKER_6",
-            "URL_FOR_STICKER_7",
-            "URL_FOR_STICKER_8",
-            "URL_FOR_STICKER_9",
-            "URL_FOR_STICKER_10"
+            "URL_FOR_STICKER_1", "URL_FOR_STICKER_2", "URL_FOR_STICKER_3",
+            "URL_FOR_STICKER_4", "URL_FOR_STICKER_5", "URL_FOR_STICKER_6",
+            "URL_FOR_STICKER_7", "URL_FOR_STICKER_8", "URL_FOR_STICKER_9", "URL_FOR_STICKER_10"
         ];
 
+        // --- BLOG CONTENT ---
         const journalData = [
-            { title: "First Roast", date: "APR 17, 2026", content: "The scent of coffee is the best introduction to the morning. It's a warm promise of a fresh start.", comments: ["Love this vibe."] },
-            { title: "Warm Beige", date: "APR 14, 2026", content: "Found peace in the neutral tones today. Sometimes, the world doesn't need to be loud; it just needs to be creamy and soft.", comments: ["Cozy."] },
-            { title: "Simple Joys", date: "APR 10, 2026", content: "A blank page and a hot cup. There’s something timeless about this specific ritual.", comments: [] },
-            { title: "Golden Hour", date: "APR 05, 2026", content: "The light hitting the cream-colored walls is everything. A visual exhale.", comments: [] },
-            { title: "Closing the Chapter", date: "MAR 30, 2026", content: "Finishing the cup, finishing the entry. Ready for what comes next.", comments: ["Can't wait."] }
+            { title: "Morning Light", date: "APR 17, 2026", content: "Today the light filled the room perfectly. No shadows, just a clean, bright space to think and create.", comments: ["So bright and airy!"] },
+            { title: "Clean Slate", date: "APR 14, 2026", content: "There is something therapeutic about removing the clutter. A fresh background and a warm coffee are all I need.", comments: ["Clean vibes."] },
+            { title: "Simple Rituals", date: "APR 10, 2026", content: "The sound of the kettle, the first blank page. These are the moments that keep me grounded.", comments: [] },
+            { title: "Visual Breathing", date: "APR 05, 2026", content: "White space is just as important as the words. It lets the mind rest before the next big thought.", comments: [] },
+            { title: "Final Reflection", date: "MAR 30, 2026", content: "We close one chapter only to find the next one is even brighter. The journey continues.", comments: ["Ready for Vol II."] }
         ];
 
         function renderJournal() {
@@ -234,15 +239,15 @@
             journalData.forEach((post, index) => {
                 html += `
                     <article class="post-card">
-                        <span style="color:var(--coffee-milk); font-size:0.8rem; font-weight:bold;">${post.date}</span>
+                        <span class="post-date">${post.date}</span>
                         <h2>${post.title}</h2>
                         <p>${post.content}</p>
-                        <div style="margin-top:30px; border-top:1px solid #eee; padding-top:15px;">
-                            <small style="color:var(--coffee-milk); font-style:italic;">Add note...</small>
+                        <div style="margin-top:25px; border-top:1px solid #F5F5F5; padding-top:15px;">
+                            <small style="color:var(--warm-foam); font-style:italic;">Add a reflection...</small>
                         </div>
                     </article>
                 `;
-                if (index === 2) html += `<div class="image-break">[ CAFE_EDITORIAL_PLACEHOLDER ]</div>`;
+                if (index === 2) html += `<div class="image-break">[ FEATURED_VISUAL_BREAK ]</div>`;
             });
             feed.innerHTML = html;
         }
@@ -255,17 +260,17 @@
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
                 
-                const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 100);
+                const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 80);
                 const isLeft = Math.random() > 0.5;
-                const leftPos = isLeft ? (Math.random() * 10) : (88 + Math.random() * 4);
+                const leftPos = isLeft ? (Math.random() * 8) : (88 + Math.random() * 4);
                 
                 sticker.style.top = `${topPos}px`;
                 sticker.style.left = `${leftPos}%`;
-                sticker.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+                sticker.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
                 
                 sticker.innerHTML = `
                     <img src="${url}" alt="Placeholder ${i+1}" onerror="this.style.display='none'">
-                    <span class="sticker-label">JOURNAL_MEMO_${i+1}</span>
+                    <span class="sticker-label">MEMO_${i+1}</span>
                 `;
                 
                 canvas.appendChild(sticker);
