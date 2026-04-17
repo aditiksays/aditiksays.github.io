@@ -3,12 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
+    <title>Alabaster & Petal | Digital Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --alabaster: #F2F0E9;
+            --petal: #DDA0A0;
+            --paper-white: #FCFAF5;
+            --text-dark: #4A4540;
+            --glass: rgba(255, 255, 255, 0.4);
+            --header-font: 'Cormorant Garamond', serif;
+            --body-font: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--alabaster);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            color: var(--text-dark);
+            font-family: var(--body-font);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            z-index: 1000;
+            background: rgba(242, 240, 233, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .search-bar {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 12px 30px;
+            border-radius: 50px;
+            width: 250px;
+            outline: none;
+            text-align: center;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar:focus { width: 350px; }
+
+        .menu-btn { cursor: pointer; font-family: var(--header-font); font-size: 1.3rem; color: var(--petal); letter-spacing: 2px; }
+
+        /* --- Side Drawer --- */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background: var(--paper-white);
+            z-index: 2000;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 100px 50px;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.05);
+        }
+
+        .nav-drawer.open { right: 0; }
+
+        .nav-drawer a {
+            display: block;
+            font-family: var(--header-font);
+            font-size: 2.2rem;
+            color: var(--petal);
+            text-decoration: none;
+            margin-bottom: 25px;
+        }
+
+        /* --- Journal Content --- */
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 20; 
+        }
+
+        .post-card {
+            background: var(--paper-white);
+            padding: 60px;
+            margin-bottom: 100px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            border: 1px solid white;
+        }
+
+        h2 { font-family: var(--header-font); font-size: 3rem; margin-bottom: 20px; }
+
+        .image-break {
+            width: 100vw;
+            height: 450px;
+            background: #EAE8E0;
+            margin: 80px 0;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--petal);
+            font-family: var(--header-font);
+            font-style: italic;
+        }
+
+        /* --- STICKERS --- */
+        #sticker-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10; 
+        }
+
+        .sticker {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sticker img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
+        }
+
+        .sticker-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--petal);
+            background: white;
+            padding: 2px 5px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .post-card { padding: 30px; }
+            .sticker { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
-    <p>This is a basic paragraph on my new webpage.</p>
+    <div id="sticker-canvas"></div>
 
+    <header>
+        <div style="font-family: var(--header-font); font-size: 1.4rem;">VOL. II</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="SEARCH...">
+        </div>
+        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
+    </header>
+
+    <nav class="nav-drawer" id="navDrawer">
+        <div class="menu-btn" style="text-align: right; margin-bottom: 50px;" onclick="toggleMenu()">CLOSE X</div>
+        <a href="#" onclick="toggleMenu()">CHRONICLE</a>
+        <a href="#" onclick="toggleMenu()">FRAGMENTS</a>
+        <a href="#" onclick="toggleMenu()">ABOUT</a>
+    </nav>
+
+    <div class="container">
+        <main id="journal-feed"></main>
+    </div>
+
+    <script>
+        // --- 1. THE STICKER URL PLACEHOLDERS ---
+        // Put your 10 image URLs inside the quotes below.
+        const stickerUrls = [
+            "URL_FOR_STICKER_1", 
+            "URL_FOR_STICKER_2",
+            "URL_FOR_STICKER_3",
+            "URL_FOR_STICKER_4",
+            "URL_FOR_STICKER_5",
+            "URL_FOR_STICKER_6",
+            "URL_FOR_STICKER_7",
+            "URL_FOR_STICKER_8",
+            "URL_FOR_STICKER_9",
+            "URL_FOR_STICKER_10"
+        ];
+
+        // --- 2. BLOG POSTS ---
+        const journalData = [
+            { title: "Morning Alabaster", date: "APR 17, 2026", content: "Silence has a texture. It feels like cold stone and warm linen.", comments: ["Peaceful."] },
+            { title: "The Petal Press", date: "APR 14, 2026", content: "I found a dried rose in an old book. Time is just a cycle of colors.", comments: ["Beautiful."] },
+            { title: "Minimalist Echoes", date: "APR 10, 2026", content: "To simplify is not to lose, but to find the core that was always there.", comments: [] },
+            { title: "Visual Space", date: "APR 05, 2026", content: "The gap between thoughts is where the real story lives.", comments: [] },
+            { title: "Closing Volume II", date: "MAR 30, 2026", content: "The end of a page is just the beginning of the next chapter.", comments: ["Wait for Vol III."] }
+        ];
+
+        // --- 3. RENDERING ---
+        function renderJournal() {
+            const feed = document.getElementById('journal-feed');
+            let html = '';
+            journalData.forEach((post, index) => {
+                html += `
+                    <article class="post-card">
+                        <span style="color:var(--petal); font-size:0.8rem;">${post.date}</span>
+                        <h2>${post.title}</h2>
+                        <p>${post.content}</p>
+                        <div style="margin-top:30px; border-top:1px solid #eee; padding-top:15px;">
+                            <small style="color:var(--petal); font-style:italic;">Notes...</small>
+                        </div>
+                    </article>
+                `;
+                if (index === 2) html += `<div class="image-break">[ IMAGE_BREAK_PLACEHOLDER ]</div>`;
+            });
+            feed.innerHTML = html;
+        }
+
+        // --- 4. STICKER ENGINE ---
+        function spawnStickers() {
+            const canvas = document.getElementById('sticker-canvas');
+            const pageHeight = document.body.scrollHeight;
+            
+            stickerUrls.forEach((url, i) => {
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker';
+                
+                // Distribute through height
+                const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 100);
+                const isLeft = Math.random() > 0.5;
+                const leftPos = isLeft ? (Math.random() * 10) : (88 + Math.random() * 4);
+                
+                sticker.style.top = `${topPos}px`;
+                sticker.style.left = `${leftPos}%`;
+                sticker.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+                
+                sticker.innerHTML = `
+                    <img src="${url}" alt="Placeholder ${i+1}" onerror="this.style.display='none'">
+                    <span class="sticker-label">STICKER_${i+1}</span>
+                `;
+                
+                canvas.appendChild(sticker);
+            });
+        }
+
+        function toggleMenu() { document.getElementById('navDrawer').classList.toggle('open'); }
+
+        window.onload = () => {
+            renderJournal();
+            setTimeout(spawnStickers, 300);
+        };
+    </script>
 </body>
 </html>
