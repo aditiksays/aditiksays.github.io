@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postcards from the Garden</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Lato:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <title>My Petite Postcard Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Montserrat:wght@300;400;600&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <style>
         :root {
-            --post-cream: #FDFCF0;
-            --stamp-gold: #D4AF37;
-            --airmail-blue: #2B5797;
-            --airmail-red: #B22222;
-            --ink: #2F2F2F;
-            --serif: 'Cormorant Garamond', serif;
-            --sans: 'Lato', sans-serif;
+            --blush-pink: #FFD1DC;
+            --soft-cream: #FFFDF5;
+            --gold: #D4AF37;
+            --petal-pink: #F8BBD0;
+            --ink: #4A4A4A;
+            --white: #FFFFFF;
+            --serif: 'Playfair Display', serif;
+            --sans: 'Montserrat', sans-serif;
             --handwriting: 'Reenie Beanie', cursive;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #E5E0D8; /* Clean neutral desk background */
+            background-color: var(--blush-pink);
+            /* Soft radial glow instead of textures */
+            background-image: radial-gradient(circle at center, #FFFFFF 0%, var(--blush-pink) 100%);
+            background-attachment: fixed;
             color: var(--ink);
             font-family: var(--sans);
             min-height: 100vh;
@@ -33,40 +37,47 @@
             position: sticky;
             top: 0;
             height: 80px;
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 40px;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            /* Airmail border effect */
-            border-bottom: 6px solid transparent;
-            border-image: repeating-linear-gradient(45deg, var(--airmail-red), var(--airmail-red) 15px, white 15px, white 30px, var(--airmail-blue) 30px, var(--airmail-blue) 45px, white 45px, white 60px) 10;
+            border-bottom: 2px solid var(--petal-pink);
         }
 
         .search-bar {
-            background: #f0f0f0;
-            border: 1px solid #ddd;
-            padding: 10px 20px;
+            background: var(--white);
+            border: 1px solid var(--petal-pink);
+            padding: 8px 20px;
             border-radius: 20px;
-            width: 250px;
+            width: 220px;
             outline: none;
             font-family: var(--sans);
+            font-size: 0.8rem;
+            text-align: center;
         }
 
-        .menu-btn { cursor: pointer; font-weight: bold; letter-spacing: 2px; color: var(--airmail-blue); }
+        .menu-btn { 
+            cursor: pointer; 
+            font-family: var(--serif); 
+            font-style: italic; 
+            font-weight: bold;
+            color: var(--petal-pink);
+            letter-spacing: 1px;
+        }
 
         /* --- Side Menu --- */
         .nav-drawer {
             position: fixed;
-            top: 0; right: -300px;
-            width: 300px; height: 100%;
-            background: var(--post-cream);
+            top: 0; right: -320px;
+            width: 320px; height: 100%;
+            background: var(--soft-cream);
             z-index: 2000;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 60px 30px;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 80px 40px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
         }
         .nav-drawer.open { right: 0; }
         .nav-drawer a {
@@ -74,163 +85,151 @@
             font-family: var(--serif);
             font-size: 2rem;
             text-decoration: none;
-            color: var(--ink);
-            margin-bottom: 20px;
+            color: var(--petal-pink);
+            margin-bottom: 25px;
         }
 
-        /* --- Main Feed --- */
+        /* --- Main Content --- */
         .container {
-            max-width: 800px;
+            max-width: 750px;
             margin: 40px auto;
             padding: 20px;
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
 
         .postcard {
-            background: var(--post-cream);
-            padding: 40px;
+            background: var(--white);
+            padding: 50px;
             margin-bottom: 80px;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
+            border: 1px solid #FFF0F5;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e0e0e0;
         }
 
-        /* Postcard Divider */
-        .postcard-grid {
+        .postcard-layout {
             display: grid;
-            grid-template-columns: 1.5fr 1px 1fr;
-            gap: 30px;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 40px;
         }
-
-        .divider { background: #ddd; height: 100%; }
 
         .post-date {
             font-family: var(--handwriting);
             font-size: 1.8rem;
-            color: var(--airmail-red);
+            color: var(--petal-pink);
             margin-bottom: 10px;
+            display: block;
         }
 
-        h2 { font-family: var(--serif); font-size: 2.5rem; line-height: 1.1; margin-bottom: 15px; }
+        h2 { font-family: var(--serif); font-size: 2.5rem; color: var(--ink); margin-bottom: 20px; }
 
-        .message { font-size: 1.1rem; line-height: 1.6; }
+        .message { font-size: 1rem; line-height: 1.8; color: #555; }
+
+        .stamp-area {
+            border-left: 1px dashed var(--petal-pink);
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
         .stamp {
-            width: 80px;
-            height: 100px;
-            border: 2px dashed var(--stamp-gold);
-            margin: 0 0 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            text-align: center;
-            color: var(--stamp-gold);
-            transform: rotate(5deg);
+            width: 90px; height: 110px;
+            border: 2px dotted var(--gold);
+            border-radius: 5px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--serif); font-size: 0.6rem; color: var(--gold);
+            text-align: center; transform: rotate(8deg);
+            margin-bottom: 30px;
+            background: var(--soft-cream);
         }
 
-        /* --- Functional Comments --- */
-        .comments-section {
-            margin-top: 30px;
+        .address-lines div {
+            border-bottom: 1px solid #EEE;
+            height: 30px; width: 100%; margin-bottom: 10px;
+        }
+
+        /* --- Comment System --- */
+        .comment-section {
+            margin-top: 40px;
+            border-top: 1px solid #F9F9F9;
             padding-top: 20px;
-            border-top: 1px dashed #ccc;
         }
 
-        .comments-list {
+        .comment-list {
             list-style: none;
             margin-bottom: 15px;
             font-family: var(--handwriting);
-            font-size: 1.3rem;
-            color: var(--airmail-blue);
+            font-size: 1.4rem;
+            color: #888;
         }
 
-        .comment-input-group { display: flex; gap: 10px; }
-        .comment-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            font-family: var(--sans);
+        .comment-input-row { display: flex; gap: 10px; }
+        .comment-input-row input {
+            flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #EEE; outline: none; font-size: 0.9rem;
         }
-        .comment-btn {
-            background: var(--airmail-blue);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
+        .comment-input-row button {
+            background: var(--petal-pink); color: white; border: none; padding: 0 15px; border-radius: 10px; cursor: pointer;
         }
 
         /* --- Image Break --- */
         .image-break {
-            width: 100vw;
-            height: 400px;
-            background: #ddd;
+            width: 100vw; height: 400px;
+            background: var(--white);
             margin: 60px 0;
-            position: relative;
-            left: 50%; transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--serif);
-            font-style: italic;
-            font-size: 1.5rem;
+            position: relative; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--serif); font-style: italic; color: var(--petal-pink);
+            border-top: 4px double var(--petal-pink);
+            border-bottom: 4px double var(--petal-pink);
         }
 
         /* --- Stickers --- */
         .sticker {
             position: absolute;
-            width: 150px;
-            height: 150px;
-            pointer-events: none;
-            z-index: 5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 140px; height: 140px;
+            z-index: 10; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
         }
-        .sticker-box {
-            width: 100px; height: 100px;
-            background: rgba(255,255,255,0.8);
-            border: 1px solid var(--stamp-gold);
+        .sticker-frame {
+            width: 110px; height: 110px;
+            background: white; border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.6rem; text-align: center;
+            font-size: 0.6rem; color: #CCC;
         }
-        .sticker-tag {
+        .sticker-note {
             font-family: var(--handwriting);
-            background: var(--airmail-blue);
-            color: white;
-            padding: 2px 8px;
-            margin-top: 5px;
-            font-size: 1rem;
+            background: var(--petal-pink); color: white;
+            padding: 2px 8px; margin-top: 5px; border-radius: 5px;
         }
 
         @media (max-width: 768px) {
-            .postcard-grid { grid-template-columns: 1fr; }
-            .divider { display: none; }
-            .search-bar { width: 150px; }
-            header { padding: 0 20px; }
-            .container { padding: 10px; }
+            .postcard-layout { grid-template-columns: 1fr; }
+            .stamp-area { border-left: none; padding-left: 0; padding-top: 20px; border-top: 1px dashed var(--petal-pink); }
             .sticker { display: none; }
+            .search-bar { width: 140px; }
+            h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="sticker-container"></div>
+    <div id="sticker-canvas"></div>
 
     <header>
-        <div style="font-family: var(--serif); font-size: 1.2rem;">AIRMAIL SERVICE</div>
-        <input type="text" class="search-bar" placeholder="Find a postcard...">
-        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
+        <div style="font-family: var(--serif); font-size: 1.4rem; color: var(--petal-pink);">Sweet Memoirs</div>
+        <input type="text" class="search-bar" placeholder="Search a memory...">
+        <div class="menu-btn" onclick="toggleMenu()">Menu 🌸</div>
     </header>
 
     <nav class="nav-drawer" id="navDrawer">
-        <div class="menu-btn" style="text-align: right; margin-bottom: 40px;" onclick="toggleMenu()">CLOSE X</div>
-        <a href="#">THE ARCHIVE</a>
-        <a href="#">TRAVEL LOGS</a>
-        <a href="#">STAMP COLLECTION</a>
-        <a href="#">ABOUT ME</a>
+        <div class="menu-btn" style="text-align: right; margin-bottom: 40px;" onclick="toggleMenu()">Close ✕</div>
+        <a href="#" onclick="toggleMenu()">My Scrapbook</a>
+        <a href="#" onclick="toggleMenu()">Gallery</a>
+        <a href="#" onclick="toggleMenu()">Dried Flowers</a>
+        <a href="#" onclick="toggleMenu()">About Me</a>
     </nav>
 
     <div class="container">
@@ -238,133 +237,132 @@
     </div>
 
     <script>
-        // 1. DATA ARRAY (Add your posts here)
-        const journalPosts = [
+        // 1. DATA ARRAY
+        const journalEntries = [
             { 
-                id: 0,
-                title: "Greetings from the Coast", 
+                id: 1, 
+                title: "Tea in the Garden", 
                 date: "April 17, 2026", 
-                content: "The salt air is doing wonders for my creative block. I spent the afternoon watching the tide come in. Wish you were here to see the blue horizon.",
-                comments: ["Sounds lovely!", "Bring back some shells!"]
+                content: "I spent the entire afternoon reading among the peonies. The air smelled of jasmine and Earl Grey. It's funny how a quiet afternoon can feel so full.",
+                comments: ["Sounds so dreamy!", "I love peonies!"]
             },
             { 
-                id: 1,
-                title: "The Mountain Pass", 
-                date: "April 12, 2026", 
-                content: "Higher altitudes mean thinner air but clearer thoughts. I found a small cafe that serves the best bitter coffee. Keeping the local map as a souvenir.",
-                comments: ["Don't get lost!"]
+                id: 2, 
+                title: "Golden Hour Glow", 
+                date: "April 14, 2026", 
+                content: "The way the light hit the lace curtains today made everything look like a vintage photograph. I just sat there for a moment, breathing it all in.",
+                comments: ["Pure magic."]
             },
             { 
-                id: 2,
-                title: "City of Lights", 
-                date: "April 08, 2026", 
-                content: "The neon buzz here is a stark contrast to last week. I'm writing this from a rainy balcony. There's poetry in the traffic below.",
+                id: 3, 
+                title: "Ribbons & Lace", 
+                date: "April 10, 2026", 
+                content: "Found some beautiful vintage silk ribbons at the market today. Thinking of using them to bind my next physical journal.",
                 comments: []
             },
             { 
-                id: 3,
-                title: "Market Findings", 
-                date: "April 02, 2026", 
-                content: "Found an antique shop tucked between two bakeries. I bought a fountain pen that supposedly belonged to a sailor. The ink is still wet.",
-                comments: ["What a find!"]
+                id: 4, 
+                title: "A Letter Home", 
+                date: "April 05, 2026", 
+                content: "Writing letters by candlelight always feels so much more intentional. I hope this one reaches them safely across the sea.",
+                comments: ["So romantic!"]
             },
             { 
-                id: 4,
-                title: "Departure Lounge", 
+                id: 5, 
+                title: "Cherry Blossom Path", 
                 date: "March 28, 2026", 
-                content: "Waiting for the final leg of the journey. One last postcard before I head home. The suitcase is heavy, but the heart is light.",
-                comments: ["Safe travels!"]
+                content: "The petals are falling like snow today. I tucked one into this page so I wouldn't forget how pink the world looked this morning.",
+                comments: ["Spring is finally here."]
             }
         ];
 
         // 2. RENDER FEED
-        function renderFeed() {
+        function renderPosts() {
             const feed = document.getElementById('journal-feed');
             let html = '';
 
-            journalPosts.forEach((post, index) => {
+            journalEntries.forEach((post, index) => {
                 html += `
                 <article class="postcard" style="transform: rotate(${Math.random() * 2 - 1}deg)">
-                    <div class="postcard-grid">
-                        <div class="left-side">
+                    <div class="postcard-layout">
+                        <div class="message-section">
                             <span class="post-date">${post.date}</span>
                             <h2>${post.title}</h2>
                             <p class="message">${post.content}</p>
                         </div>
-                        <div class="divider"></div>
-                        <div class="right-side">
-                            <div class="stamp">PLACE STAMP<br>HERE</div>
-                            <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px; height: 30px;">To: My Future Self</div>
-                            <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px; height: 30px;">123 Memory Lane</div>
-                            <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px; height: 30px;">The Archives</div>
+                        <div class="stamp-area">
+                            <div class="stamp">LOVE<br>POST<br>2026</div>
+                            <div class="address-lines">
+                                <div>To: My Dearest Self</div>
+                                <div>Somewhere in a Dream</div>
+                                <div>The Lily Garden</div>
+                            </div>
                         </div>
                     </div>
 
-                    <section class="comments-section">
-                        <ul class="comments-list" id="comments-${post.id}">
-                            ${post.comments.map(c => `<li>• ${c}</li>`).join('')}
+                    <section class="comment-section">
+                        <ul class="comment-list" id="list-${post.id}">
+                            ${post.comments.map(c => `<li>❀ ${c}</li>`).join('')}
                         </ul>
-                        <div class="comment-input-group">
-                            <input type="text" class="comment-input" id="input-${post.id}" placeholder="Write a reply...">
-                            <button class="comment-btn" onclick="addComment(${post.id})">SEND</button>
+                        <div class="comment-input-row">
+                            <input type="text" id="input-${post.id}" placeholder="Leave a sweet note...">
+                            <button onclick="addComment(${post.id})">Post</button>
                         </div>
                     </section>
                 </article>
                 `;
 
                 if (index === 2) {
-                    html += `<div class="image-break">[ FEATURED_GALLERY_IMAGE_PLACEHOLDER ]</div>`;
+                    html += `<div class="image-break">❀ FEATURED GALLERY IMAGE ❀</div>`;
                 }
             });
-
             feed.innerHTML = html;
         }
 
         // 3. COMMENT LOGIC
-        function addComment(postId) {
-            const input = document.getElementById(`input-${postId}`);
-            const list = document.getElementById(`comments-${postId}`);
-            
+        function addComment(id) {
+            const input = document.getElementById(`input-${id}`);
+            const list = document.getElementById(`list-${id}`);
             if (input.value.trim() !== "") {
                 const li = document.createElement('li');
-                li.innerText = `• ${input.value}`;
+                li.innerText = `❀ ${input.value}`;
                 list.appendChild(li);
                 input.value = "";
             }
         }
 
-        // 4. STICKER ENGINE (10 Placeholders)
-        function spawnStickers() {
-            const container = document.getElementById('sticker-container');
+        // 4. STICKER GENERATOR (10 placeholders)
+        function generateStickers() {
+            const container = document.getElementById('sticker-canvas');
             const totalHeight = document.body.scrollHeight;
 
             for (let i = 1; i <= 10; i++) {
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
                 
-                const y = (totalHeight / 11) * i + (Math.random() * 100);
-                const x = Math.random() > 0.5 ? (Math.random() * 10) : (85 + Math.random() * 5);
+                const top = (totalHeight / 11) * i + (Math.random() * 100);
+                const left = Math.random() > 0.5 ? (Math.random() * 10) : (85 + Math.random() * 5);
                 
-                sticker.style.top = `${y}px`;
-                sticker.style.left = `${x}%`;
-                sticker.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+                sticker.style.top = `${top}px`;
+                sticker.style.left = `${left}%`;
+                sticker.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
                 
                 sticker.innerHTML = `
-                    <div class="sticker-box">IMAGE_STICKER_${i}</div>
-                    <div class="sticker-tag">Souvenir #${i}</div>
+                    <div class="sticker-frame">PNG_STICKER_${i}</div>
+                    <div class="sticker-note">Petal #${i}</div>
                 `;
                 container.appendChild(sticker);
             }
         }
 
-        // 5. NAVIGATION
+        // 5. NAV TOGGLE
         function toggleMenu() {
             document.getElementById('navDrawer').classList.toggle('open');
         }
 
         window.onload = () => {
-            renderFeed();
-            setTimeout(spawnStickers, 300);
+            renderPosts();
+            setTimeout(generateStickers, 500);
         };
     </script>
 </body>
