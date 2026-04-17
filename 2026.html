@@ -7,13 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Miserable & Betrayal Color Palette Options */
-            --stagnant-sage: #96A08F; /* Muted Sage - Sickly/Dying vibe */
-            --heavy-sand: #D2CABB;    /* Wet Sand - Cold/Waterlogged vibe */
-            --spent-peach: #D4B2A7;   /* Smoked Peach - Bruised/Fading vibe */
+            /* --- THE MISERY PALETTE --- */
+            /* Swap the hex codes below to change the mood */
+            --stagnant-sage: #96A08F; /* Use this for a murky, sickly vibe */
+            --heavy-sand: #D2CABB;    /* Use this for a cold, waterlogged vibe */
+            --spent-peach: #D4B2A7;   /* Use this for a bruised, fading vibe */
 
-            /* Logic: Set --alabaster to your preferred mood from above */
-            --alabaster: var(--spent-peach); 
+            /* ACTIVE BACKGROUND COLOR: Change this to one of the variables above */
+            --alabaster: var(--stagnant-sage); 
             
             --petal: #A29196;         /* Bruised Mauve */
             --paper-white: #FCFAF5;
@@ -26,9 +27,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--alabaster);
+            /* Explicitly using the --alabaster variable here */
+            background-color: var(--alabaster) !important; 
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-attachment: fixed;
             color: var(--text-dark);
@@ -49,8 +51,10 @@
             justify-content: space-between;
             padding: 0 50px;
             z-index: 1000;
-            background: rgba(242, 240, 233, 0.7);
+            /* Header background now matches the theme background */
+            background: var(--alabaster);
             backdrop-filter: blur(10px);
+            opacity: 0.95;
         }
 
         .search-container {
@@ -69,6 +73,7 @@
             outline: none;
             text-align: center;
             transition: width 0.3s ease;
+            color: var(--text-dark);
         }
 
         .search-bar:focus { width: 350px; }
@@ -86,7 +91,7 @@
             z-index: 2000;
             transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             padding: 100px 50px;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.05);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
         }
 
         .nav-drawer.open { right: 0; }
@@ -113,16 +118,16 @@
             background: var(--paper-white);
             padding: 60px;
             margin-bottom: 100px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
             border: 1px solid white;
         }
 
-        h2 { font-family: var(--header-font); font-size: 3rem; margin-bottom: 20px; }
+        h2 { font-family: var(--header-font); font-size: 3rem; margin-bottom: 20px; color: var(--text-dark); }
 
         .image-break {
             width: 100vw;
             height: 450px;
-            background: #EAE8E0;
+            background: #B4B8B1; /* Tarnished Silver Interlude */
             margin: 80px 0;
             position: relative;
             left: 50%;
@@ -159,7 +164,7 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
+            filter: grayscale(30%) drop-shadow(4px 6px 10px rgba(0,0,0,0.1));
         }
 
         .sticker-label {
@@ -167,7 +172,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--petal);
-            background: white;
+            background: rgba(255,255,255,0.9);
             padding: 2px 5px;
             margin-top: 5px;
         }
@@ -183,7 +188,7 @@
     <div id="sticker-canvas"></div>
 
     <header>
-        <div style="font-family: var(--header-font); font-size: 1.4rem;">VOL. II</div>
+        <div style="font-family: var(--header-font); font-size: 1.4rem; color: var(--text-dark);">VOL. II</div>
         <div class="search-container">
             <input type="text" class="search-bar" placeholder="SEARCH...">
         </div>
@@ -202,7 +207,6 @@
     </div>
 
     <script>
-        // --- 1. THE STICKER URL PLACEHOLDERS ---
         const stickerUrls = [
             "URL_FOR_STICKER_1", 
             "URL_FOR_STICKER_2",
@@ -216,16 +220,14 @@
             "URL_FOR_STICKER_10"
         ];
 
-        // --- 2. BLOG POSTS ---
         const journalData = [
-            { title: "Morning Alabaster", date: "APR 17, 2026", content: "Silence has a texture. It feels like cold stone and warm linen.", comments: ["Peaceful."] },
-            { title: "The Petal Press", date: "APR 14, 2026", content: "I found a dried rose in an old book. Time is just a cycle of colors.", comments: ["Beautiful."] },
-            { title: "Minimalist Echoes", date: "APR 10, 2026", content: "To simplify is not to lose, but to find the core that was always there.", comments: [] },
-            { title: "Visual Space", date: "APR 05, 2026", content: "The gap between thoughts is where the real story lives.", comments: [] },
-            { title: "Closing Volume II", date: "MAR 30, 2026", content: "The end of a page is just the beginning of the next chapter.", comments: ["Wait for Vol III."] }
+            { title: "The Stagnant Hour", date: "APR 17, 2026", content: "The air in this room feels heavy, as if the walls themselves are exhaling the weight of things unsaid.", comments: ["Heavy."] },
+            { title: "Bruised Petals", date: "APR 14, 2026", content: "I found a dried rose in an old book. Time hasn't been kind to it; it's just a cycle of fading until there's nothing left.", comments: ["..."] },
+            { title: "Minimalist Misery", date: "APR 10, 2026", content: "We simplify our surroundings to match the hollowness inside. There is a certain safety in having nothing left to lose.", comments: [] },
+            { title: "Empty Echoes", date: "APR 05, 2026", content: "The gap between memories is where the real betrayal lives. It's the silence that hurts the most.", comments: [] },
+            { title: "Spent Embers", date: "MAR 30, 2026", content: "The fire went out long ago. I'm just sitting here, staring at the ash and wondering if it was ever really warm.", comments: ["Wait for Vol III."] }
         ];
 
-        // --- 3. RENDERING ---
         function renderJournal() {
             const feed = document.getElementById('journal-feed');
             let html = '';
@@ -240,12 +242,11 @@
                         </div>
                     </article>
                 `;
-                if (index === 2) html += `<div class="image-break">[ IMAGE_BREAK_PLACEHOLDER ]</div>`;
+                if (index === 2) html += `<div class="image-break">[ SHADOWED_INTERLUDE ]</div>`;
             });
             feed.innerHTML = html;
         }
 
-        // --- 4. STICKER ENGINE ---
         function spawnStickers() {
             const canvas = document.getElementById('sticker-canvas');
             const pageHeight = document.body.scrollHeight;
@@ -264,7 +265,7 @@
                 
                 sticker.innerHTML = `
                     <img src="${url}" alt="Placeholder ${i+1}" onerror="this.style.display='none'">
-                    <span class="sticker-label">STICKER_${i+1}</span>
+                    <span class="sticker-label">MEMENTO_${i+1}</span>
                 `;
                 
                 canvas.appendChild(sticker);
