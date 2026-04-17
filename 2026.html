@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Coffee Journal | Edition I</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <title>Vibrant Life | Digital Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- BRIGHTER BEIGE COFFEE PALETTE --- */
-            --latte-bright: #F5EFE6;   /* Much lighter, cleaner cream background */
-            --warm-foam: #E8DFD8;     /* Soft, clean taupe for accents */
-            --dark-roast: #4F4436;    /* Deep brown for sharp, readable text */
+            /* --- PLAYFUL & BRIGHT PALETTE --- */
+            --soft-sky: #E0F2F1;      /* Fresh minty base */
+            --taffy-pink: #FF80AB;    /* Playful accent */
+            --electric-lavender: #7C4DFF; /* Energetic date color */
+            --marshmallow: #FFFFFF;   /* Pure white cards */
+            --ink-blue: #263238;      /* Deep blue-grey text (easier on eyes) */
             
-            --alabaster: var(--latte-bright); 
-            --petal: var(--warm-foam);
-            --paper-white: #FFFFFF;    /* Pure white for the cards to pop */
-            --text-dark: var(--dark-roast);
-            --glass: rgba(255, 255, 255, 0.7);
             --header-font: 'Cormorant Garamond', serif;
             --body-font: 'Lato', sans-serif;
         }
@@ -24,11 +21,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Removed noise/mold effect - now a clean, soft radial gradient */
-            background-color: var(--alabaster) !important; 
-            background-image: radial-gradient(circle at top left, #FFFFFF 0%, var(--alabaster) 100%);
+            /* --- BACKGROUND IMAGE PLACEHOLDER --- */
+            background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+                        url('https://images.unsplash.com/photo-1517842644237-4883638118e9?auto=format&fit=crop&q=80&w=2070'); 
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
-            color: var(--text-dark);
+            
+            color: var(--ink-blue);
             font-family: var(--body-font);
             min-height: 100vh;
             overflow-x: hidden;
@@ -46,9 +46,9 @@
             justify-content: space-between;
             padding: 0 50px;
             z-index: 1000;
-            background: rgba(245, 239, 230, 0.85);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0,0,0,0.03);
+            border-bottom: 2px solid var(--taffy-pink);
         }
 
         .search-container {
@@ -58,25 +58,29 @@
         }
 
         .search-bar {
-            background: var(--paper-white);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: var(--marshmallow);
+            border: 2px solid var(--soft-sky);
             padding: 10px 25px;
             border-radius: 50px;
-            width: 240px;
+            width: 260px;
             outline: none;
             text-align: center;
-            transition: width 0.3s ease, border-color 0.3s ease;
-            color: var(--text-dark);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            font-weight: bold;
         }
 
-        .search-bar:focus { width: 320px; border-color: var(--warm-foam); }
+        .search-bar:focus { 
+            width: 340px; 
+            border-color: var(--taffy-pink);
+            box-shadow: 0 0 15px rgba(255, 128, 171, 0.3);
+        }
 
         .menu-btn { 
             cursor: pointer; 
-            font-family: var(--header-font); 
-            font-size: 1.1rem; 
-            color: var(--text-dark); 
+            font-family: var(--body-font); 
+            font-weight: 700;
+            font-size: 0.9rem; 
+            color: var(--electric-lavender); 
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -88,11 +92,11 @@
             right: -320px;
             width: 320px;
             height: 100%;
-            background: var(--paper-white);
+            background: var(--marshmallow);
             z-index: 2000;
-            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             padding: 80px 40px;
-            box-shadow: -15px 0 50px rgba(0,0,0,0.05);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         }
 
         .nav-drawer.open { right: 0; }
@@ -100,18 +104,18 @@
         .nav-drawer a {
             display: block;
             font-family: var(--header-font);
-            font-size: 2rem;
-            color: var(--text-dark);
+            font-size: 2.2rem;
+            color: var(--ink-blue);
             text-decoration: none;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             transition: color 0.3s;
         }
 
-        .nav-drawer a:hover { color: var(--warm-foam); }
+        .nav-drawer a:hover { color: var(--taffy-pink); }
 
         /* --- Journal Content --- */
         .container {
-            max-width: 720px;
+            max-width: 750px;
             margin: 0 auto;
             padding: 60px 20px;
             position: relative;
@@ -119,34 +123,43 @@
         }
 
         .post-card {
-            background: var(--paper-white);
-            padding: 50px;
+            background: var(--marshmallow);
+            padding: 60px;
             margin-bottom: 80px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
-            border-radius: 4px;
-            border: 1px solid rgba(0,0,0,0.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-radius: 20px; /* More playful rounded corners */
+            border-bottom: 8px solid var(--soft-sky);
+            transition: transform 0.3s ease;
         }
 
-        h2 { font-family: var(--header-font); font-size: 2.8rem; margin-bottom: 15px; color: var(--text-dark); }
+        .post-card:hover { transform: translateY(-5px); }
 
-        .post-date { color: var(--warm-foam); font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; display: block; }
+        h2 { font-family: var(--header-font); font-size: 3rem; margin-bottom: 15px; color: var(--ink-blue); }
+
+        .post-date { 
+            color: var(--electric-lavender); 
+            font-size: 0.9rem; 
+            font-weight: 900; 
+            margin-bottom: 10px; 
+            display: block; 
+            letter-spacing: 1px;
+        }
 
         .image-break {
             width: 100vw;
-            height: 400px;
-            background: #FDFBFA; 
-            margin: 60px 0;
+            height: 450px;
+            background: var(--taffy-pink);
+            margin: 80px 0;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--warm-foam);
+            color: white;
             font-family: var(--header-font);
-            font-style: italic;
-            border-top: 1px solid #F0F0F0;
-            border-bottom: 1px solid #F0F0F0;
+            font-size: 2rem;
+            font-weight: bold;
         }
 
         /* --- STICKERS --- */
@@ -160,8 +173,8 @@
 
         .sticker {
             position: absolute;
-            width: 140px;
-            height: 140px;
+            width: 160px;
+            height: 160px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -170,25 +183,25 @@
         .sticker img {
             max-width: 100%; max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
         }
 
         .sticker-label {
-            font-size: 9px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dark);
-            background: rgba(255,255,255,0.95);
-            padding: 3px 8px;
-            margin-top: 8px;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-weight: 800;
+            color: white;
+            background: var(--electric-lavender);
+            padding: 4px 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         @media (max-width: 768px) {
-            .post-card { padding: 30px; }
+            .post-card { padding: 35px 25px; }
             .sticker { display: none; }
-            .header { padding: 0 20px; }
+            h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -197,19 +210,19 @@
     <div id="sticker-canvas"></div>
 
     <header>
-        <div style="font-family: var(--header-font); font-size: 1.2rem; font-weight: 600;">JOURNAL . ED I</div>
+        <div style="font-family: var(--header-font); font-size: 1.6rem; font-weight: 800; color: var(--taffy-pink);">DAILY GLOW.</div>
         <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Find a memory...">
+            <input type="text" class="search-bar" placeholder="Search a happy thought...">
         </div>
-        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
+        <div class="menu-btn" onclick="toggleMenu()">EXPLORE +</div>
     </header>
 
     <nav class="nav-drawer" id="navDrawer">
-        <div class="menu-btn" style="text-align: right; margin-bottom: 40px; font-size: 0.9rem;" onclick="toggleMenu()">CLOSE X</div>
-        <a href="#" onclick="toggleMenu()">Chronicle</a>
-        <a href="#" onclick="toggleMenu()">Gallery</a>
-        <a href="#" onclick="toggleMenu()">Archive</a>
-        <a href="#" onclick="toggleMenu()">About</a>
+        <div class="menu-btn" style="text-align: right; margin-bottom: 40px;" onclick="toggleMenu()">CLOSE X</div>
+        <a href="#" onclick="toggleMenu()">The Archive</a>
+        <a href="#" onclick="toggleMenu()">Photo Booth</a>
+        <a href="#" onclick="toggleMenu()">Color Palettes</a>
+        <a href="#" onclick="toggleMenu()">About Me</a>
     </nav>
 
     <div class="container">
@@ -219,18 +232,18 @@
     <script>
         // --- STICKER URLs ---
         const stickerUrls = [
-            "URL_FOR_STICKER_1", "URL_FOR_STICKER_2", "URL_FOR_STICKER_3",
-            "URL_FOR_STICKER_4", "URL_FOR_STICKER_5", "URL_FOR_STICKER_6",
-            "URL_FOR_STICKER_7", "URL_FOR_STICKER_8", "URL_FOR_STICKER_9", "URL_FOR_STICKER_10"
+            "URL_FOR_PLAYFUL_STICKER_1", "URL_FOR_PLAYFUL_STICKER_2", "URL_FOR_PLAYFUL_STICKER_3",
+            "URL_FOR_PLAYFUL_STICKER_4", "URL_FOR_PLAYFUL_STICKER_5", "URL_FOR_PLAYFUL_STICKER_6",
+            "URL_FOR_PLAYFUL_STICKER_7", "URL_FOR_PLAYFUL_STICKER_8", "URL_FOR_PLAYFUL_STICKER_9", "URL_FOR_PLAYFUL_STICKER_10"
         ];
 
         // --- BLOG CONTENT ---
         const journalData = [
-            { title: "Morning Light", date: "APR 17, 2026", content: "Today the light filled the room perfectly. No shadows, just a clean, bright space to think and create.", comments: ["So bright and airy!"] },
-            { title: "Clean Slate", date: "APR 14, 2026", content: "There is something therapeutic about removing the clutter. A fresh background and a warm coffee are all I need.", comments: ["Clean vibes."] },
-            { title: "Simple Rituals", date: "APR 10, 2026", content: "The sound of the kettle, the first blank page. These are the moments that keep me grounded.", comments: [] },
-            { title: "Visual Breathing", date: "APR 05, 2026", content: "White space is just as important as the words. It lets the mind rest before the next big thought.", comments: [] },
-            { title: "Final Reflection", date: "MAR 30, 2026", content: "We close one chapter only to find the next one is even brighter. The journey continues.", comments: ["Ready for Vol II."] }
+            { title: "Sunshine & Sprinkles", date: "APRIL 17, 2026", content: "Today was incredible. I finally sat down at my desk with a giant iced coffee and realized how much better everything feels when you embrace the color!", comments: ["Love this energy!"] },
+            { title: "Pop of Pink", date: "APRIL 14, 2026", content: "I bought a fresh bouquet of peonies today. They matched my journal perfectly. It's the little things that make the big difference.", comments: ["Peonies are the best."] },
+            { title: "Creative Spark", date: "APRIL 10, 2026", content: "Doodling in the margins for three hours instead of working. No regrets. Creativity isn't a straight line anyway.", comments: [] },
+            { title: "Visual Break!", date: "APRIL 05, 2026", content: "Look at the colorful break below! Sometimes you just need to stop writing and just look at something beautiful.", comments: [] },
+            { title: "Adventure Awaits", date: "MARCH 30, 2026", content: "Packing for the weekend trip. I'm bringing three different cameras and four journals. I might have a problem, but it's a fun one.", comments: ["Have fun!"] }
         ];
 
         function renderJournal() {
@@ -242,12 +255,12 @@
                         <span class="post-date">${post.date}</span>
                         <h2>${post.title}</h2>
                         <p>${post.content}</p>
-                        <div style="margin-top:25px; border-top:1px solid #F5F5F5; padding-top:15px;">
-                            <small style="color:var(--warm-foam); font-style:italic;">Add a reflection...</small>
+                        <div style="margin-top:25px; border-top:2px solid var(--soft-sky); padding-top:15px;">
+                            <small style="color:var(--taffy-pink); font-weight:bold;">Add a smiley...</small>
                         </div>
                     </article>
                 `;
-                if (index === 2) html += `<div class="image-break">[ FEATURED_VISUAL_BREAK ]</div>`;
+                if (index === 2) html += `<div class="image-break">FULL WIDTH COLOR POP!</div>`;
             });
             feed.innerHTML = html;
         }
@@ -260,17 +273,17 @@
                 const sticker = document.createElement('div');
                 sticker.className = 'sticker';
                 
-                const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 80);
+                const topPos = (pageHeight / 11) * (i + 1) + (Math.random() * 120);
                 const isLeft = Math.random() > 0.5;
-                const leftPos = isLeft ? (Math.random() * 8) : (88 + Math.random() * 4);
+                const leftPos = isLeft ? (Math.random() * 10) : (85 + Math.random() * 5);
                 
                 sticker.style.top = `${topPos}px`;
                 sticker.style.left = `${leftPos}%`;
-                sticker.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+                sticker.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
                 
                 sticker.innerHTML = `
-                    <img src="${url}" alt="Placeholder ${i+1}" onerror="this.style.display='none'">
-                    <span class="sticker-label">MEMO_${i+1}</span>
+                    <img src="${url}" alt="Happy Sticker ${i+1}" onerror="this.style.display='none'">
+                    <span class="sticker-label">STICKER_${i+1}</span>
                 `;
                 
                 canvas.appendChild(sticker);
