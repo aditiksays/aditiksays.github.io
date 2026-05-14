@@ -9,12 +9,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            --bg-pink-cream: #f4dcd6;
-            --soft-blue-tint: #c5d9ed;
-            --butter-yellow: #f9e1a0;
-            --text-dark: #1a2a38;
-            --star-gold: #ffcc33;
-            --accent-pink: #eeb8b8;
+            /* Vintage Paper / Scrapbook Theme Colors */
+            --bg-vintage: #e8e2d6;       /* Aged paper cream */
+            --soft-blue-tint: #d0deeb; 
+            --license-yellow: #f4cf6d;    /* More "Official" government document yellow */
+            --text-dark: #2c241e;       /* Sepia-toned dark text */
+            --accent-red: #a33b3b;      /* Stamp ink red */
         }
 
         body, html {
@@ -22,7 +22,9 @@
             padding: 0;
             width: 100%;
             min-height: 100vh;
-            background-color: var(--bg-pink-cream);
+            background-color: var(--bg-vintage);
+            /* Subtle paper texture effect */
+            background-image: url("https://www.transparenttextures.com/patterns/parchment.png");
             font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
@@ -31,11 +33,21 @@
 
         .page-container {
             width: 100%;
-            max-width: 900px; /* Wider to allow side-by-side layout */
+            max-width: 900px;
             margin: 60px auto;
             position: relative;
             padding: 20px;
-            display: block; 
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.2rem; /* Adjusted for readability */
+            font-weight: bold;
+            opacity: 0.7;
+            margin-bottom: 20px;
+            display: inline-block;
+            letter-spacing: 2px;
         }
 
         h1 {
@@ -44,182 +56,153 @@
             font-size: 3.5rem;
             color: var(--text-dark);
             margin-bottom: 40px;
-            text-align: left;
+            text-align: center; /* Replaced <centre> tag */
         }
 
-        /* 1. YEARBOOK (Anchored Left) */
+        /* 1. YEARBOOK - Now Straight Sticked */
         .yearbook-frame {
-            width: 450px;
-            border: 3px solid rgba(0,0,0,0.08);
-            padding: 15px;
-            background: var(--soft-blue-tint); 
-            box-shadow: 10px 10px 25px rgba(0,0,0,0.1);
-            border-radius: 4px;
-            box-sizing: border-box;
+            width: 420px;
+            border: 8px solid #fff; /* Classic white photo border */
+            padding: 10px;
+            background: #fff; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
             position: relative;
-            transform: rotate(-1.5deg); /* Slight tilt for realism */
+            transform: rotate(0deg); /* Made it straight */
             z-index: 1;
         }
 
         .photo-container {
             width: 100%;
-            height: 550px; 
-            background: #111;
+            height: 500px; 
+            background: #222;
             overflow: hidden;
-            border: 2px solid rgba(0,0,0,0.15);
         }
 
         .photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: sepia(0.2); /* Slight vintage filter */
         }
 
         .yearbook-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             color: var(--text-dark);
-            margin: 15px 0 5px;
+            margin: 10px 0 0;
             text-align: center;
         }
 
-        /* 2. ID CARD (Stuck to the Right, Overlapping) */
+        /* 2. ID CARD - Shorter height, Longer width, Original Colors */
         .license-card {
-            background-color: var(--butter-yellow);
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-            background-size: 20px 20px;
-            border: 12px solid transparent;
-            border-image: radial-gradient(#222 25%, transparent 26%) 33% repeat;
-            border-width: 16px;
-            padding: 25px;
-            color: var(--text-dark);
-            box-shadow: 15px 15px 40px rgba(0,0,0,0.2);
+            background-color: var(--license-yellow);
+            /* Added a subtle "official document" watermark pattern */
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 10px);
+            
+            border: 2px solid #b58d3d;
+            padding: 20px;
+            color: #3d2b1f;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.25);
             font-family: 'Courier New', Courier, monospace;
             
-            /* Positioning logic */
-            width: 500px;
+            /* Sizing & Position */
+            width: 550px;       /* Longer */
+            height: 280px;      /* Shorter */
             position: absolute;
-            right: -120px; /* Sticks to the right */
-            top: 250px;  /* Positioned non-uniformly lower than yearbook start */
-            transform: rotate(6deg); /* Messy/non-uniform rotation */
+            right: -80px;      /* Pushed to the right */
+            top: 320px;         /* Non-uniform vertical offset */
+            transform: rotate(5deg); 
             z-index: 2;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* STICKERS */
         .sticker {
             position: absolute;
             z-index: 10;
-            filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.15));
-            pointer-events: none;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
         }
-
-        .star {
-            width: 40px;
-            height: 40px;
-            background: var(--star-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-        }
-
-        .s1 { top: -20px; left: 10px; transform: rotate(-10deg); }
-        .s2 { bottom: -15px; right: 20px; font-size: 45px; } 
-        .s3 { top: 15%; right: -25px; font-size: 40px; transform: rotate(15deg); } 
-        .s4 { top: -45px; right: 10%; font-size: 35px; } 
+        .s1 { top: -15px; left: -10px; font-size: 40px; transform: rotate(-15deg); }
+        .s2 { bottom: 10px; right: 10px; font-size: 30px; } 
 
         .license-header-group {
-            text-align: right;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-pink);
+            border-bottom: 2px solid var(--accent-red);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        .license-title { font-size: 0.9rem; font-weight: 900; }
-        .license-no { font-size: 0.8rem; font-weight: bold; }
+        .license-title { font-size: 1rem; font-weight: 900; color: var(--accent-red); }
+        .license-no { font-size: 0.75rem; letter-spacing: 1px; }
 
         .license-main {
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 15px;
+            align-items: flex-start;
         }
 
         .id-photo-small {
-            width: 110px;
+            width: 90px;
             height: 110px;
-            background: #fff;
-            border: 2px solid #664d3d;
-            padding: 3px;
-            flex-shrink: 0;
+            border: 1px solid #000;
+            background: #eee;
         }
 
-        .id-photo-small img { width: 100%; height: 100%; object-fit: cover; }
+        .id-photo-small img { width: 100%; height: 100%; object-fit: cover; grayscale: 0.3; }
 
         .license-fields {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            line-height: 1.8;
+            line-height: 1.5;
             flex-grow: 1;
-            font-weight: bold;
         }
 
         .field-line {
-            border-bottom: 1px dashed rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
             display: block;
+            margin-bottom: 2px;
         }
 
         .signature {
             font-family: 'Sacramento', cursive;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            color: #0c1c8a; /* Classic blue ink pen color */
             text-align: right;
-            margin-top: 5px;
-            border-top: 1px solid #222;
-            float: right;
-            min-width: 120px;
+            line-height: 0.8;
         }
 
-        .back-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 2.0 rem;
-            font-weight: bold;
-            opacity: 0.6;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        /* Mobile adjustments to keep it readable */
         @media (max-width: 900px) {
             .page-container { display: flex; flex-direction: column; align-items: center; }
-            .yearbook-frame { width: 95%; transform: none; }
-            .license-card { position: relative; width: 100%; right: 0; top: -30px; transform: rotate(-2deg); }
+            .yearbook-frame { width: 90%; }
+            .license-card { position: relative; width: 100%; right: 0; top: 20px; height: auto; transform: none; }
         }
     </style>
 </head>
 <body>
 
 <div class="page-container">
-    <a href="home.html" class="back-link"> JOURNAL→ </a>
-    <h1> <centre>INTRODUCTION </centre></h1>
+    <a href="home.html" class="back-link">JOURNAL →</a>
+    
+    <h1>INTRODUCTION</h1>
 
     <div class="yearbook-frame">
         <div class="photo-container">
             <img src="highschoolyearbook.jpeg" alt="Yearbook Portrait">
         </div>
         <div class="yearbook-name">K ADITI</div>
-        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e; text-align: center;">
+        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e; text-align: center; padding: 10px;">
             "I'm not killing people, I'm killing boys."
         </div>
     </div>
 
     <div class="license-card">
-        <div class="sticker star s1">💅🏼</div>
-        <div class="sticker s2">🍓</div>
-        <div class="sticker s3">🍒</div>
-        <div class="sticker s4">🌸</div>
+        <div class="sticker s1">💅🏼</div>
+        <div class="sticker s2">🌸</div>
 
         <div class="license-header-group">
             <div class="license-title">PERMANENT LICENSE OF DIVA</div>
-            <div class="license-no">NO. AK20041111</div>
+            <div class="license-no">ID: AK-2205-08</div>
         </div>
         
         <div class="license-main">
@@ -229,18 +212,20 @@
             <div class="license-fields">
                 <span class="field-line">NAME: <b>ADITI K</b></span>
                 <span class="field-line">DOB: <b>22/05/2008</b></span>
-                <span class="field-line">ISSUE: <b>14/04/2026</b></span>
-                <span class="field-line">PROs: <b>OBNOXIOUSLY BETTER</b></span>
-                <span class="field-line">EXPIRY: <b>PERMANENT</b></span>
-                <span class="field-line">CAUTION: <b>CAN BE ADDICTIVE</b></span>
+                <span class="field-line">CLASS: <b>A-CLASS</b></span>
+                <span class="field-line">STATUS: <b>ADDICTIVE</b></span>
+                <span class="field-line">EXP: <b>NEVER</b></span>
             </div>
         </div>
-        <div style="font-size: 0.75rem; margin-top: 20px; text-align: justify; line-height: 1.4; font-weight: bold; text-transform: uppercase; color: #5d4a3e;">
-        Valid for international travel and looking better than you. If lost, just cry about what you're missing.
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div style="font-size: 0.6rem; max-width: 60%; font-weight: bold; color: #5d4a3e;">
+                OFFICIAL DOCUMENT: AUTHORIZED FOR LOOKING BETTER THAN THE COMPETITION.
+            </div>
+            <div class="signature">Aditi</div>
         </div>
-        <div class="signature">Aditi</div>
-        <div style="clear:both;"></div>
     </div>
 </div>
+
 </body>
 </html>
