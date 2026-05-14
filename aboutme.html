@@ -9,62 +9,61 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
 
         :root {
-            --bg-pink-cream: #f4dcd6;   /* Deeper pinkish-creamy background */
-            --soft-blue-tint: #c5d9ed;  /* Noticeable soft blue */
-            --butter-yellow: #f9e1a0;   /* Saturated butter yellow */
-            --text-dark: #1a2a38;       
-            --star-gold: #ffcc33;       
-            --accent-pink: #eeb8b8;     
+            --bg-pink-cream: #f4dcd6;
+            --soft-blue-tint: #c5d9ed;
+            --butter-yellow: #f9e1a0;
+            --text-dark: #1a2a38;
+            --star-gold: #ffcc33;
+            --accent-pink: #eeb8b8;
         }
 
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
+            min-height: 100vh;
             background-color: var(--bg-pink-cream);
             font-family: 'Quicksand', sans-serif;
-            overflow-y: auto; 
-            overflow-x: hidden;
             display: flex;
             justify-content: center;
+            overflow-x: hidden;
         }
 
         .page-container {
-            width: 95vw;
-            max-width: 600px;
-            margin: 40px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 100%;
+            max-width: 900px; /* Wider to allow side-by-side layout */
+            margin: 60px auto;
             position: relative;
-            /* Added gap to prevent elements from crushing each other */
-            gap: 20px;
+            padding: 20px;
+            display: block; 
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--text-dark);
-            margin-bottom: 10px;
-            align-self: flex-start;
+            margin-bottom: 40px;
+            text-align: left;
         }
 
-        /* 1. YEARBOOK (PORTRAIT) */
+        /* 1. YEARBOOK (Anchored Left) */
         .yearbook-frame {
-            width: 100%;
+            width: 450px;
             border: 3px solid rgba(0,0,0,0.08);
             padding: 15px;
             background: var(--soft-blue-tint); 
             box-shadow: 10px 10px 25px rgba(0,0,0,0.1);
             border-radius: 4px;
             box-sizing: border-box;
+            position: relative;
+            transform: rotate(-1.5deg); /* Slight tilt for realism */
             z-index: 1;
         }
 
         .photo-container {
             width: 100%;
-            height: 750px; /* Strict Portrait height */
+            height: 550px; 
             background: #111;
             overflow: hidden;
             border: 2px solid rgba(0,0,0,0.15);
@@ -78,13 +77,13 @@
 
         .yearbook-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             color: var(--text-dark);
             margin: 15px 0 5px;
             text-align: center;
         }
 
-        /* 2. ID CARD (LANDSCAPE & STAMPED BELOW) */
+        /* 2. ID CARD (Stuck to the Right, Overlapping) */
         .license-card {
             background-color: var(--butter-yellow);
             background-image: 
@@ -96,20 +95,20 @@
             border-width: 16px;
             padding: 25px;
             color: var(--text-dark);
-            box-shadow: 15px 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 15px 15px 40px rgba(0,0,0,0.2);
             font-family: 'Courier New', Courier, monospace;
             
-            /* STAMPED EFFECT - Positioned below yearbook */
-            width: 120%; 
-            margin-top: 10px; /* Positive margin so it doesn't overlay the photo */
-            transform: rotate(-2deg); 
-            
-            box-sizing: border-box;
-            position: relative;
+            /* Positioning logic */
+            width: 500px;
+            position: absolute;
+            right: -20px; /* Sticks to the right */
+            top: 250px;  /* Positioned non-uniformly lower than yearbook start */
+            transform: rotate(4deg); /* Messy/non-uniform rotation */
             z-index: 2;
+            box-sizing: border-box;
         }
 
-        /* STICKERS / EMOJIS */
+        /* STICKERS */
         .sticker {
             position: absolute;
             z-index: 10;
@@ -125,9 +124,9 @@
         }
 
         .s1 { top: -20px; left: 10px; transform: rotate(-10deg); }
-        .s2 { bottom: -15px; right: 20px; font-size: 45px; } /* Strawberry */
-        .s3 { top: 15%; right: -20px; font-size: 40px; transform: rotate(15deg); } /* Cherries */
-        .s4 { top: -35px; right: 20%; font-size: 35px; } /* Lily */
+        .s2 { bottom: -15px; right: 20px; font-size: 45px; } 
+        .s3 { top: 15%; right: -25px; font-size: 40px; transform: rotate(15deg); } 
+        .s4 { top: -45px; right: 10%; font-size: 35px; } 
 
         .license-header-group {
             text-align: right;
@@ -156,9 +155,9 @@
         .id-photo-small img { width: 100%; height: 100%; object-fit: cover; }
 
         .license-fields {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            line-height: 2;
+            line-height: 1.8;
             flex-grow: 1;
             font-weight: bold;
         }
@@ -170,12 +169,12 @@
 
         .signature {
             font-family: 'Sacramento', cursive;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             text-align: right;
             margin-top: 5px;
             border-top: 1px solid #222;
             float: right;
-            min-width: 150px;
+            min-width: 120px;
         }
 
         .back-link {
@@ -184,13 +183,15 @@
             font-size: 0.9rem;
             font-weight: bold;
             opacity: 0.6;
-            margin-bottom: 10px;
-            display: block;
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
-        @media (max-width: 600px) {
-            .license-card { width: 100%; transform: rotate(0); }
-            .photo-container { height: 500px; }
+        /* Mobile adjustments to keep it readable */
+        @media (max-width: 900px) {
+            .page-container { display: flex; flex-direction: column; align-items: center; }
+            .yearbook-frame { width: 95%; transform: none; }
+            .license-card { position: relative; width: 100%; right: 0; top: -30px; transform: rotate(-2deg); }
         }
     </style>
 </head>
@@ -211,7 +212,7 @@
     </div>
 
     <div class="license-card">
-        <div class="sticker star s1">⭐</div>
+        <div class="sticker star s1"></div>
         <div class="sticker s2">🍓</div>
         <div class="sticker s3">🍒</div>
         <div class="sticker s4">🌸</div>
@@ -234,9 +235,9 @@
                 <span class="field-line">CAUTION: <b>CAN BE ADDICTIVE</b></span>
             </div>
         </div>
-<div style="font-size: 0.8rem; margin-top: 30px; text-align: justify; line-height: 1.5; font-weight: bold; text-transform: uppercase; color: #5d4a3e;">
-    Warning: This ID is officially issued to certify that Aditi is 100% that girl. Valid for international travel, making bad decisions, and looking better than you. If lost, please don't bother returning it—just cry about what you're missing.
-</div>
+        <div style="font-size: 0.75rem; margin-top: 20px; text-align: justify; line-height: 1.4; font-weight: bold; text-transform: uppercase; color: #5d4a3e;">
+            Warning: This ID is officially issued to certify that Aditi is 100% that girl. Valid for international travel and looking better than you. If lost, just cry about what you're missing.
+        </div>
         <div class="signature">Aditi</div>
         <div style="clear:both;"></div>
     </div>
