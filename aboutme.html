@@ -6,15 +6,14 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <title>About Me - Stamped Edition</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Sacramento&display=swap');
+        /* Added Mrs Saint Delafield for a superior calligraphic signature */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Quicksand:wght@300;500&family=Mrs+Saint+Delafield&display=swap');
 
         :root {
-            /* Vintage Paper / Scrapbook Theme Colors */
-            --bg-vintage: #e8e2d6;       /* Aged paper cream */
-            --soft-blue-tint: #d0deeb; 
-            --license-yellow: #f4cf6d;    /* More "Official" government document yellow */
-            --text-dark: #2c241e;       /* Sepia-toned dark text */
-            --accent-red: #a33b3b;      /* Stamp ink red */
+            --bg-vintage: #e8e2d6;       
+            --id-blue: #b4c5d6;         
+            --text-dark: #2c241e;       
+            --stamp-red: rgba(163, 59, 59, 0.8); 
         }
 
         body, html {
@@ -23,57 +22,72 @@
             width: 100%;
             min-height: 100vh;
             background-color: var(--bg-vintage);
-            /* Subtle paper texture effect */
             background-image: url("https://www.transparenttextures.com/patterns/parchment.png");
             font-family: 'Quicksand', sans-serif;
-            display: flex;
-            justify-content: center;
             overflow-x: hidden;
         }
 
         .page-container {
             width: 100%;
-            max-width: 900px;
-            margin: 60px auto;
+            max-width: 1100px;
+            margin: 20px auto;
             position: relative;
             padding: 20px;
         }
 
+        /* JOURNAL: Bold, Large, Centered */
         .back-link {
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 1.2rem; /* Adjusted for readability */
+            font-size: 3rem; 
             font-weight: bold;
-            opacity: 0.7;
-            margin-bottom: 20px;
-            display: inline-block;
-            letter-spacing: 2px;
+            opacity: 0.9;
+            text-align: center;
+            display: block;
+            margin: 40px auto;
+            letter-spacing: 12px;
+            font-family: 'Playfair Display', serif;
+            transition: opacity 0.3s;
         }
 
+        .back-link:hover { opacity: 0.6; }
+
+        /* INTRODUCTION: Top Left Label */
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3.5rem;
+            font-size: 1.4rem; 
             color: var(--text-dark);
-            margin-bottom: 40px;
-            text-align: center; /* Replaced <centre> tag */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 1px solid var(--text-dark);
         }
 
-        /* 1. YEARBOOK - Now Straight Sticked */
+        .content-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 60px;
+            gap: 30px;
+        }
+
+        /* 1. YEARBOOK FRAME */
         .yearbook-frame {
-            width: 420px;
-            border: 8px solid #fff; /* Classic white photo border */
+            width: 380px;
+            border: 12px solid #fff; 
             padding: 10px;
             background: #fff; 
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
-            position: relative;
-            transform: rotate(0deg); /* Made it straight */
-            z-index: 1;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .photo-container {
             width: 100%;
-            height: 500px; 
+            height: 460px; 
             background: #222;
             overflow: hidden;
         }
@@ -82,146 +96,164 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.2); /* Slight vintage filter */
         }
 
         .yearbook-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--text-dark);
-            margin: 10px 0 0;
+            margin: 15px 0 5px;
             text-align: center;
         }
 
-        /* 2. ID CARD - Shorter height, Longer width, Original Colors */
+        /* 2. ID CARD - Blue & Landscape */
         .license-card {
-            background-color: var(--license-yellow);
-            /* Added a subtle "official document" watermark pattern */
-            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 10px);
-            
-            border: 2px solid #b58d3d;
-            padding: 20px;
-            color: #3d2b1f;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.25);
+            background-color: var(--id-blue);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 1px solid #9fb0c1;
+            padding: 30px;
+            color: #1e2b37;
+            box-shadow: 12px 12px 30px rgba(0,0,0,0.15);
             font-family: 'Courier New', Courier, monospace;
-            
-            /* Sizing & Position */
-            width: 550px;       /* Longer */
-            height: 280px;      /* Shorter */
-            position: absolute;
-            right: -80px;      /* Pushed to the right */
-            top: 320px;         /* Non-uniform vertical offset */
-            transform: rotate(5deg); 
-            z-index: 2;
+            width: 580px;       
+            height: 320px;      
+            position: relative;
+            transform: rotate(0.5deg); 
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
-
-        .sticker {
-            position: absolute;
-            z-index: 10;
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
-        }
-        .s1 { top: -15px; left: -10px; font-size: 40px; transform: rotate(-15deg); }
-        .s2 { bottom: 10px; right: 10px; font-size: 30px; } 
 
         .license-header-group {
-            border-bottom: 2px solid var(--accent-red);
-            padding-bottom: 5px;
-            margin-bottom: 10px;
+            border-bottom: 1.5px solid #1e2b37;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
         }
 
-        .license-title { font-size: 1rem; font-weight: 900; color: var(--accent-red); }
-        .license-no { font-size: 0.75rem; letter-spacing: 1px; }
+        .license-title { font-size: 1.2rem; font-weight: 900; letter-spacing: 1px; }
 
         .license-main {
             display: flex;
-            gap: 15px;
-            align-items: flex-start;
+            gap: 25px;
         }
 
         .id-photo-small {
-            width: 90px;
-            height: 110px;
-            border: 1px solid #000;
-            background: #eee;
+            width: 110px;
+            height: 140px;
+            border: 1px solid #1e2b37;
+            background: #fff;
+            padding: 3px;
         }
 
-        .id-photo-small img { width: 100%; height: 100%; object-fit: cover; grayscale: 0.3; }
+        .id-photo-small img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) grayscale(0.2); }
 
         .license-fields {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            line-height: 1.5;
-            flex-grow: 1;
+            line-height: 2;
+            font-weight: bold;
         }
 
         .field-line {
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px dashed rgba(0,0,0,0.15);
             display: block;
-            margin-bottom: 2px;
         }
 
+        /* NEW CALLIGRAPHIC SIGNATURE */
         .signature {
-            font-family: 'Sacramento', cursive;
-            font-size: 2.5rem;
-            color: #0c1c8a; /* Classic blue ink pen color */
-            text-align: right;
-            line-height: 0.8;
+            font-family: 'Mrs Saint Delafield', cursive;
+            font-size: 4rem; /* Larger for better impact */
+            color: #1a3a5a; 
+            position: absolute;
+            bottom: 10px;
+            right: 40px;
+            z-index: 5;
+            line-height: 1;
         }
 
-        @media (max-width: 900px) {
-            .page-container { display: flex; flex-direction: column; align-items: center; }
-            .yearbook-frame { width: 90%; }
-            .license-card { position: relative; width: 100%; right: 0; top: 20px; height: auto; transform: none; }
+        /* STAMP */
+        .official-stamp {
+            position: absolute;
+            bottom: 30px;
+            left: 240px; /* Shifted to avoid signature clash */
+            width: 85px;
+            height: 85px;
+            border: 3px solid var(--stamp-red);
+            border-radius: 50%;
+            color: var(--stamp-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.6rem;
+            transform: rotate(-20deg);
+            mix-blend-mode: multiply;
+        }
+
+        .stamp-inner {
+            border: 1px solid var(--stamp-red);
+            border-radius: 50%;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        @media (max-width: 950px) {
+            .content-wrapper { flex-direction: column; align-items: center; }
+            .license-card { width: 100%; max-width: 500px; height: auto; }
+            h1 { position: static; text-align: center; margin-bottom: 15px; }
         }
     </style>
 </head>
 <body>
 
 <div class="page-container">
-    <a href="home.html" class="back-link">JOURNAL →</a>
-    
     <h1>INTRODUCTION</h1>
+    
+    <a href="home.html" class="back-link">JOURNAL</a>
 
-    <div class="yearbook-frame">
-        <div class="photo-container">
-            <img src="highschoolyearbook.jpeg" alt="Yearbook Portrait">
-        </div>
-        <div class="yearbook-name">K ADITI</div>
-        <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e; text-align: center; padding: 10px;">
-            "I'm not killing people, I'm killing boys."
-        </div>
-    </div>
-
-    <div class="license-card">
-        <div class="sticker s1">💅🏼</div>
-        <div class="sticker s2">🌸</div>
-
-        <div class="license-header-group">
-            <div class="license-title">PERMANENT LICENSE OF DIVA</div>
-            <div class="license-no">ID: AK-2205-08</div>
-        </div>
-        
-        <div class="license-main">
-            <div class="id-photo-small">
-                <img src="mug shot.jpeg" alt="ID Photo">
+    <div class="content-wrapper">
+        <div class="yearbook-frame">
+            <div class="photo-container">
+                <img src="highschoolyearbook.jpeg" alt="Yearbook Portrait">
             </div>
-            <div class="license-fields">
-                <span class="field-line">NAME: <b>ADITI K</b></span>
-                <span class="field-line">DOB: <b>22/05/2008</b></span>
-                <span class="field-line">CLASS: <b>A-CLASS</b></span>
-                <span class="field-line">STATUS: <b>ADDICTIVE</b></span>
-                <span class="field-line">EXP: <b>NEVER</b></span>
+            <div class="yearbook-name">K ADITI</div>
+            <div style="font-family: 'Playfair Display'; font-style: italic; color: #5d4a3e; text-align: center; padding: 10px; font-size: 0.85rem;">
+                "I'm not killing people, I'm killing boys."
             </div>
         </div>
-        
-        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-            <div style="font-size: 0.6rem; max-width: 60%; font-weight: bold; color: #5d4a3e;">
-                OFFICIAL DOCUMENT: AUTHORIZED FOR LOOKING BETTER THAN THE COMPETITION.
+
+        <div class="license-card">
+            <div class="license-header-group">
+                <div class="license-title">IDENTITY RECORD: 001</div>
+                <div style="font-size: 0.7rem; opacity: 0.8;">FACULTY OF CREATIVE ARTS</div>
             </div>
+            
+            <div class="license-main">
+                <div class="id-photo-small">
+                    <img src="mug shot.jpeg" alt="ID Photo">
+                </div>
+                <div class="license-fields">
+                    <span class="field-line">HOLDER: <b>ADITI K.</b></span>
+                    <span class="field-line">ORIGIN: <b>MAY 22, 2008</b></span>
+                    <span class="field-line">ROLE: <b>LEAD CREATIVE</b></span>
+                    <span class="field-line">ACCESS: <b>UNRESTRICTED</b></span>
+                </div>
+            </div>
+
+            <div class="official-stamp">
+                <div class="stamp-inner">
+                    <span>VERIFIED</span>
+                    <span>2026</span>
+                </div>
+            </div>
+            
             <div class="signature">Aditi</div>
         </div>
     </div>
